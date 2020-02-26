@@ -21,15 +21,6 @@ https://github.com/stm32duino/Arduino_Core_STM32
 - Powered by ST-Link   
 ![STM32F103-CAN-2](https://user-images.githubusercontent.com/6020549/75343868-b4f18d00-58dc-11ea-904e-ce052fae65fd.jpg)
 
-# Transfer
-- STM32F103   
-CAN ID:0x103xx   
-![STM32F103-Transfer](https://user-images.githubusercontent.com/6020549/75340563-119d7980-58d6-11ea-9e70-00d56f7f1234.jpg)
-
-- STM32F303   
-CAN ID:0x303xx   
-![STM32F303-Transfer](https://user-images.githubusercontent.com/6020549/75340579-195d1e00-58d6-11ea-8fdd-f8fea31e9b7d.jpg)
-
 # API
 - Initialize   
 void initCanard(uint32_t speed);   
@@ -43,6 +34,14 @@ bool receiveCanard(uint32_t * can_id, uint8_t * payload, uint8_t * payload_size)
 - Push CAN Packet to TX queue   
 void queueCanard(uint32_t can_id, uint8_t * payload, uint8_t payload_size);
 
+# Transfer
+- STM32F103   
+CAN ID:0x103xx   
+![STM32F103-Transfer](https://user-images.githubusercontent.com/6020549/75340563-119d7980-58d6-11ea-9e70-00d56f7f1234.jpg)
+
+- STM32F303   
+CAN ID:0x303xx   
+![STM32F303-Transfer](https://user-images.githubusercontent.com/6020549/75340579-195d1e00-58d6-11ea-8fdd-f8fea31e9b7d.jpg)
 
 # Receive
 ![STM32-Receive](https://user-images.githubusercontent.com/6020549/75340537-00ed0380-58d6-11ea-8a7c-15c2bbda87a9.jpg)
