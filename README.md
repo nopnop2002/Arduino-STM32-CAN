@@ -40,7 +40,8 @@ You can use [this](https://github.com/linux-can/can-utils) library.
 
 # Communication with Arduino-DUE
 You can use [this](https://github.com/collin80/due_can) library.
-![STM32F103-CAN-DUO](https://user-images.githubusercontent.com/6020549/75341979-da7c9780-58d8-11ea-8563-424ef56ab783.jpg)
+![STM32F103-CAN-DUO](https://user-images.githubusercontent.com/6020549/75342460-d604ae80-58d9-11ea-869f-5bdf5f9e5e07.jpg)
+
 
 # Communication with Raspberry Pi
 Edit /boot/config.txt and reboot.   
