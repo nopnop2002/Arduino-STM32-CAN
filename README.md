@@ -17,10 +17,12 @@ STM32 core support for Arduino.
 https://github.com/stm32duino/Arduino_Core_STM32
 
 # Wirering   
-- Powered by USB   
+- BluePill Powered by USB  
+BluePill have 5V output pin.   
 ![STM32F103-CAN-1](https://user-images.githubusercontent.com/6020549/75343857-b02cd900-58dc-11ea-9022-1a6e4530ffc8.jpg)
 
 - Powered by ST-Link   
+- Black Pill   
 ![STM32F103-CAN-2](https://user-images.githubusercontent.com/6020549/75343868-b4f18d00-58dc-11ea-904e-ce052fae65fd.jpg)
 
 # API
