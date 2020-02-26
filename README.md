@@ -94,7 +94,7 @@ can0: flags=193<UP,RUNNING,NOARP>  mtu 16
 $ sudo ifconfig can0 txqueuelen 1000
 ```
 
-Install can-util.
+Install can-utils.
 ```
 $ sudo apt-get install can-utils
 
@@ -105,5 +105,5 @@ $ candump can0
 $ cansend can0 123#11223344AABBCCDD
 ```
 
-![STM32-CAN-RPI](https://user-images.githubusercontent.com/6020549/75343528-064d4c80-58dc-11ea-90ed-a65c15e24cc7.jpg)
+![STM32-CAN-RPI](https://user-images.githubusercontent.com/6020549/75344872-df444a00-58de-11ea-991d-75141febc5c1.jpg)
 
