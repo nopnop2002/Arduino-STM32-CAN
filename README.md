@@ -21,7 +21,10 @@ https://github.com/stm32duino/Arduino_Core_STM32
 ![STM32F103-CAN-1](https://user-images.githubusercontent.com/6020549/75343857-b02cd900-58dc-11ea-9022-1a6e4530ffc8.jpg)
 
 - Board without 5V pin, such as BlackPill, or ST-Link power supply  
-![STM32F103-CAN-2](https://user-images.githubusercontent.com/6020549/75352307-e5412780-58ec-11ea-80f9-6c6bcabdcb8a.jpg)
+3V CAN Trasnceviers are fully interoperable with 5V CAN trasnceviers.   
+Check [here](http://e2e.ti.com/cfs-file.ashx/__key/communityserver-discussions-components-files/142/4747.2012_2D00_11_2D00_02-CAN-Transceiver-3V-and-5V-Mixed-Network-Basics.pdf).
+![STM32F103-CAN-2](https://user-images.githubusercontent.com/6020549/75353583-03a82280-58ef-11ea-890d-ea2c52930453.jpg)
+
 
 # API
 - Initialize   
