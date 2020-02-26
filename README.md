@@ -11,8 +11,7 @@ I forked from [here](https://github.com/geosmall/UAVCAN-for-STM32-Arduino).
 MCP2551(5V)   
 SN65HVD230(3.3V)   
 
-__NOTE__
-3V CAN Trasnceviers are fully interoperable with 5V CAN trasnceviers.   
+__NOTE__:3V CAN Trasnceviers are fully interoperable with 5V CAN trasnceviers.   
 Check [here](http://e2e.ti.com/cfs-file.ashx/__key/communityserver-discussions-components-files/142/4747.2012_2D00_11_2D00_02-CAN-Transceiver-3V-and-5V-Mixed-Network-Basics.pdf).
 
 
