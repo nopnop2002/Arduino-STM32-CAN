@@ -1,5 +1,5 @@
 # Arduino-STM32-CAN
-Can Example for Arduino Core STM32
+Can Example for Arduino Core STM32.   
 I forked from [here](https://github.com/geosmall/UAVCAN-for-STM32-Arduino).
 
 
