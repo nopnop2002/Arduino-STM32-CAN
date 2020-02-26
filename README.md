@@ -53,7 +53,7 @@ Serial printing goes to PA9.
 
 
 # Communication with Arduino-UNO
-You can use [this](https://github.com/linux-can/can-utils) library.
+You can use [this](https://github.com/coryjfowler/MCP_CAN_lib) library.
 
 # Communication with Arduino-DUE
 You can use [this](https://github.com/collin80/due_can) library.
