@@ -41,7 +41,7 @@ bool receiveCanard(uint32_t * can_id, uint8_t * payload, uint8_t * payload_size)
 - Push CAN Packet to TX queue   
 void queueCanard(uint32_t can_id, uint8_t * payload, uint8_t payload_size);
 
-# Transfer
+# Transmitter
 - STM32F103   
 CAN ID:0x103xx   
 
@@ -52,7 +52,7 @@ CAN ID:0x303xx
 
 ![STM32F303-Transfer](https://user-images.githubusercontent.com/6020549/75340579-195d1e00-58d6-11ea-8fdd-f8fea31e9b7d.jpg)
 
-# Receive   
+# Receiver   
 Serial printing goes to PA9.   
 ![STM32-Receive](https://user-images.githubusercontent.com/6020549/75340537-00ed0380-58d6-11ea-8a7c-15c2bbda87a9.jpg)
 
@@ -108,7 +108,7 @@ $ sudo apt-get install can-utils
 #Receiver
 $ candump can0
 
-#Transfer
+#Transmitter
 $ cansend can0 123#11223344AABBCCDD
 ```
 
