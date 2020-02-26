@@ -15,18 +15,18 @@ STM32 core support for Arduino.
 https://github.com/stm32duino/Arduino_Core_STM32
 
 # Wirering   
-- Powered by USB
+- Powered by USB   
 ![STM32F103-CAN-1](https://user-images.githubusercontent.com/6020549/75340817-87094a00-58d6-11ea-9067-9b7c0a50fee8.jpg)
 
-- Powered by ST-Link
+- Powered by ST-Link   
 ![STM32F103-CAN-2](https://user-images.githubusercontent.com/6020549/75340826-8a043a80-58d6-11ea-8f78-fdd1e8145cd9.jpg)
 
 
 # Transfer
-- STM32F103
+- STM32F103   
 ![STM32F103-Transfer](https://user-images.githubusercontent.com/6020549/75340563-119d7980-58d6-11ea-9e70-00d56f7f1234.jpg)
 
-- STM32F303
+- STM32F303   
 ![STM32F303-Transfer](https://user-images.githubusercontent.com/6020549/75340579-195d1e00-58d6-11ea-8fdd-f8fea31e9b7d.jpg)
 
 
@@ -36,10 +36,10 @@ https://github.com/stm32duino/Arduino_Core_STM32
 
 
 # Communication with Arduino-UNO
-Communication can be performed using [this](https://github.com/linux-can/can-utils) library.
+You can use [this](https://github.com/linux-can/can-utils) library.
 
 # Communication with Arduino-DUE
-Communication can be performed using [this](https://github.com/collin80/due_can) library.
+You can use [this](https://github.com/collin80/due_can) library.
 
 # Communication with Raspberry Pi
 Edit /boot/config.txt and reboot.   
