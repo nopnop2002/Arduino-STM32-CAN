@@ -23,9 +23,11 @@ https://github.com/stm32duino/Arduino_Core_STM32
 
 # Transfer
 - STM32F103   
+CAN ID:0x103xx   
 ![STM32F103-Transfer](https://user-images.githubusercontent.com/6020549/75340563-119d7980-58d6-11ea-9e70-00d56f7f1234.jpg)
 
 - STM32F303   
+CAN ID:0x303xx   
 ![STM32F303-Transfer](https://user-images.githubusercontent.com/6020549/75340579-195d1e00-58d6-11ea-8fdd-f8fea31e9b7d.jpg)
 
 
