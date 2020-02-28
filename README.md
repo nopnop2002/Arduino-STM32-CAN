@@ -1,6 +1,5 @@
 # Arduino-STM32-CAN
 Can Example for Arduino Core STM32.   
-I forked from [here](https://github.com/geosmall/UAVCAN-for-STM32-Arduino).
 
 
 # Hardware requirements
@@ -27,28 +26,8 @@ https://github.com/stm32duino/Arduino_Core_STM32
 - Board without 5V pin, such as BlackPill, or ST-Link power supply  
 ![STM32F103-CAN-2](https://user-images.githubusercontent.com/6020549/75353583-03a82280-58ef-11ea-890d-ea2c52930453.jpg)
 
-
-# API
-- Initialize   
-void initCanard(uint32_t speed);   
-
-- Send CAN Packet from queue   
-void sendCanard(void);   
-
-- Receive CAN Packet   
-bool receiveCanard(uint32_t * can_id, uint8_t * payload, uint8_t * payload_size);
-
-- Push CAN Packet to TX queue   
-void queueCanard(uint32_t can_id, uint8_t * payload, uint8_t payload_size);
-
 # Transmitter
-- STM32F103   
-CAN ID:0x103xx   
-
 ![STM32F103-Transfer](https://user-images.githubusercontent.com/6020549/75340563-119d7980-58d6-11ea-9e70-00d56f7f1234.jpg)
-
-- STM32F303   
-CAN ID:0x303xx   
 
 ![STM32F303-Transfer](https://user-images.githubusercontent.com/6020549/75340579-195d1e00-58d6-11ea-8fdd-f8fea31e9b7d.jpg)
 
