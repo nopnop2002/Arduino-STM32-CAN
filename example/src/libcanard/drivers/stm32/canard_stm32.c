@@ -104,7 +104,8 @@ static uint32_t convertFrameIDRegisterToCanard(const uint32_t id)
     }
     else
     {
-        out = (CANARD_CAN_EXT_ID_MASK & (id >> 3U)) | CANARD_CAN_FRAME_EFF;
+        //out = (CANARD_CAN_EXT_ID_MASK & (id >> 3U)) | CANARD_CAN_FRAME_EFF;
+        out = (CANARD_CAN_EXT_ID_MASK & (id >> 3U));
     }
 
     if ((id & CANARD_STM32_CAN_RIR_RTR) != 0)
@@ -420,7 +421,13 @@ int16_t canardSTM32Receive(CanardCANFrame* const out_frame)
                 g_stats.rx_overflow_count++;
             }
 
+            //printstr("mb->RIR=0x");
+            //printint(mb->RIR);
+            //println();
             out_frame->id = convertFrameIDRegisterToCanard(mb->RIR);
+            //printstr("out_frame->id=0x");
+            //printint(out_frame->id);
+            //println();
 
             out_frame->data_len = (uint8_t)(mb->RDTR & CANARD_STM32_CAN_RDTR_DLC_MASK);
 

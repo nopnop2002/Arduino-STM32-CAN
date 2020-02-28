@@ -17,8 +17,20 @@ extern "C" void printint(uint32_t num) {
 }
 
 extern "C" void printframe(uint32_t id, uint8_t data_len, uint8_t * data) {
-  Serial.print("ID: 0x");
-  Serial.print(id, HEX);
+  if (id > 0x7ff) {
+    Serial.print("Extended ID: 0x");
+    if (id < 0x10000000) Serial.print("0");
+    if (id < 0x1000000) Serial.print("00");
+    if (id < 0x100000) Serial.print("000");
+    if (id < 0x10000) Serial.print("0000");
+    Serial.print(id, HEX);
+  } else {
+    Serial.print("Standard ID: 0x");
+    if (id < 0x100) Serial.print("0");
+    if (id < 0x10) Serial.print("00");
+    Serial.print(id, HEX);
+    Serial.print("     ");
+  }
   Serial.print(" DLC: ");
   Serial.print(data_len);
   Serial.print(" Data: ");
