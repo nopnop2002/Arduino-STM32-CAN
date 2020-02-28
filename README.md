@@ -54,7 +54,7 @@ CAN ID:0x303xx
 
 # Receiver   
 Serial printing goes to PA9.   
-![STM32-Receive](https://user-images.githubusercontent.com/6020549/75340537-00ed0380-58d6-11ea-8a7c-15c2bbda87a9.jpg)
+![STM32-Receive](https://user-images.githubusercontent.com/6020549/75561089-c2984580-5a89-11ea-80d0-90a2af235b80.jpg)
 
 
 # Communication with Arduino-UNO
