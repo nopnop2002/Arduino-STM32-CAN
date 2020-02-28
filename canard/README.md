@@ -6,7 +6,10 @@ The original supports transmission of 8 bytes or more, but is not compatible wit
 This example can only transfer up to 8 bytes of data, but can communicate with other libraries.   
 
 # API
-- Initialize   
+- Initialize Hardware   
+transfer_id = CAN_HW_Init(uint8_t serial);
+
+- Initialize Library    
 void initCanard(uint32_t speed);   
 
 - Send CAN Packet from queue   
