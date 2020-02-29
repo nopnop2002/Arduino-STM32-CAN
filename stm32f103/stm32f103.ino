@@ -68,7 +68,7 @@ void CANInit(enum BITRATE bitrate, bool remap)
                                        //   MODE=11(Output mode, max speed 50 MHz) 
                                        //   CNF=10(Alternate function output Push-pull
                                        
-      GPIOA->ODR |= 0x1UL << 12;       // PB12 Upll-up
+      GPIOA->ODR |= 0x1UL << 12;       // PA12 Upll-up
       
     }
 
