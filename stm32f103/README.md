@@ -1,6 +1,13 @@
 # stm32f103
 I forked from [here](https://github.com/seeers/CAN-Bus-Arduino_Core_STM32).
 
+# Support board
+- STM32F101xx
+- STM32F102xx
+- STM32F103xx
+- STM32F105xx
+- STM32F107xx
+
 # Changes from the original
 
 - frame format   
