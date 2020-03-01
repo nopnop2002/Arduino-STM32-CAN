@@ -2,8 +2,12 @@
 I forked from [here](https://github.com/geosmall/UAVCAN-for-STM32-Arduino).
 
 # Changes from the original
+
+- Communicate with other libraries   
 The original supports transmission of 8 bytes or more, but is not compatible with other libraries.   
 This example can only transfer up to 8 bytes of data, but can communicate with other libraries.   
+
+- Support STM32F405/407   
 
 # API
 - Initialize Hardware   

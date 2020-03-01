@@ -40,6 +40,17 @@ uint32_t CAN_HW_Init(uint8_t serial) {
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
   return 0x303 << 8 + serial;  // 0x303XX
 
+#elif defined (STM32F405xx) || defined (STM32F415xx) || defined (STM32F407xx) || defined (STM32F417xx)
+  printstr("Board is STM32F405xx/F415xx/F407xx/417xx");
+  println();
+  GPIO_InitStruct.Pin = GPIO_PIN_11 | GPIO_PIN_12;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  GPIO_InitStruct.Alternate = GPIO_AF9_CAN1;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  return 0x405 << 8 + serial;  // 0x303XX
+
 #else
 #error "Warning untested processor variant"
 #endif
