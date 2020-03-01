@@ -16,6 +16,11 @@ typedef const struct
 
 CAN_bit_timing_config_t can_configs[6] = {{2, 13, 45}, {2, 15, 20}, {2, 13, 18}, {2, 13, 9}, {2, 15, 4}, {2, 15, 2}};
 
+void printRegister(char * buf, uint32_t reg) {
+    Serial.print(buf);
+    Serial.print(reg, HEX);
+    Serial.println();
+}
 
 //extern CAN_bit_timing_config_t can_configs[6];
     
@@ -32,98 +37,117 @@ CAN_bit_timing_config_t can_configs[6] = {{2, 13, 45}, {2, 15, 20}, {2, 13, 18},
  */
 void CANInit(enum BITRATE bitrate, int remap)
 {
-    // https://www.st.com/content/ccc/resource/technical/document/reference_manual/59/b9/ba/7f/11/af/43/d5/CD00171190.pdf/files/CD00171190.pdf/jcr:content/translations/en.CD00171190.pdf
+    // https://www.st.com/content/ccc/resource/technical/document/reference_manual/4a/19/6e/18/9d/92/43/32/DM00043574.pdf/files/DM00043574.pdf/jcr:content/translations/en.DM00043574.pdf
 
-    RCC->APB1ENR |= 0x2000000UL;       // Enable CAN clock 
-    RCC->APB2ENR |= 0x1UL;             // Enable AFIO clock
-    AFIO->MAPR   &= 0xFFFF9FFF;        // reset CAN remap
-                                       // CAN_RX mapped to PA11, CAN_TX mapped to PA12
+
+    RCC->APB1ENR |= 0x2000000UL;         // Enable CAN clock 
 
     if (remap == 0) {
-      RCC->APB2ENR |= 0x4UL;           // Enable GPIOA clock
-      GPIOA->CRH   &= ~(0xFF000UL);    // Configure PA12(0b0000) and PA11(0b0000)
-                                       // 0b0000
-                                       //   MODE=00(Input mode)
-                                       //   CNF=00(Analog mode)
- 
-      GPIOA->CRH   |= 0xB8FFFUL;       // Configure PA12(0b1011) and PA11(0b1000)
-                                       // 0b1011
-                                       //   MODE=11(Output mode, max speed 50 MHz) 
-                                       //   CNF=10(Alternate function output Push-pull
-                                       // 0b1000
-                                       //   MODE=00(Input mode)
-                                       //   CNF=10(Input with pull-up / pull-down)
-                                       
-      GPIOA->ODR |= 0x1UL << 12;       // PA12 Upll-up
+      RCC->AHBENR |= 0x20000UL;          // Enable GPIOA clock 
+
+      printRegister("GPIO_AFR(b)=", GPIOA->AFR[1]);
+      GPIOA->AFR[1]  &= 0xFFF00FFF;      // Reset alternate function PA12 and PA11   
+      GPIOA->AFR[1]  |= 0x99000;         // Set AF9 PA12 and PA11
+      printRegister("GPIO_AFR(a)=", GPIOA->AFR[1]);
       
+      printRegister("GPIO_MODER(b)=", GPIOA->MODER);
+      GPIOA->MODER   &= 0xFC3FFFFF;      // Reset mode PA12 and PA11 
+      GPIOA->MODER   |= 0x2800000;       // set Alternate function mode PA12 and PA11
+      printRegister("GPIO_MODER(a)=", GPIOA->MODER);
+ 
+      printRegister("GPIO_OSPEEDR(b)=", GPIOA->OSPEEDR);
+      GPIOA->OSPEEDR &= 0xFC3FFFFF;      // Reset speed PB12 and PA11
+      GPIOA->OSPEEDR |= 0x3C00000;       // set high speed PB12 and PA11
+      printRegister("GPIO_OSPEEDR(a)=", GPIOA->OSPEEDR);
+  
+      printRegister("GPIO_OTYPER(b)=", GPIOA->OTYPER);
+      GPIOA->OTYPER  &= 0xE7FF;          // Reset Output push-pull PA12 and PA11
+      printRegister("GPIO_OTYPER(a)=", GPIOA->OTYPER);
+  
+      printRegister("GPIO_PUPDR(b)=", GPIOA->PUPDR);
+      GPIOA->PUPDR   &= 0xFC3FFFFF;      // Reset port pull-up/pull-down PA12 and PA11
+      printRegister("GPIO_PUPDR(a)=", GPIOA->PUPDR);
     }
-                                  
+
     if (remap == 2) {
-      AFIO->MAPR   |= 0x00004000;      // set CAN remap
-                                       // CAN_RX mapped to PB8, CAN_TX mapped to PB9 (not available on 36-pin package)
-  
-      RCC->APB2ENR |= 0x8UL;           // Enable GPIOB clock
-      GPIOB->CRH   &= ~(0xFFUL);       // Configure PB9(0b0000) and PB8(0b0000)
-                                       // 0b0000
-                                       //   MODE=00(Input mode)
-                                       //   CNF=00(Analog mode)
+      RCC->AHBENR |= 0x40000UL;          // Enable GPIOB clock 
+
+      printRegister("GPIO_AFR(a)=", GPIOB->AFR[1]);
+      GPIOB->AFR[1]  &= 0xFFFFFF00;      // Reset alternate function PB9 and PB8   
+      GPIOB->AFR[1]  |= 0x99;            // Set AF9 PB9 and PB8
+      printRegister("GPIO_AFR(b)=", GPIOB->AFR[1]);
+      
+      printRegister("GPIO_MODER(b)=", GPIOB->MODER);
+      GPIOB->MODER   &= 0xFFF0FFFF;      // Reset mode PB9 and PB8 
+      GPIOB->MODER   |= 0xA0000;         // set Alternate function mode PB9 and PB8
+      printRegister("GPIO_MODER(a)=", GPIOB->MODER);
  
-      GPIOB->CRH   |= 0xB8UL;          // Configure PB9(0b1011) and PB8(0b1000)
-                                       // 0b1011
-                                       //   MODE=11(Output mode, max speed 50 MHz) 
-                                       //   CNF=10(Alternate function output Push-pull
-                                       // 0b1000
-                                       //   MODE=00(Input mode)
-                                       //   CNF=10(Input with pull-up / pull-down)
-                                       
-      GPIOB->ODR |= 0x1UL << 8;        // PB8 Upll-up
+      printRegister("GPIO_OSPEEDR(b)=", GPIOB->OSPEEDR);
+      GPIOB->OSPEEDR &= 0xFFF0FFFF;      // Reset speed PB9 and PB8
+      GPIOB->OSPEEDR |= 0xF0000;         // set high speed PB9 and PB8
+      printRegister("GPIO_OSPEEDR(a)=", GPIOB->OSPEEDR);
+  
+      printRegister("GPIO_OTYPER(b)=", GPIOB->OTYPER);
+      GPIOB->OTYPER  &= 0xFCFF;          // Reset Output push-pull PB9 and PB8
+      printRegister("GPIO_OTYPER(a)=", GPIOB->OTYPER);
+  
+      printRegister("GPIO_PUPDR(b)=", GPIOB->PUPDR);
+      GPIOB->PUPDR   &= 0xFFF0FFFF;      // Reset port pull-up/pull-down PB9 and PB8
+      printRegister("GPIO_PUPDR(a)=", GPIOB->PUPDR);
     }
-    
+
     if (remap == 3) {
-      AFIO->MAPR   |= 0x00005000;      // set CAN remap
-                                       // CAN_RX mapped to PD0, CAN_TX mapped to PD1 (available on 100-pin and 144-pin package)
-  
-      RCC->APB2ENR |= 0x20UL;          // Enable GPIOD clock
-      GPIOD->CRL   &= ~(0xFFUL);       // Configure PD1(0b0000) and PD0(0b0000)
-                                       // 0b0000
-                                       //   MODE=00(Input mode)
-                                       //   CNF=00(Analog mode)
+      RCC->AHBENR |= 0x100000UL;         // Enable GPIOD clock 
+
+      printRegister("GPIO_AFR(a)=", GPIOD->AFR[0]);
+      GPIOD->AFR[0]  &= 0xFFFFFF00;      // Reset alternate function PD1 and PD0   
+      GPIOD->AFR[0]  |= 0x99;            // Set AF9 PD1 and PD0
+      printRegister("GPIO_AFR(b)=", GPIOD->AFR[0]);
+      
+      printRegister("GPIO_MODER(b)=", GPIOD->MODER);
+      GPIOD->MODER   &= 0xFFFFFFF0;      // Reset mode PD1 and PD0 
+      GPIOD->MODER   |= 0xA;             // set Alternate function mode PD1 and PD0
+      printRegister("GPIO_MODER(a)=", GPIOD->MODER);
  
-      GPIOD->CRH   |= 0xB8UL;          // Configure PD1(0b1011) and PD0(0b1000)
-                                       // 0b1000
-                                       //   MODE=00(Input mode)
-                                       //   CNF=10(Input with pull-up / pull-down)
-                                       // 0b1011
-                                       //   MODE=11(Output mode, max speed 50 MHz) 
-                                       //   CNF=10(Alternate function output Push-pull
-                                       
-      GPIOD->ODR |= 0x1UL << 0;        // PD0 Upll-up
+      printRegister("GPIO_OSPEEDR(b)=", GPIOD->OSPEEDR);
+      GPIOD->OSPEEDR &= 0xFFFFFFF0;      // Reset speed PD1 and PD0
+      GPIOD->OSPEEDR |= 0xF;             // set high speed PD1 and PD0
+      printRegister("GPIO_OSPEEDR(a)=", GPIOD->OSPEEDR);
+  
+      printRegister("GPIO_OTYPER(b)=", GPIOD->OTYPER);
+      GPIOD->OTYPER  &= 0xFFFC;          // Reset Output push-pull PD1 and PD0
+      printRegister("GPIO_OTYPER(a)=", GPIOD->OTYPER);
+  
+      printRegister("GPIO_PUPDR(b)=", GPIOD->PUPDR);
+      GPIOD->PUPDR   &= 0xFFFFFFF0;      // Reset port pull-up/pull-down PD1 and PD0
+      printRegister("GPIO_PUPDR(a)=", GPIOD->PUPDR);
+
     }
 
     //CAN1->MCR = 0x51UL;              // Set CAN to initialization mode(No automatic retransmission)
-    CAN1->MCR = 0x41UL;                // Set CAN to initialization mode(With automatic retransmission)
-     
+    CAN->MCR = 0x41UL;                // Set CAN to initialization mode(With automatic retransmission)
+
     // Set bit rates 
-    CAN1->BTR &= ~(((0x03) << 24) | ((0x07) << 20) | ((0x0F) << 16) | (0x1FF)); 
-    CAN1->BTR |=  (((can_configs[bitrate].TS2-1) & 0x07) << 20) | (((can_configs[bitrate].TS1-1) & 0x0F) << 16) | ((can_configs[bitrate].BRP-1) & 0x1FF);
+    CAN->BTR &= ~(((0x03) << 24) | ((0x07) << 20) | ((0x0F) << 16) | (0x1FF)); 
+    CAN->BTR |=  (((can_configs[bitrate].TS2-1) & 0x07) << 20) | (((can_configs[bitrate].TS1-1) & 0x0F) << 16) | ((can_configs[bitrate].BRP-1) & 0x1FF);
   
     // Configure Filters to default values
-    CAN1->FM1R |= 0x1C << 8;              // Assign all filters to CAN1
-    CAN1->FMR  |=   0x1UL;                // Set to filter initialization mode
-    CAN1->FA1R &= ~(0x1UL);               // Deactivate filter 0
-    CAN1->FS1R |=   0x1UL;                // Set first filter to single 32 bit configuration
+    //CAN->FM1R |= 0x1C << 8;              // Assign all filters to CAN1
+    CAN->FMR  |=   0x1UL;                // Set to filter initialization mode
+    CAN->FA1R &= ~(0x1UL);               // Deactivate filter 0
+    CAN->FS1R |=   0x1UL;                // Set first filter to single 32 bit configuration
   
-    CAN1->sFilterRegister[0].FR1 = 0x0UL; // Set filter registers to 0
-    CAN1->sFilterRegister[0].FR2 = 0x0UL; // Set filter registers to 0
-    CAN1->FM1R &= ~(0x1UL);               // Set filter to mask mode
+    CAN->sFilterRegister[0].FR1 = 0x0UL; // Set filter registers to 0
+    CAN->sFilterRegister[0].FR2 = 0x0UL; // Set filter registers to 0
+    CAN->FM1R &= ~(0x1UL);               // Set filter to mask mode
   
-    CAN1->FFA1R &= ~(0x1UL);              // Apply filter to FIFO 0  
-    CAN1->FA1R  |=   0x1UL;               // Activate filter 0
+    CAN->FFA1R &= ~(0x1UL);              // Apply filter to FIFO 0  
+    CAN->FA1R  |=   0x1UL;               // Activate filter 0
     
-    CAN1->FMR   &= ~(0x1UL);              // Deactivate initialization mode
-    CAN1->MCR   &= ~(0x1UL);              // Set CAN to normal mode 
+    CAN->FMR   &= ~(0x1UL);              // Deactivate initialization mode
+    CAN->MCR   &= ~(0x1UL);              // Set CAN to normal mode 
   
-    while (CAN1->MSR & 0x1UL);            // Wait for Initialization acknowledge
+    while (CAN->MSR & 0x1UL);            // Wait for Initialization acknowledge
  
 }
  
@@ -311,7 +335,7 @@ void loop() {
   if (currentMillis - previousMillis >= interval) {
     previousMillis = currentMillis;
     if ( ( counter % 2) == 0) {
-        CAN_TX_msg.id = 0x1032F103;
+        CAN_TX_msg.id = 0x1032F303;
     } else {
         CAN_TX_msg.id = 0x103;
     }
