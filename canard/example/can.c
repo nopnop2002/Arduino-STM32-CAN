@@ -49,7 +49,7 @@ uint32_t CAN_HW_Init(uint8_t serial) {
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   GPIO_InitStruct.Alternate = GPIO_AF9_CAN1;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-  return 0x405 << 8 + serial;  // 0x303XX
+  return 0x405 << 8 + serial;  // 0x405XX
 
 #else
 #error "Warning untested processor variant"
