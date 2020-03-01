@@ -1,6 +1,13 @@
 # stm32f303
 I used [this](https://github.com/seeers/CAN-Bus-Arduino_Core_STM32) as a reference.
 
+# Support board
+- STM32F303xB/C/D/E
+- STM32F303x6/8
+- STM32F328x8,
+- STM32F358xC
+- STM32F398xE 
+
 # Changes from the original
 
 - frame format   
