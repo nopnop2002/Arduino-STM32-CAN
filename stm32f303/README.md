@@ -11,6 +11,8 @@ This example support Extended frame format: with 29 identifier bits.
 The original uses PB8 and PB9 as CAN ports.   
 In this example, you can select the CAN port.   
 
+# Remap CAN port
+
 CAN_RX mapped to PA11, CAN_TX mapped to PA12   
 ```
 CANInit(CAN_1000KBPS, 0);  // CAN_RX mapped to PA11, CAN_TX mapped to PA12
