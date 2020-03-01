@@ -56,8 +56,8 @@ void CANInit(enum BITRATE bitrate, int remap)
       printRegister("GPIO_MODER(a)=", GPIOA->MODER);
  
       printRegister("GPIO_OSPEEDR(b)=", GPIOA->OSPEEDR);
-      GPIOA->OSPEEDR &= 0xFC3FFFFF;      // Reset speed PB12 and PA11
-      GPIOA->OSPEEDR |= 0x3C00000;       // set high speed PB12 and PA11
+      GPIOA->OSPEEDR &= 0xFC3FFFFF;      // Reset speed PA12 and PA11
+      GPIOA->OSPEEDR |= 0x3C00000;       // set high speed PA12 and PA11
       printRegister("GPIO_OSPEEDR(a)=", GPIOA->OSPEEDR);
   
       printRegister("GPIO_OTYPER(b)=", GPIOA->OTYPER);
