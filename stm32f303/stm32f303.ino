@@ -32,13 +32,13 @@ void printRegister(char * buf, uint32_t reg) {
  *                    =0:CAN_RX mapped to PA11, CAN_TX mapped to PA12
  *                    =1:Not used
  *                    =2:CAN_RX mapped to PB8, CAN_TX mapped to PB9 (not available on 36-pin package)
- *                    =3:CAN_RX mapped to PD0, CAN_TX mapped to PD1 (not available on 36-pin package)
+ *                    =3:CAN_RX mapped to PD0, CAN_TX mapped to PD1 (available on 100-pin and 144-pin package)
  *
  */
 void CANInit(enum BITRATE bitrate, int remap)
 {
+    // Reference manual
     // https://www.st.com/content/ccc/resource/technical/document/reference_manual/4a/19/6e/18/9d/92/43/32/DM00043574.pdf/files/DM00043574.pdf/jcr:content/translations/en.DM00043574.pdf
-
 
     RCC->APB1ENR |= 0x2000000UL;         // Enable CAN clock 
 
@@ -124,33 +124,43 @@ void CANInit(enum BITRATE bitrate, int remap)
 
     }
 
-    //CAN1->MCR = 0x51UL;              // Set CAN to initialization mode(No automatic retransmission)
-    CAN->MCR = 0x41UL;                // Set CAN to initialization mode(With automatic retransmission)
+    CAN1->MCR |= 0x1UL;                // Set CAN to Initialization mode 
+    while (!(CAN1->MSR & 0x1UL));      // Wait for Initialization mode
+
+    //CAN1->MCR = 0x51UL;              // Hardware initialization(No automatic retransmission)
+    CAN1->MCR = 0x41UL;                // Hardware initialization(With automatic retransmission)
 
     // Set bit rates 
-    CAN->BTR &= ~(((0x03) << 24) | ((0x07) << 20) | ((0x0F) << 16) | (0x1FF)); 
-    CAN->BTR |=  (((can_configs[bitrate].TS2-1) & 0x07) << 20) | (((can_configs[bitrate].TS1-1) & 0x0F) << 16) | ((can_configs[bitrate].BRP-1) & 0x1FF);
+    CAN1->BTR &= ~(((0x03) << 24) | ((0x07) << 20) | ((0x0F) << 16) | (0x1FF)); 
+    CAN1->BTR |=  (((can_configs[bitrate].TS2-1) & 0x07) << 20) | (((can_configs[bitrate].TS1-1) & 0x0F) << 16) | ((can_configs[bitrate].BRP-1) & 0x1FF);
   
     // Configure Filters to default values
-    //CAN->FM1R |= 0x1C << 8;              // Assign all filters to CAN1
-    CAN->FMR  |=   0x1UL;                // Set to filter initialization mode
-    CAN->FA1R &= ~(0x1UL);               // Deactivate filter 0
-    CAN->FS1R |=   0x1UL;                // Set first filter to single 32 bit configuration
+    CAN1->FMR  |=   0x1UL;                // Set to filter initialization mode
+    CAN1->FMR  &= 0xFFFFC0FF;             // Clear CAN2 start bank
+
+    // bxCAN has 28 filters.
+    // These filters are used for both CAN1 and CAN2.
+    // STM32F303 has only CAN1, so all 28 are used for CAN1
+    CAN1->FMR  |= 0x1C << 8;              // Assign all filters to CAN1
+
+    CAN1->FA1R &= ~(0x1UL);               // Deactivate filter 0
+    CAN1->FS1R |=   0x1UL;                // Set first filter to single 32 bit configuration
   
-    CAN->sFilterRegister[0].FR1 = 0x0UL; // Set filter registers to 0
-    CAN->sFilterRegister[0].FR2 = 0x0UL; // Set filter registers to 0
-    CAN->FM1R &= ~(0x1UL);               // Set filter to mask mode
+    CAN1->sFilterRegister[0].FR1 = 0x0UL; // Set filter registers to 0
+    CAN1->sFilterRegister[0].FR2 = 0x0UL; // Set filter registers to 0
+    CAN1->FM1R &= ~(0x1UL);               // Set filter to mask mode
   
-    CAN->FFA1R &= ~(0x1UL);              // Apply filter to FIFO 0  
-    CAN->FA1R  |=   0x1UL;               // Activate filter 0
+    CAN1->FFA1R &= ~(0x1UL);              // Apply filter to FIFO 0  
+    CAN1->FA1R  |=   0x1UL;               // Activate filter 0
     
-    CAN->FMR   &= ~(0x1UL);              // Deactivate initialization mode
-    CAN->MCR   &= ~(0x1UL);              // Set CAN to normal mode 
+    CAN1->FMR   &= ~(0x1UL);              // Deactivate initialization mode
+    CAN1->MCR   &= ~(0x1UL);              // Set CAN to normal mode 
   
-    while (CAN->MSR & 0x1UL);            // Wait for Initialization acknowledge
+    while (CAN1->MSR & 0x1UL);            // Wait for normal mode
  
 }
- 
+
+#if 0
 void CANSetFilter(uint16_t id)
 {
      static uint32_t filterID = 0;
@@ -196,6 +206,7 @@ void CANSetFilters(uint16_t* ids, uint8_t num)
         CANSetFilter(ids[i]);
     }
 }
+#endif
 
 #define STM32_CAN_TIR_TXRQ              (1U << 0U)  // Bit 0: Transmit Mailbox Request
 #define STM32_CAN_RIR_RTR               (1U << 1U)  // Bit 1: Remote Transmission Request
@@ -212,7 +223,7 @@ void CANSetFilters(uint16_t* ids, uint8_t num)
  * CAN message struct with the data fields.
  * 
  * @preconditions A valid CAN message is received
- * @params CAN_rx_msg - CAN message struct that will be populated
+ * @params CAN_rx_msg - CAN message structure for reception
  * 
  */
 void CANReceive(CAN_msg_t* CAN_rx_msg)
@@ -248,8 +259,7 @@ void CANReceive(CAN_msg_t* CAN_rx_msg)
  * Encodes CAN messages using the CAN message struct and populates the 
  * data registers with the sent.
  * 
- * @preconditions A valid CAN message is received
- * @params CAN_rx_msg - CAN message struct that will be populated
+ * @params CAN_tx_msg - CAN message structure for transmission
  * 
  */
 void CANSend(CAN_msg_t* CAN_tx_msg)
@@ -323,12 +333,16 @@ void setup() {
 
 void loop() {
   CAN_msg_t CAN_TX_msg;
-  CAN_msg_t CAN_rx_msg;
+  CAN_msg_t CAN_RX_msg;
    
   CAN_TX_msg.data[0] = counter;
   CAN_TX_msg.data[1] = 0x01;
   CAN_TX_msg.data[2] = 0x02;
   CAN_TX_msg.data[3] = 0x03;
+  CAN_TX_msg.data[4] = 0x04;
+  CAN_TX_msg.data[5] = 0x05;
+  CAN_TX_msg.data[6] = 0x06;
+  CAN_TX_msg.data[7] = 0x07;
   CAN_TX_msg.len = 8;
 
   unsigned long currentMillis = millis();
@@ -344,30 +358,30 @@ void loop() {
   }
   
   if(CANMsgAvail()) {
-    CANReceive(&CAN_rx_msg);
+    CANReceive(&CAN_RX_msg);
 
-    if (CAN_rx_msg.id > 0x7ff) {
+    if (CAN_RX_msg.id > 0x7ff) {
       Serial.print("Extended ID: 0x");
-      if (CAN_rx_msg.id < 0x10000000) Serial.print("0");
-      if (CAN_rx_msg.id < 0x1000000) Serial.print("00");
-      if (CAN_rx_msg.id < 0x100000) Serial.print("000");
-      if (CAN_rx_msg.id < 0x10000) Serial.print("0000");
-      Serial.print(CAN_rx_msg.id, HEX);
+      if (CAN_RX_msg.id < 0x10000000) Serial.print("0");
+      if (CAN_RX_msg.id < 0x1000000) Serial.print("00");
+      if (CAN_RX_msg.id < 0x100000) Serial.print("000");
+      if (CAN_RX_msg.id < 0x10000) Serial.print("0000");
+      Serial.print(CAN_RX_msg.id, HEX);
     } else {
       Serial.print("Standard ID: 0x");
-      if (CAN_rx_msg.id < 0x100) Serial.print("0");
-      if (CAN_rx_msg.id < 0x10) Serial.print("00");
-      Serial.print(CAN_rx_msg.id, HEX);
+      if (CAN_RX_msg.id < 0x100) Serial.print("0");
+      if (CAN_RX_msg.id < 0x10) Serial.print("00");
+      Serial.print(CAN_RX_msg.id, HEX);
       Serial.print("     ");
     }
 
     Serial.print(" DLC: ");
-    Serial.print(CAN_rx_msg.len);
+    Serial.print(CAN_RX_msg.len);
     Serial.print(" Data: ");
-    for(int i=0; i<CAN_rx_msg.len; i++) {
+    for(int i=0; i<CAN_RX_msg.len; i++) {
       Serial.print("0x"); 
-      Serial.print(CAN_rx_msg.data[i], HEX); 
-      if (i != (CAN_rx_msg.len-1))  Serial.print(" ");
+      Serial.print(CAN_RX_msg.data[i], HEX); 
+      if (i != (CAN_RX_msg.len-1))  Serial.print(" ");
     }
     Serial.println();
   }
