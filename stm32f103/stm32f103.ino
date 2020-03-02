@@ -1,5 +1,7 @@
 enum BITRATE{CAN_50KBPS, CAN_100KBPS, CAN_125KBPS, CAN_250KBPS, CAN_500KBPS, CAN_1000KBPS};
 
+#define DEBUG 0
+
 typedef struct
 {
   uint32_t id;
@@ -16,6 +18,13 @@ typedef const struct
 
 CAN_bit_timing_config_t can_configs[6] = {{2, 13, 45}, {2, 15, 20}, {2, 13, 18}, {2, 13, 9}, {2, 15, 4}, {2, 15, 2}};
 
+void printRegister(char * buf, uint32_t reg) {
+  if (DEBUG == 0) return;
+  Serial.print(buf);
+  Serial.print(reg, HEX);
+  Serial.println();
+}
+
 /**
  * Initializes the CAN controller with specified bit rate.
  *
@@ -27,112 +36,128 @@ CAN_bit_timing_config_t can_configs[6] = {{2, 13, 45}, {2, 15, 20}, {2, 13, 18},
  *                    =3:CAN_RX mapped to PD0, CAN_TX mapped to PD1 (available on 100-pin and 144-pin package)
  *
  */
-void CANInit(enum BITRATE bitrate, int remap)
+bool CANInit(enum BITRATE bitrate, int remap)
 {
-    // Reference manual
-    // https://www.st.com/content/ccc/resource/technical/document/reference_manual/59/b9/ba/7f/11/af/43/d5/CD00171190.pdf/files/CD00171190.pdf/jcr:content/translations/en.CD00171190.pdf
+  // Reference manual
+  // https://www.st.com/content/ccc/resource/technical/document/reference_manual/59/b9/ba/7f/11/af/43/d5/CD00171190.pdf/files/CD00171190.pdf/jcr:content/translations/en.CD00171190.pdf
 
-    RCC->APB1ENR |= 0x2000000UL;       // Enable CAN clock 
-    RCC->APB2ENR |= 0x1UL;             // Enable AFIO clock
-    AFIO->MAPR   &= 0xFFFF9FFF;        // reset CAN remap
-                                       // CAN_RX mapped to PA11, CAN_TX mapped to PA12
+  RCC->APB1ENR |= 0x2000000UL;       // Enable CAN clock 
+  RCC->APB2ENR |= 0x1UL;             // Enable AFIO clock
+  AFIO->MAPR   &= 0xFFFF9FFF;        // reset CAN remap
+                                     // CAN_RX mapped to PA11, CAN_TX mapped to PA12
 
-    if (remap == 0) {
-      RCC->APB2ENR |= 0x4UL;           // Enable GPIOA clock
-      GPIOA->CRH   &= ~(0xFF000UL);    // Configure PA12(0b0000) and PA11(0b0000)
-                                       // 0b0000
-                                       //   MODE=00(Input mode)
-                                       //   CNF=00(Analog mode)
- 
-      GPIOA->CRH   |= 0xB8FFFUL;       // Configure PA12(0b1011) and PA11(0b1000)
-                                       // 0b1011
-                                       //   MODE=11(Output mode, max speed 50 MHz) 
-                                       //   CNF=10(Alternate function output Push-pull
-                                       // 0b1000
-                                       //   MODE=00(Input mode)
-                                       //   CNF=10(Input with pull-up / pull-down)
-                                       
-      GPIOA->ODR |= 0x1UL << 12;       // PA12 Upll-up
-      
-    }
-                                  
-    if (remap == 2) {
-      AFIO->MAPR   |= 0x00004000;      // set CAN remap
-                                       // CAN_RX mapped to PB8, CAN_TX mapped to PB9 (not available on 36-pin package)
-  
-      RCC->APB2ENR |= 0x8UL;           // Enable GPIOB clock
-      GPIOB->CRH   &= ~(0xFFUL);       // Configure PB9(0b0000) and PB8(0b0000)
-                                       // 0b0000
-                                       //   MODE=00(Input mode)
-                                       //   CNF=00(Analog mode)
- 
-      GPIOB->CRH   |= 0xB8UL;          // Configure PB9(0b1011) and PB8(0b1000)
-                                       // 0b1011
-                                       //   MODE=11(Output mode, max speed 50 MHz) 
-                                       //   CNF=10(Alternate function output Push-pull
-                                       // 0b1000
-                                       //   MODE=00(Input mode)
-                                       //   CNF=10(Input with pull-up / pull-down)
-                                       
-      GPIOB->ODR |= 0x1UL << 8;        // PB8 Upll-up
-    }
+  if (remap == 0) {
+    RCC->APB2ENR |= 0x4UL;           // Enable GPIOA clock
+    GPIOA->CRH   &= ~(0xFF000UL);    // Configure PA12(0b0000) and PA11(0b0000)
+                                     // 0b0000
+                                     //   MODE=00(Input mode)
+                                     //   CNF=00(Analog mode)
+
+    GPIOA->CRH   |= 0xB8FFFUL;       // Configure PA12(0b1011) and PA11(0b1000)
+                                     // 0b1011
+                                     //   MODE=11(Output mode, max speed 50 MHz) 
+                                     //   CNF=10(Alternate function output Push-pull
+                                     // 0b1000
+                                     //   MODE=00(Input mode)
+                                     //   CNF=10(Input with pull-up / pull-down)
+                                     
+    GPIOA->ODR |= 0x1UL << 12;       // PA12 Upll-up
     
-    if (remap == 3) {
-      AFIO->MAPR   |= 0x00005000;      // set CAN remap
-                                       // CAN_RX mapped to PD0, CAN_TX mapped to PD1 (available on 100-pin and 144-pin package)
+  }
+                                
+  if (remap == 2) {
+    AFIO->MAPR   |= 0x00004000;      // set CAN remap
+                                     // CAN_RX mapped to PB8, CAN_TX mapped to PB9 (not available on 36-pin package)
+
+    RCC->APB2ENR |= 0x8UL;           // Enable GPIOB clock
+    GPIOB->CRH   &= ~(0xFFUL);       // Configure PB9(0b0000) and PB8(0b0000)
+                                     // 0b0000
+                                     //   MODE=00(Input mode)
+                                     //   CNF=00(Analog mode)
+
+    GPIOB->CRH   |= 0xB8UL;          // Configure PB9(0b1011) and PB8(0b1000)
+                                     // 0b1011
+                                     //   MODE=11(Output mode, max speed 50 MHz) 
+                                     //   CNF=10(Alternate function output Push-pull
+                                     // 0b1000
+                                     //   MODE=00(Input mode)
+                                     //   CNF=10(Input with pull-up / pull-down)
+                                     
+    GPIOB->ODR |= 0x1UL << 8;        // PB8 Upll-up
+  }
   
-      RCC->APB2ENR |= 0x20UL;          // Enable GPIOD clock
-      GPIOD->CRL   &= ~(0xFFUL);       // Configure PD1(0b0000) and PD0(0b0000)
-                                       // 0b0000
-                                       //   MODE=00(Input mode)
-                                       //   CNF=00(Analog mode)
- 
-      GPIOD->CRH   |= 0xB8UL;          // Configure PD1(0b1011) and PD0(0b1000)
-                                       // 0b1000
-                                       //   MODE=00(Input mode)
-                                       //   CNF=10(Input with pull-up / pull-down)
-                                       // 0b1011
-                                       //   MODE=11(Output mode, max speed 50 MHz) 
-                                       //   CNF=10(Alternate function output Push-pull
-                                       
-      GPIOD->ODR |= 0x1UL << 0;        // PD0 Upll-up
+  if (remap == 3) {
+    AFIO->MAPR   |= 0x00005000;      // set CAN remap
+                                     // CAN_RX mapped to PD0, CAN_TX mapped to PD1 (available on 100-pin and 144-pin package)
+
+    RCC->APB2ENR |= 0x20UL;          // Enable GPIOD clock
+    GPIOD->CRL   &= ~(0xFFUL);       // Configure PD1(0b0000) and PD0(0b0000)
+                                     // 0b0000
+                                     //   MODE=00(Input mode)
+                                     //   CNF=00(Analog mode)
+
+    GPIOD->CRH   |= 0xB8UL;          // Configure PD1(0b1011) and PD0(0b1000)
+                                     // 0b1000
+                                     //   MODE=00(Input mode)
+                                     //   CNF=10(Input with pull-up / pull-down)
+                                     // 0b1011
+                                     //   MODE=11(Output mode, max speed 50 MHz) 
+                                     //   CNF=10(Alternate function output Push-pull
+                                     
+    GPIOD->ODR |= 0x1UL << 0;        // PD0 Upll-up
+  }
+
+  CAN1->MCR |= 0x1UL;                // Set CAN to Initialization mode 
+  while (!(CAN1->MSR & 0x1UL));      // Wait for Initialization mode
+
+  //CAN1->MCR = 0x51UL;              // Hardware initialization(No automatic retransmission)
+  CAN1->MCR = 0x41UL;                // Hardware initialization(With automatic retransmission)
+   
+  // Set bit rates 
+  CAN1->BTR &= ~(((0x03) << 24) | ((0x07) << 20) | ((0x0F) << 16) | (0x1FF)); 
+  CAN1->BTR |=  (((can_configs[bitrate].TS2-1) & 0x07) << 20) | (((can_configs[bitrate].TS1-1) & 0x0F) << 16) | ((can_configs[bitrate].BRP-1) & 0x1FF);
+
+  // Configure Filters to default values
+  CAN1->FMR  |=   0x1UL;                // Set to filter initialization mode
+  CAN1->FMR  &= 0xFFFFC0FF;             // Clear CAN2 start bank
+
+  // bxCAN has 28 filters.
+  // These filters are used for both CAN1 and CAN2.
+  // STM32F103 has only CAN1, so all 28 are used for CAN1
+  CAN1->FMR  |= 0x1C << 8;              // Assign all filters to CAN1
+
+  CAN1->FA1R &= ~(0x1UL);               // Deactivate filter 0
+  CAN1->FS1R |=   0x1UL;                // Set first filter to single 32 bit configuration
+
+  CAN1->sFilterRegister[0].FR1 = 0x0UL; // Set filter registers to 0
+  CAN1->sFilterRegister[0].FR2 = 0x0UL; // Set filter registers to 0
+  CAN1->FM1R &= ~(0x1UL);               // Set filter to mask mode
+
+  CAN1->FFA1R &= ~(0x1UL);              // Apply filter to FIFO 0  
+  CAN1->FA1R  |=   0x1UL;               // Activate filter 0
+  
+  CAN1->FMR   &= ~(0x1UL);              // Deactivate initialization mode
+
+  uint16_t TimeoutMilliseconds = 1000;
+  bool can1 = false;
+  CAN1->MCR   &= ~(0x1UL);              // Set CAN1 to normal mode 
+  // Wait for normal mode
+  for (uint16_t wait_ack = 0; wait_ack < TimeoutMilliseconds; wait_ack++) {
+    if ((CAN1->MSR & 0x1UL) == 0) {
+      can1 = true;
+      break;
     }
-
-    CAN1->MCR |= 0x1UL;                // Set CAN to Initialization mode 
-    while (!(CAN1->MSR & 0x1UL));      // Wait for Initialization mode
-
-    //CAN1->MCR = 0x51UL;              // Hardware initialization(No automatic retransmission)
-    CAN1->MCR = 0x41UL;                // Hardware initialization(With automatic retransmission)
-     
-    // Set bit rates 
-    CAN1->BTR &= ~(((0x03) << 24) | ((0x07) << 20) | ((0x0F) << 16) | (0x1FF)); 
-    CAN1->BTR |=  (((can_configs[bitrate].TS2-1) & 0x07) << 20) | (((can_configs[bitrate].TS1-1) & 0x0F) << 16) | ((can_configs[bitrate].BRP-1) & 0x1FF);
-  
-    // Configure Filters to default values
-    //CAN1->FM1R |= 0x1C << 8;              // Assign all filters to CAN1
-    CAN1->FMR  |=   0x1UL;                // Set to filter initialization mode
-    CAN1->FMR  &= 0xFFFFC0FF;             // Clear CAN2 start bank
-
-    // bxCAN has 28 filters.
-    // These filters are used for both CAN1 and CAN2.
-    // STM32F103 has only CAN1, so all 28 are used for CAN1
-    CAN1->FMR  |= 0x1C << 8;              // Assign all filters to CAN1
-
-    CAN1->FA1R &= ~(0x1UL);               // Deactivate filter 0
-    CAN1->FS1R |=   0x1UL;                // Set first filter to single 32 bit configuration
-  
-    CAN1->sFilterRegister[0].FR1 = 0x0UL; // Set filter registers to 0
-    CAN1->sFilterRegister[0].FR2 = 0x0UL; // Set filter registers to 0
-    CAN1->FM1R &= ~(0x1UL);               // Set filter to mask mode
-  
-    CAN1->FFA1R &= ~(0x1UL);              // Apply filter to FIFO 0  
-    CAN1->FA1R  |=   0x1UL;               // Activate filter 0
-    
-    CAN1->FMR   &= ~(0x1UL);              // Deactivate initialization mode
-    CAN1->MCR   &= ~(0x1UL);              // Set CAN to normal mode 
-  
-    while (CAN1->MSR & 0x1UL);            // Wait for normal mode
- 
+    delayMicroseconds(1000);
+  }
+  //Serial.print("can1=");
+  //Serial.println(can1);
+  if (can1) {
+    Serial.println("CAN1 initialize ok");
+  } else {
+    Serial.println("CAN1 initialize fail!!");
+    return false;
+  }
+  return true; 
 }
 
 #if 0 
@@ -301,9 +326,10 @@ const long interval = 1000;           // transmission interval (milliseconds)
 
 void setup() {
   Serial.begin(115200);
-  CANInit(CAN_1000KBPS, 0);  // CAN_RX mapped to PA11, CAN_TX mapped to PA12
+  bool ret = CANInit(CAN_1000KBPS, 0);  // CAN_RX mapped to PA11, CAN_TX mapped to PA12
   //CANInit(CAN_1000KBPS, 2);  // CAN_RX mapped to PB8, CAN_TX mapped to PB9
   //CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PD0, CAN_TX mapped to PD1
+  if (!ret) while(true);
 }
 
 void loop() {
