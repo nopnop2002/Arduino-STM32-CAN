@@ -107,11 +107,11 @@ bool CANInit(enum BITRATE bitrate, int remap)
     GPIOD->ODR |= 0x1UL << 0;        // PD0 Upll-up
   }
 
-  CAN1->MCR |= 0x1UL;                // Set CAN to Initialization mode 
-  while (!(CAN1->MSR & 0x1UL));      // Wait for Initialization mode
+  CAN1->MCR |= 0x1UL;                   // Require CAN1 to Initialization mode 
+  while (!(CAN1->MSR & 0x1UL));         // Wait for Initialization mode
 
-  //CAN1->MCR = 0x51UL;              // Hardware initialization(No automatic retransmission)
-  CAN1->MCR = 0x41UL;                // Hardware initialization(With automatic retransmission)
+  //CAN1->MCR = 0x51UL;                 // Hardware initialization(No automatic retransmission)
+  CAN1->MCR = 0x41UL;                   // Hardware initialization(With automatic retransmission)
    
   // Set bit rates 
   CAN1->BTR &= ~(((0x03) << 24) | ((0x07) << 20) | ((0x0F) << 16) | (0x1FF)); 
@@ -140,8 +140,10 @@ bool CANInit(enum BITRATE bitrate, int remap)
 
   uint16_t TimeoutMilliseconds = 1000;
   bool can1 = false;
-  CAN1->MCR   &= ~(0x1UL);              // Set CAN1 to normal mode 
+  CAN1->MCR   &= ~(0x1UL);              // Require CAN1 to normal mode 
+
   // Wait for normal mode
+  // If the connection is not correct, it will not return to normal mode.
   for (uint16_t wait_ack = 0; wait_ack < TimeoutMilliseconds; wait_ack++) {
     if ((CAN1->MSR & 0x1UL) == 0) {
       can1 = true;
