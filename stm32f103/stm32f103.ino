@@ -112,6 +112,10 @@ void CANInit(enum BITRATE bitrate, int remap)
     //CAN1->FM1R |= 0x1C << 8;              // Assign all filters to CAN1
     CAN1->FMR  |=   0x1UL;                // Set to filter initialization mode
     CAN1->FMR  &= 0xFFFFC0FF;             // Clear CAN2 start bank
+
+    // bxCAN has 28 filters.
+    // These filters are used for both CAN1 and CAN2.
+    // STM32F103 has only CAN1, so all 28 are used for CAN1
     CAN1->FMR  |= 0x1C << 8;              // Assign all filters to CAN1
 
     CAN1->FA1R &= ~(0x1UL);               // Deactivate filter 0
