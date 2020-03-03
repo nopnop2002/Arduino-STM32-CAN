@@ -18,11 +18,61 @@ typedef const struct
 
 CAN_bit_timing_config_t can_configs[6] = {{2, 13, 45}, {2, 15, 20}, {2, 13, 18}, {2, 13, 9}, {2, 15, 4}, {2, 15, 2}};
 
+/**
+ * Print registers.
+*/ 
 void printRegister(char * buf, uint32_t reg) {
   if (DEBUG == 0) return;
   Serial.print(buf);
   Serial.print(reg, HEX);
   Serial.println();
+}
+
+/**
+ * Initializes the CAN filter registers.
+ *
+ * @preconditions   - This register can be written only when the filter initialization mode is set (FINIT=1) in the CAN_FMR register.
+ * @params: index   - Specified filter index. index 27:14 are available in connectivity line devices only.
+ * @params: scale   - Select filter scale.
+ *                    0: Dual 16-bit scale configuration
+ *                    1: Single 32-bit scale configuration
+ * @params: mode    - Select filter mode.
+ *                    0: Two 32-bit registers of filter bank x are in Identifier Mask mode
+ *                    1: Two 32-bit registers of filter bank x are in Identifier List mode
+ * @params: fifo    - Select filter assigned.
+ *                    0: Filter assigned to FIFO 0
+ *                    1: Filter assigned to FIFO 1
+ * @params: bank1   - Filter bank register 1
+ * @params: bank2   - Filter bank register 2
+ *
+ */
+void CANSetFilter(uint8_t index, uint8_t scale, uint8_t mode, uint8_t fifo, uint32_t bank1, uint32_t bank2) {
+  if (index > 27) return;
+
+  CAN1->FA1R &= ~(0x1UL<<index);               // Deactivate filter
+
+  if (scale == 0) {
+    CAN1->FS1R &= ~(0x1UL<<index);             // Set filter to Dual 16-bit scale configuration
+  } else {
+    CAN1->FS1R |= (0x1UL<<index);              // Set filter to single 32 bit configuration
+  }
+    if (mode == 0) {
+    CAN1->FM1R &= ~(0x1UL<<index);             // Set filter to Mask mode
+  } else {
+    CAN1->FM1R |= (0x1UL<<index);              // Set filter to List mode
+  }
+
+  if (fifo == 0) {
+    CAN1->FFA1R &= ~(0x1UL<<index);            // Set filter assigned to FIFO 0
+  } else {
+    CAN1->FFA1R |= (0x1UL<<index);             // Set filter assigned to FIFO 1
+  }
+
+  CAN1->sFilterRegister[index].FR1 = bank1;    // Set filter bank registers1
+  CAN1->sFilterRegister[index].FR2 = bank2;    // Set filter bank registers2
+
+  CAN1->FA1R |= (0x1UL<<index);                // Activate filter
+
 }
 
 /**
@@ -126,6 +176,9 @@ bool CANInit(enum BITRATE bitrate, int remap)
   // STM32F103 has only CAN1, so all 28 are used for CAN1
   CAN1->FMR  |= 0x1C << 8;              // Assign all filters to CAN1
 
+  // Set fileter 0
+  CANSetFilter(0, 1, 0, 0, 0x0UL, 0x0UL); 
+#if 0
   CAN1->FA1R &= ~(0x1UL);               // Deactivate filter 0
   CAN1->FS1R |=   0x1UL;                // Set first filter to single 32 bit configuration
 
@@ -135,6 +188,7 @@ bool CANInit(enum BITRATE bitrate, int remap)
 
   CAN1->FFA1R &= ~(0x1UL);              // Apply filter to FIFO 0  
   CAN1->FA1R  |=   0x1UL;               // Activate filter 0
+#endif
   
   CAN1->FMR   &= ~(0x1UL);              // Deactivate initialization mode
 
@@ -162,53 +216,6 @@ bool CANInit(enum BITRATE bitrate, int remap)
   return true; 
 }
 
-#if 0 
-void CANSetFilter(uint16_t id)
-{
-     static uint32_t filterID = 0;
-     
-     if (filterID == 112)
-     {
-         return;
-     }
-     
-     CAN1->FMR  |=   0x1UL;                // Set to filter initialization mode
-     
-     switch(filterID%4)
-     {
-         case 0:
-            // if we need another filter bank, initialize it
-            CAN1->FA1R |= 0x1UL <<(filterID/4);
-            CAN1->FM1R |= 0x1UL << (filterID/4);
-            CAN1->FS1R &= ~(0x1UL << (filterID/4)); 
-            
-            CAN1->sFilterRegister[filterID/4].FR1 = (id << 5) | (id << 21);
-            CAN1->sFilterRegister[filterID/4].FR2 = (id << 5) | (id << 21);
-            break;
-         case 1:
-            CAN1->sFilterRegister[filterID/4].FR1 &= 0x0000FFFF;
-            CAN1->sFilterRegister[filterID/4].FR1 |= id << 21;
-            break;
-         case 2:
-            CAN1->sFilterRegister[filterID/4].FR2 = (id << 5) | (id << 21);
-            break;
-         case 3:
-              CAN1->sFilterRegister[filterID/4].FR2 &= 0x0000FFFF;
-              CAN1->sFilterRegister[filterID/4].FR2 |= id << 21;
-              break;
-     }
-     filterID++;
-     CAN1->FMR   &= ~(0x1UL);              // Deactivate initialization mode
-}
- 
-void CANSetFilters(uint16_t* ids, uint8_t num)
-{
-    for (int i = 0; i < num; i++)
-    {
-        CANSetFilter(ids[i]);
-    }
-}
-#endif
 
 #define STM32_CAN_TIR_TXRQ              (1U << 0U)  // Bit 0: Transmit Mailbox Request
 #define STM32_CAN_RIR_RTR               (1U << 1U)  // Bit 1: Remote Transmission Request
@@ -230,31 +237,33 @@ void CANSetFilters(uint16_t* ids, uint8_t num)
  */
 void CANReceive(CAN_msg_t* CAN_rx_msg)
 {
-    uint32_t id = CAN1->sFIFOMailBox[0].RIR;
-    if ((id & STM32_CAN_RIR_IDE) == 0) { // Standard frame format
-        CAN_rx_msg->id = (CAN_STD_ID_MASK & (id >> 21U));
-    } 
-    else {                               // Extended frame format
-        CAN_rx_msg->id = (CAN_EXT_ID_MASK & (id >> 3U));
-    }
+  uint32_t id = CAN1->sFIFOMailBox[0].RIR;
+  if ((id & STM32_CAN_RIR_IDE) == 0) { // Standard frame format
+      CAN_rx_msg->id = (CAN_STD_ID_MASK & (id >> 21U));
+  } 
+  else {                               // Extended frame format
+      CAN_rx_msg->id = (CAN_EXT_ID_MASK & (id >> 3U));
+  }
 
-    if ((id & STM32_CAN_RIR_RTR) != 0) {
-        CAN_rx_msg->id |= CAN_FRAME_RTR;
-    }
+  if ((id & STM32_CAN_RIR_RTR) != 0) {
+      CAN_rx_msg->id |= CAN_FRAME_RTR;
+  }
 
-    
-    CAN_rx_msg->len = (CAN1->sFIFOMailBox[0].RDTR) & 0xFUL;
-    
-    CAN_rx_msg->data[0] = 0xFFUL &  CAN1->sFIFOMailBox[0].RDLR;
-    CAN_rx_msg->data[1] = 0xFFUL & (CAN1->sFIFOMailBox[0].RDLR >> 8);
-    CAN_rx_msg->data[2] = 0xFFUL & (CAN1->sFIFOMailBox[0].RDLR >> 16);
-    CAN_rx_msg->data[3] = 0xFFUL & (CAN1->sFIFOMailBox[0].RDLR >> 24);
-    CAN_rx_msg->data[4] = 0xFFUL &  CAN1->sFIFOMailBox[0].RDHR;
-    CAN_rx_msg->data[5] = 0xFFUL & (CAN1->sFIFOMailBox[0].RDHR >> 8);
-    CAN_rx_msg->data[6] = 0xFFUL & (CAN1->sFIFOMailBox[0].RDHR >> 16);
-    CAN_rx_msg->data[7] = 0xFFUL & (CAN1->sFIFOMailBox[0].RDHR >> 24);
-    
-    CAN1->RF0R |= 0x20UL;
+  
+  CAN_rx_msg->len = (CAN1->sFIFOMailBox[0].RDTR) & 0xFUL;
+  
+  CAN_rx_msg->data[0] = 0xFFUL &  CAN1->sFIFOMailBox[0].RDLR;
+  CAN_rx_msg->data[1] = 0xFFUL & (CAN1->sFIFOMailBox[0].RDLR >> 8);
+  CAN_rx_msg->data[2] = 0xFFUL & (CAN1->sFIFOMailBox[0].RDLR >> 16);
+  CAN_rx_msg->data[3] = 0xFFUL & (CAN1->sFIFOMailBox[0].RDLR >> 24);
+  CAN_rx_msg->data[4] = 0xFFUL &  CAN1->sFIFOMailBox[0].RDHR;
+  CAN_rx_msg->data[5] = 0xFFUL & (CAN1->sFIFOMailBox[0].RDHR >> 8);
+  CAN_rx_msg->data[6] = 0xFFUL & (CAN1->sFIFOMailBox[0].RDHR >> 16);
+  CAN_rx_msg->data[7] = 0xFFUL & (CAN1->sFIFOMailBox[0].RDHR >> 24);
+
+  // Release FIFO 0 output mailbox.
+  // Make the next incoming message available.
+  CAN1->RF0R |= 0x20UL;
 }
  
 /**
@@ -266,48 +275,59 @@ void CANReceive(CAN_msg_t* CAN_rx_msg)
  */
 void CANSend(CAN_msg_t* CAN_tx_msg)
 {
-    volatile int count = 0;
+  volatile int count = 0;
 
-    uint32_t out = 0;
-    if (CAN_tx_msg->id > CAN_STD_ID_MASK) { // Extended frame format
-        out = ((CAN_tx_msg->id & CAN_EXT_ID_MASK) << 3U) | STM32_CAN_TIR_IDE;
-    }
-    else {                                  // Standard frame format
-        out = ((CAN_tx_msg->id & CAN_STD_ID_MASK) << 21U);
-    }
+  uint32_t out = 0;
+  if (CAN_tx_msg->id > CAN_STD_ID_MASK) { // Extended frame format
+      out = ((CAN_tx_msg->id & CAN_EXT_ID_MASK) << 3U) | STM32_CAN_TIR_IDE;
+  }
+  else {                                  // Standard frame format
+      out = ((CAN_tx_msg->id & CAN_STD_ID_MASK) << 21U);
+  }
 
-    if (CAN_tx_msg->id & CAN_FRAME_RTR) {
-        out |= STM32_CAN_TIR_RTR;
-    }
+  if (CAN_tx_msg->id & CAN_FRAME_RTR) {
+      out |= STM32_CAN_TIR_RTR;
+  }
 
-    CAN1->sTxMailBox[0].TDTR &= ~(0xF);
-    CAN1->sTxMailBox[0].TDTR |= CAN_tx_msg->len & 0xFUL;
-    
-    CAN1->sTxMailBox[0].TDLR  = (((uint32_t) CAN_tx_msg->data[3] << 24) |
-                                 ((uint32_t) CAN_tx_msg->data[2] << 16) |
-                                 ((uint32_t) CAN_tx_msg->data[1] <<  8) |
-                                 ((uint32_t) CAN_tx_msg->data[0]      ));
-    CAN1->sTxMailBox[0].TDHR  = (((uint32_t) CAN_tx_msg->data[7] << 24) |
-                                 ((uint32_t) CAN_tx_msg->data[6] << 16) |
-                                 ((uint32_t) CAN_tx_msg->data[5] <<  8) |
-                                 ((uint32_t) CAN_tx_msg->data[4]      ));
+  CAN1->sTxMailBox[0].TDTR &= ~(0xF);
+  CAN1->sTxMailBox[0].TDTR |= CAN_tx_msg->len & 0xFUL;
+  
+  CAN1->sTxMailBox[0].TDLR  = (((uint32_t) CAN_tx_msg->data[3] << 24) |
+                               ((uint32_t) CAN_tx_msg->data[2] << 16) |
+                               ((uint32_t) CAN_tx_msg->data[1] <<  8) |
+                               ((uint32_t) CAN_tx_msg->data[0]      ));
+  CAN1->sTxMailBox[0].TDHR  = (((uint32_t) CAN_tx_msg->data[7] << 24) |
+                               ((uint32_t) CAN_tx_msg->data[6] << 16) |
+                               ((uint32_t) CAN_tx_msg->data[5] <<  8) |
+                               ((uint32_t) CAN_tx_msg->data[4]      ));
 
-    // Send Go
-    CAN1->sTxMailBox[0].TIR = out | STM32_CAN_TIR_TXRQ;
+  // Send Go
+  CAN1->sTxMailBox[0].TIR = out | STM32_CAN_TIR_TXRQ;
 
-    while(CAN1->sTxMailBox[0].TIR & 0x1UL && count++ < 1000000);
-     
-     if (!(CAN1->sTxMailBox[0].TIR & 0x1UL)) return;
-     
-     //Sends error log to screen
-     while (CAN1->sTxMailBox[0].TIR & 0x1UL)
-     {
-         Serial.println("Send Fail");
-         Serial.println(CAN1->ESR);        
-         Serial.println(CAN1->MSR);        
-         Serial.println(CAN1->TSR);
-        
-     }
+  // Wait until the mailbox is empty
+  while(CAN1->sTxMailBox[0].TIR & 0x1UL && count++ < 1000000);
+
+  // The mailbox don't becomes empty while loop
+  if (CAN1->sTxMailBox[0].TIR & 0x1UL) {
+    Serial.println("Send Fail");
+    Serial.println(CAN1->ESR);
+    Serial.println(CAN1->MSR);
+    Serial.println(CAN1->TSR);
+  }
+
+#if 0   
+  if (!(CAN1->sTxMailBox[0].TIR & 0x1UL)) return;
+   
+  //Sends error log to screen
+  while (CAN1->sTxMailBox[0].TIR & 0x1UL)
+  {
+       Serial.println("Send Fail");
+       Serial.println(CAN1->ESR);        
+       Serial.println(CAN1->MSR);        
+       Serial.println(CAN1->TSR);
+      
+  }
+#endif
 }
 
  /**
@@ -318,6 +338,7 @@ void CANSend(CAN_msg_t* CAN_tx_msg)
  */
 uint8_t CANMsgAvail(void)
 {
+  // Check for pending FIFO 0 messages
   return CAN1->RF0R & 0x3UL;
 }
 
@@ -337,7 +358,7 @@ void setup() {
 void loop() {
   CAN_msg_t CAN_TX_msg;
   CAN_msg_t CAN_RX_msg;
-   
+
   CAN_TX_msg.data[0] = counter;
   CAN_TX_msg.data[1] = 0x01;
   CAN_TX_msg.data[2] = 0x02;
