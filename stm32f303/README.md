@@ -4,11 +4,9 @@ I used [this](https://github.com/seeers/CAN-Bus-Arduino_Core_STM32) as a referen
 # Changes from the original
 
 - frame format   
-The original support only Base frame format: with 11 identifier bits.   
 This example support Extended frame format: with 29 identifier bits.   
 
 - CAN port   
-The original uses PB8 and PB9 as CAN ports.   
 In this example, you can select the CAN port.   
 
 # Remap CAN port
