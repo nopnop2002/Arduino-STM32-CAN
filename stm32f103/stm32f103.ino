@@ -278,6 +278,7 @@ void CANSend(CAN_msg_t* CAN_tx_msg)
       out = ((CAN_tx_msg->id & CAN_STD_ID_MASK) << 21U);
   }
 
+  // Remote frame
   if (CAN_tx_msg->id & CAN_FRAME_RTR) {
       out |= STM32_CAN_TIR_RTR;
   }
