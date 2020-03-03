@@ -177,18 +177,11 @@ bool CANInit(enum BITRATE bitrate, int remap)
   CAN1->FMR  |= 0x1C << 8;              // Assign all filters to CAN1
 
   // Set fileter 0
+  // Single 32-bit scale configuration 
+  // Two 32-bit registers of filter bank x are in Identifier Mask mode
+  // Filter assigned to FIFO 0 
+  // Filter bank register to all 0
   CANSetFilter(0, 1, 0, 0, 0x0UL, 0x0UL); 
-#if 0
-  CAN1->FA1R &= ~(0x1UL);               // Deactivate filter 0
-  CAN1->FS1R |=   0x1UL;                // Set first filter to single 32 bit configuration
-
-  CAN1->sFilterRegister[0].FR1 = 0x0UL; // Set filter registers to 0
-  CAN1->sFilterRegister[0].FR2 = 0x0UL; // Set filter registers to 0
-  CAN1->FM1R &= ~(0x1UL);               // Set filter to mask mode
-
-  CAN1->FFA1R &= ~(0x1UL);              // Apply filter to FIFO 0  
-  CAN1->FA1R  |=   0x1UL;               // Activate filter 0
-#endif
   
   CAN1->FMR   &= ~(0x1UL);              // Deactivate initialization mode
 
@@ -314,20 +307,6 @@ void CANSend(CAN_msg_t* CAN_tx_msg)
     Serial.println(CAN1->MSR);
     Serial.println(CAN1->TSR);
   }
-
-#if 0   
-  if (!(CAN1->sTxMailBox[0].TIR & 0x1UL)) return;
-   
-  //Sends error log to screen
-  while (CAN1->sTxMailBox[0].TIR & 0x1UL)
-  {
-       Serial.println("Send Fail");
-       Serial.println(CAN1->ESR);        
-       Serial.println(CAN1->MSR);        
-       Serial.println(CAN1->TSR);
-      
-  }
-#endif
 }
 
  /**
