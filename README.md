@@ -44,7 +44,7 @@ You can use [this](https://github.com/coryjfowler/MCP_CAN_lib) library.
 
 # Communication with Arduino-DUE
 You can use [this](https://github.com/collin80/due_can) library.
-![STM32F103-CAN-DUO](https://user-images.githubusercontent.com/6020549/75351657-d312b980-58eb-11ea-97e6-83b6eb409b88.jpg)
+![STM32F103-CAN-DUO](https://user-images.githubusercontent.com/6020549/75880245-43778880-5e60-11ea-9688-6523d85c10fc.jpg)
 
 # Communication with Raspberry Pi
 Edit /boot/config.txt and reboot.   
