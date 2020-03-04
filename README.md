@@ -6,6 +6,9 @@ Can Example for Arduino Core STM32.
 
 - STM32F103 Development Board.   
 - STM32F303 Development Board.   
+- STM32F405 Development Board.   
+- STM32F407 Development Board.   
+- STM32F446 Development Board.   
 - CAN Transceiver.   
 MCP2551/2561(5V)   
 SN65HVD230/231/232(3.3V)   
