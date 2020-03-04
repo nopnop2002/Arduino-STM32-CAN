@@ -29,6 +29,62 @@ void printRegister(char * buf, uint32_t reg) {
 }
 
 /**
+ * Initializes the CAN GPIO registers.
+ *
+ * @params: addr    - Specified GPIO register address.
+ * @params: index   - Specified GPIO index.
+ * @params: speed   - Specified OSPEEDR register value.(Optional)
+ *
+ */
+void CANSetGpio(GPIO_TypeDef * addr, uint8_t index, uint8_t speed = 3) {
+    uint8_t _index2 = index * 2;
+    uint8_t _index4 = index * 4;
+    uint8_t ofs = 0;
+    uint8_t setting;
+
+    if (index > 7) {
+      _index4 = (index - 8) * 4;
+      ofs = 1;
+    }
+
+    uint32_t mask;
+    printRegister("GPIO_AFR(b)=", addr->AFR[1]);
+    mask = 0xF << _index4;
+    addr->AFR[ofs]  &= ~mask;         // Reset alternate function
+    setting = 0x9;                    // AF9
+    mask = setting << _index4;
+    addr->AFR[ofs]  |= mask;          // Set alternate function
+    printRegister("GPIO_AFR(a)=", addr->AFR[1]);
+
+    printRegister("GPIO_MODER(b)=", addr->MODER);
+    mask = 0x3 << _index2;
+    addr->MODER   &= ~mask;           // Reset mode
+    setting = 0x2;                    // Alternate function mode
+    mask = setting << _index2;
+    addr->MODER   |= mask;            // Set mode
+    printRegister("GPIO_MODER(a)=", addr->MODER);
+
+    printRegister("GPIO_OSPEEDR(b)=", addr->OSPEEDR);
+    mask = 0x3 << _index2;
+    addr->OSPEEDR &= ~mask;           // Reset speed
+    setting = speed;
+    mask = setting << _index2;
+    addr->OSPEEDR |= mask;            // Set speed
+    printRegister("GPIO_OSPEEDR(a)=", addr->OSPEEDR);
+
+    printRegister("GPIO_OTYPER(b)=", addr->OTYPER);
+    mask = 0x1 << index;
+    addr->OTYPER  &= ~mask;           // Reset Output push-pull
+    printRegister("GPIO_OTYPER(a)=", addr->OTYPER);
+
+    printRegister("GPIO_PUPDR(b)=", addr->PUPDR);
+    mask = 0x3 << _index2;
+    addr->PUPDR   &= ~mask;           // Reset port pull-up/pull-down
+    printRegister("GPIO_PUPDR(a)=", addr->PUPDR);
+}
+
+
+/**
  * Initializes the CAN filter registers.
  *
  * @preconditions   - This register can be written only when the filter initialization mode is set (FINIT=1) in the CAN_FMR register.
@@ -92,95 +148,31 @@ bool CANInit(enum BITRATE bitrate, int remap)
   // Reference manual
   // https://www.st.com/content/ccc/resource/technical/document/reference_manual/4a/19/6e/18/9d/92/43/32/DM00043574.pdf/files/DM00043574.pdf/jcr:content/translations/en.DM00043574.pdf
 
-  RCC->APB1ENR |= 0x2000000UL;         // Enable CAN clock 
+  RCC->APB1ENR |= 0x2000000UL;          // Enable CAN clock 
 
   if (remap == 0) {
-    RCC->AHBENR |= 0x20000UL;          // Enable GPIOA clock 
-
-    printRegister("GPIO_AFR(b)=", GPIOA->AFR[1]);
-    GPIOA->AFR[1]  &= 0xFFF00FFF;      // Reset alternate function PA12 and PA11   
-    GPIOA->AFR[1]  |= 0x99000;         // Set AF9 PA12 and PA11
-    printRegister("GPIO_AFR(a)=", GPIOA->AFR[1]);
-    
-    printRegister("GPIO_MODER(b)=", GPIOA->MODER);
-    GPIOA->MODER   &= 0xFC3FFFFF;      // Reset mode PA12 and PA11 
-    GPIOA->MODER   |= 0x2800000;       // set Alternate function mode PA12 and PA11
-    printRegister("GPIO_MODER(a)=", GPIOA->MODER);
-
-    printRegister("GPIO_OSPEEDR(b)=", GPIOA->OSPEEDR);
-    GPIOA->OSPEEDR &= 0xFC3FFFFF;      // Reset speed PA12 and PA11
-    GPIOA->OSPEEDR |= 0x3C00000;       // set high speed PA12 and PA11
-    printRegister("GPIO_OSPEEDR(a)=", GPIOA->OSPEEDR);
-
-    printRegister("GPIO_OTYPER(b)=", GPIOA->OTYPER);
-    GPIOA->OTYPER  &= 0xE7FF;          // Reset Output push-pull PA12 and PA11
-    printRegister("GPIO_OTYPER(a)=", GPIOA->OTYPER);
-
-    printRegister("GPIO_PUPDR(b)=", GPIOA->PUPDR);
-    GPIOA->PUPDR   &= 0xFC3FFFFF;      // Reset port pull-up/pull-down PA12 and PA11
-    printRegister("GPIO_PUPDR(a)=", GPIOA->PUPDR);
+    RCC->AHBENR |= 0x20000UL;           // Enable GPIOA clock 
+    CANSetGpio(GPIOA, 11);              // Set PA11
+    CANSetGpio(GPIOA, 12);              // Set PA12
   }
 
   if (remap == 2) {
-    RCC->AHBENR |= 0x40000UL;          // Enable GPIOB clock 
-
-    printRegister("GPIO_AFR(a)=", GPIOB->AFR[1]);
-    GPIOB->AFR[1]  &= 0xFFFFFF00;      // Reset alternate function PB9 and PB8   
-    GPIOB->AFR[1]  |= 0x99;            // Set AF9 PB9 and PB8
-    printRegister("GPIO_AFR(b)=", GPIOB->AFR[1]);
-    
-    printRegister("GPIO_MODER(b)=", GPIOB->MODER);
-    GPIOB->MODER   &= 0xFFF0FFFF;      // Reset mode PB9 and PB8 
-    GPIOB->MODER   |= 0xA0000;         // set Alternate function mode PB9 and PB8
-    printRegister("GPIO_MODER(a)=", GPIOB->MODER);
-
-    printRegister("GPIO_OSPEEDR(b)=", GPIOB->OSPEEDR);
-    GPIOB->OSPEEDR &= 0xFFF0FFFF;      // Reset speed PB9 and PB8
-    GPIOB->OSPEEDR |= 0xF0000;         // set high speed PB9 and PB8
-    printRegister("GPIO_OSPEEDR(a)=", GPIOB->OSPEEDR);
-
-    printRegister("GPIO_OTYPER(b)=", GPIOB->OTYPER);
-    GPIOB->OTYPER  &= 0xFCFF;          // Reset Output push-pull PB9 and PB8
-    printRegister("GPIO_OTYPER(a)=", GPIOB->OTYPER);
-
-    printRegister("GPIO_PUPDR(b)=", GPIOB->PUPDR);
-    GPIOB->PUPDR   &= 0xFFF0FFFF;      // Reset port pull-up/pull-down PB9 and PB8
-    printRegister("GPIO_PUPDR(a)=", GPIOB->PUPDR);
+    RCC->AHBENR |= 0x40000UL;           // Enable GPIOB clock 
+    CANSetGpio(GPIOB, 8);               // Set PB8
+    CANSetGpio(GPIOB, 9);               // Set PB9
   }
 
   if (remap == 3) {
-    RCC->AHBENR |= 0x100000UL;         // Enable GPIOD clock 
-
-    printRegister("GPIO_AFR(a)=", GPIOD->AFR[0]);
-    GPIOD->AFR[0]  &= 0xFFFFFF00;      // Reset alternate function PD1 and PD0   
-    GPIOD->AFR[0]  |= 0x99;            // Set AF9 PD1 and PD0
-    printRegister("GPIO_AFR(b)=", GPIOD->AFR[0]);
-    
-    printRegister("GPIO_MODER(b)=", GPIOD->MODER);
-    GPIOD->MODER   &= 0xFFFFFFF0;      // Reset mode PD1 and PD0 
-    GPIOD->MODER   |= 0xA;             // set Alternate function mode PD1 and PD0
-    printRegister("GPIO_MODER(a)=", GPIOD->MODER);
-
-    printRegister("GPIO_OSPEEDR(b)=", GPIOD->OSPEEDR);
-    GPIOD->OSPEEDR &= 0xFFFFFFF0;      // Reset speed PD1 and PD0
-    GPIOD->OSPEEDR |= 0xF;             // set high speed PD1 and PD0
-    printRegister("GPIO_OSPEEDR(a)=", GPIOD->OSPEEDR);
-
-    printRegister("GPIO_OTYPER(b)=", GPIOD->OTYPER);
-    GPIOD->OTYPER  &= 0xFFFC;          // Reset Output push-pull PD1 and PD0
-    printRegister("GPIO_OTYPER(a)=", GPIOD->OTYPER);
-
-    printRegister("GPIO_PUPDR(b)=", GPIOD->PUPDR);
-    GPIOD->PUPDR   &= 0xFFFFFFF0;      // Reset port pull-up/pull-down PD1 and PD0
-    printRegister("GPIO_PUPDR(a)=", GPIOD->PUPDR);
-
+    RCC->AHBENR |= 0x100000UL;          // Enable GPIOD clock 
+    CANSetGpio(GPIOD, 0);               // Set PD0
+    CANSetGpio(GPIOD, 1);               // Set PD1
   }
 
-  CAN1->MCR |= 0x1UL;                // Set CAN to Initialization mode 
-  while (!(CAN1->MSR & 0x1UL));      // Wait for Initialization mode
+  CAN1->MCR |= 0x1UL;                   // Set CAN to Initialization mode 
+  while (!(CAN1->MSR & 0x1UL));         // Wait for Initialization mode
 
-  //CAN1->MCR = 0x51UL;              // Hardware initialization(No automatic retransmission)
-  CAN1->MCR = 0x41UL;                // Hardware initialization(With automatic retransmission)
+  //CAN1->MCR = 0x51UL;                 // Hardware initialization(No automatic retransmission)
+  CAN1->MCR = 0x41UL;                   // Hardware initialization(With automatic retransmission)
 
   // Set bit rates 
   CAN1->BTR &= ~(((0x03) << 24) | ((0x07) << 20) | ((0x0F) << 16) | (0x1FF)); 
