@@ -151,43 +151,43 @@ bool CANInit(enum BITRATE bitrate, int remap)
   // Reference manual
   // https://www.st.com/content/ccc/resource/technical/document/reference_manual/3d/6d/5a/66/b4/99/40/d4/DM00031020.pdf/files/DM00031020.pdf/jcr:content/translations/en.DM00031020.pdf
 
-  RCC->APB1ENR |= 0x2000000UL;         // Enable CAN1 clock 
-  RCC->APB1ENR |= 0x4000000UL;         // Enable CAN2 clock 
+  RCC->APB1ENR |= 0x2000000UL;           // Enable CAN1 clock 
+  RCC->APB1ENR |= 0x4000000UL;           // Enable CAN2 clock 
   
   if (remap == 0) {
     // CAN1
-    RCC->AHB1ENR |= 0x1;   // Enable GPIOA clock 
-    CANSetGpio(GPIOA, 11); // Set PA11
-    CANSetGpio(GPIOA, 12); // Set PA12
+    RCC->AHB1ENR |= 0x1;                 // Enable GPIOA clock 
+    CANSetGpio(GPIOA, 11);               // Set PA11
+    CANSetGpio(GPIOA, 12);               // Set PA12
     
     // CAN2
-    RCC->AHB1ENR |= 0x2;   // Enable GPIOB clock 
-    CANSetGpio(GPIOB, 5);  // Set PB5
-    CANSetGpio(GPIOB, 6);  // Set PB6
+    RCC->AHB1ENR |= 0x2;                 // Enable GPIOB clock 
+    CANSetGpio(GPIOB, 5);                // Set PB5
+    CANSetGpio(GPIOB, 6);                // Set PB6
   }
 
   if (remap == 2) {
     // CAN1
-    RCC->AHB1ENR |= 0x2;   // Enable GPIOB clock 
-    CANSetGpio(GPIOB, 8);  // Set PB8
-    CANSetGpio(GPIOB, 9);  // Set PB9
+    RCC->AHB1ENR |= 0x2;                 // Enable GPIOB clock 
+    CANSetGpio(GPIOB, 8);                // Set PB8
+    CANSetGpio(GPIOB, 9);                // Set PB9
 
     // CAN2
-    RCC->AHB1ENR |= 0x2;   // Enable GPIOB clock 
-    CANSetGpio(GPIOB, 12); // Set PB12
-    CANSetGpio(GPIOB, 13); // Set PB13
+    RCC->AHB1ENR |= 0x2;                 // Enable GPIOB clock 
+    CANSetGpio(GPIOB, 12);               // Set PB12
+    CANSetGpio(GPIOB, 13);               // Set PB13
   }
     
   if (remap == 3) {
     // CAN1
-    RCC->AHB1ENR |= 0x8;   // Enable GPIOD clock 
-    CANSetGpio(GPIOD, 0);  // Set PD0
-    CANSetGpio(GPIOD, 1);  // Set PD1
+    RCC->AHB1ENR |= 0x8;                 // Enable GPIOD clock 
+    CANSetGpio(GPIOD, 0);                // Set PD0
+    CANSetGpio(GPIOD, 1);                // Set PD1
 
     // CAN2
-    RCC->AHB1ENR |= 0x2;   // Enable GPIOB clock 
-    CANSetGpio(GPIOB, 12); // Set PB12
-    CANSetGpio(GPIOB, 13); // Set PB13
+    RCC->AHB1ENR |= 0x2;                 // Enable GPIOB clock 
+    CANSetGpio(GPIOB, 12);               // Set PB12
+    CANSetGpio(GPIOB, 13);               // Set PB13
   }
 
   CAN1->MCR |= 0x1UL;                    // Require CAN1 to Initialization mode 
