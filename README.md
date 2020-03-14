@@ -11,7 +11,9 @@ Can Example for Arduino Core STM32.
 - STM32F446 Development Board.   
 - CAN Transceiver.   
 MCP2551/2561(5V)   
+TJA1040/1050/1055(5V)   
 SN65HVD230/231/232(3.3V)   
+ISO1050(3.3V)   
 
 __NOTE__:3V CAN Trasnceviers are fully interoperable with 5V CAN trasnceviers.   
 Check [here](http://e2e.ti.com/cfs-file.ashx/__key/communityserver-discussions-components-files/142/4747.2012_2D00_11_2D00_02-CAN-Transceiver-3V-and-5V-Mixed-Network-Basics.pdf) and [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
@@ -49,6 +51,11 @@ You can use [this](https://github.com/collin80/due_can) library.
 # Communication with ESP8266
 You can use [this](https://github.com/coryjfowler/MCP_CAN_lib) library.
 ![STM32F103-CAN-ESP8266](https://user-images.githubusercontent.com/6020549/75881239-feecec80-5e61-11ea-88c9-22deebf346ff.jpg)
+
+# Communication with ESP32
+ESP-IDE has a CAN example.
+https://github.com/espressif/esp-idf/tree/master/examples/peripherals/can/can_network
+![STM32F103-CAN-ESP32](https://user-images.githubusercontent.com/6020549/76674295-11e58680-65f1-11ea-8489-15e99bbd873a.jpg)
 
 # Communication with Raspberry Pi
 Edit /boot/config.txt and reboot.   
