@@ -53,7 +53,7 @@ You can use [this](https://github.com/coryjfowler/MCP_CAN_lib) library.
 ![STM32F103-CAN-ESP8266](https://user-images.githubusercontent.com/6020549/75881239-feecec80-5e61-11ea-88c9-22deebf346ff.jpg)
 
 # Communication with ESP32
-ESP-IDE has a CAN example.
+ESP-IDE has a CAN Network example.   
 https://github.com/espressif/esp-idf/tree/master/examples/peripherals/can/can_network
 ![STM32F103-CAN-ESP32](https://user-images.githubusercontent.com/6020549/76674295-11e58680-65f1-11ea-8489-15e99bbd873a.jpg)
 
