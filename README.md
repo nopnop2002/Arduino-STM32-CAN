@@ -50,12 +50,12 @@ You can use [this](https://github.com/collin80/due_can) library.
 
 # Communication with ESP8266
 You can use [this](https://github.com/coryjfowler/MCP_CAN_lib) library.
-![STM32F103-CAN-ESP8266](https://user-images.githubusercontent.com/6020549/75881239-feecec80-5e61-11ea-88c9-22deebf346ff.jpg)
+![STM32F103-CAN-ESP8266](https://user-images.githubusercontent.com/6020549/79196756-9a16b000-7e6b-11ea-8d60-5afee96794bd.jpg)
 
 # Communication with ESP32
 ESP-IDE has a CAN Network example.   
 https://github.com/espressif/esp-idf/tree/master/examples/peripherals/can/can_network
-![STM32F103-CAN-ESP32](https://user-images.githubusercontent.com/6020549/76674295-11e58680-65f1-11ea-8489-15e99bbd873a.jpg)
+![STM32F103-CAN-ESP32](https://user-images.githubusercontent.com/6020549/79196765-9e42cd80-7e6b-11ea-8fa9-a31c3ec9334b.jpg)
 
 # Communication with Raspberry Pi
 Edit /boot/config.txt and reboot.   
