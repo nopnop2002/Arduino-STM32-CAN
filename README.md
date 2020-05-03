@@ -115,7 +115,18 @@ $ cansend can0 123#11223344AABBCCDD
 
 
 # Troubleshooting   
-If the value of the terminating resistor is incorrect, the following error will occur.   
-The solution was to change the terminating resistance from 120 ohms to 150 ohms.   
+There is a module of SN65HVD230 like this.
+The terminating resistance is 120 ohms.
+
+![SN65HVD230-1](https://user-images.githubusercontent.com/6020549/80897499-4d204e00-8d34-11ea-80c9-3dc41b1addab.JPG)
+![SN65HVD230-2](https://user-images.githubusercontent.com/6020549/80897500-4e517b00-8d34-11ea-9025-7c43e8b62366.JPG)
+
+A transmission error will occur.
+
 ![SendFail](https://user-images.githubusercontent.com/6020549/80897131-98d0f880-8d30-11ea-96b6-05e50ac740a3.jpg)
 
+I have removed the terminating resistor.
+And I used a resistance of 150 ohms.
+The error is fixed.
+
+![SN65HVD230-3](https://user-images.githubusercontent.com/6020549/80897501-4eea1180-8d34-11ea-9f26-d3bedc72ea1f.JPG)
