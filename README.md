@@ -112,3 +112,10 @@ $ cansend can0 123#11223344AABBCCDD
 ```
 
 ![STM32F103-CAN-RPI](https://user-images.githubusercontent.com/6020549/75351666-d60daa00-58eb-11ea-8eca-ba74cf916439.jpg)
+
+
+# Troubleshooting   
+If the value of the terminating resistor is incorrect, the following error will occur.   
+The solution was to change the terminating resistance from 120 ohms to 150 ohms.   
+![SendFail](https://user-images.githubusercontent.com/6020549/80897131-98d0f880-8d30-11ea-96b6-05e50ac740a3.jpg)
+
