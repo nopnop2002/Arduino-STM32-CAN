@@ -1,5 +1,5 @@
 # Arduino-STM32-CAN
-Can Example for Arduino Core STM32.   
+Can communication example for Arduino Core STM32.   
 
 
 # Hardware requirements
