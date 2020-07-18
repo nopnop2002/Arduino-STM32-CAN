@@ -1,12 +1,22 @@
 #define DEBUG 0
 
-enum BITRATE{CAN_50KBPS, CAN_100KBPS, CAN_125KBPS, CAN_250KBPS, CAN_500KBPS, CAN_1000KBPS};
+/* Symbolic names for bit rate of CAN message                                */
+typedef enum {CAN_50KBPS, CAN_100KBPS, CAN_125KBPS, CAN_250KBPS, CAN_500KBPS, CAN_1000KBPS} BITRATE;
+
+/* Symbolic names for formats of CAN message                                 */
+typedef enum {STANDARD_FORMAT = 0, EXTENDED_FORMAT} CAN_FORMAT;
+
+/* Symbolic names for type of CAN message                                    */
+typedef enum {DATA_FRAME = 0, REMOTE_FRAME}         CAN_FRAME;
 
 typedef struct
 {
-  uint32_t id;
-  uint8_t  data[8];
-  uint8_t  len;
+  uint32_t id;        /* 29 bit identifier                               */
+  uint8_t  data[8];   /* Data field                                      */
+  uint8_t  len;       /* Length of data field in bytes                   */
+  uint8_t  ch;        /* Object channel(Not use)                         */
+  uint8_t  format;    /* 0 - STANDARD, 1- EXTENDED IDENTIFIER            */
+  uint8_t  type;      /* 0 - DATA FRAME, 1 - REMOTE FRAME                */
 } CAN_msg_t;
 
 typedef const struct
@@ -146,7 +156,7 @@ void CANSetFilter(uint8_t index, uint8_t scale, uint8_t mode, uint8_t fifo, uint
  *                       CAN2_RX mapped to PB12, CAN2_TX mapped to PB13
  *
  */
-bool CANInit(enum BITRATE bitrate, int remap)
+bool CANInit(BITRATE bitrate, int remap)
 {
   // Reference manual
   // https://www.st.com/content/ccc/resource/technical/document/reference_manual/3d/6d/5a/66/b4/99/40/d4/DM00031020.pdf/files/DM00031020.pdf/jcr:content/translations/en.DM00031020.pdf
@@ -293,7 +303,6 @@ bool CANInit(enum BITRATE bitrate, int remap)
 
 #define CAN_EXT_ID_MASK                 0x1FFFFFFFU
 #define CAN_STD_ID_MASK                 0x000007FFU
-#define CAN_FRAME_RTR                   (1UL << 30U) // Remote transmission
  
 /**
  * Decodes CAN messages from the data registers and populates a 
@@ -308,14 +317,19 @@ void CANReceive(uint8_t ch, CAN_msg_t* CAN_rx_msg)
   if(ch == 1) {
     uint32_t id = CAN1->sFIFOMailBox[0].RIR;
     if ((id & STM32_CAN_RIR_IDE) == 0) { // Standard frame format
+        CAN_rx_msg->format = STANDARD_FORMAT;;
         CAN_rx_msg->id = (CAN_STD_ID_MASK & (id >> 21U));
     } 
     else {                               // Extended frame format
+        CAN_rx_msg->format = EXTENDED_FORMAT;;
         CAN_rx_msg->id = (CAN_EXT_ID_MASK & (id >> 3U));
     }
 
-    if ((id & STM32_CAN_RIR_RTR) != 0) {
-        CAN_rx_msg->id |= CAN_FRAME_RTR;
+    if ((id & STM32_CAN_RIR_RTR) == 0) {  // Data frame
+        CAN_rx_msg->type = DATA_FRAME;
+    }
+    else {                                // Remote frame
+        CAN_rx_msg->type = REMOTE_FRAME;
     }
 
     
@@ -336,14 +350,19 @@ void CANReceive(uint8_t ch, CAN_msg_t* CAN_rx_msg)
   if(ch == 2) {
     uint32_t id = CAN2->sFIFOMailBox[0].RIR;
     if ((id & STM32_CAN_RIR_IDE) == 0) { // Standard frame format
+        CAN_rx_msg->format = STANDARD_FORMAT;;
         CAN_rx_msg->id = (CAN_STD_ID_MASK & (id >> 21U));
     } 
     else {                               // Extended frame format
+        CAN_rx_msg->format = EXTENDED_FORMAT;;
         CAN_rx_msg->id = (CAN_EXT_ID_MASK & (id >> 3U));
     }
 
-    if ((id & STM32_CAN_RIR_RTR) != 0) {
-        CAN_rx_msg->id |= CAN_FRAME_RTR;
+    if ((id & STM32_CAN_RIR_RTR) == 0) {  // Data frame
+        CAN_rx_msg->type = DATA_FRAME;
+    }
+    else {                                // Remote frame
+        CAN_rx_msg->type = REMOTE_FRAME;
     }
 
     
@@ -375,15 +394,15 @@ void CANSend(uint8_t ch, CAN_msg_t* CAN_tx_msg)
   volatile int count = 0;
 
   uint32_t out = 0;
-  if (CAN_tx_msg->id > CAN_STD_ID_MASK) { // Extended frame format
+  if (CAN_tx_msg->format == EXTENDED_FORMAT) { // Extended frame format
       out = ((CAN_tx_msg->id & CAN_EXT_ID_MASK) << 3U) | STM32_CAN_TIR_IDE;
   }
-  else {                                  // Standard frame format
+  else {                                       // Standard frame format
       out = ((CAN_tx_msg->id & CAN_STD_ID_MASK) << 21U);
   }
 
   // Remote frame
-  if (CAN_tx_msg->id & CAN_FRAME_RTR) {
+  if (CAN_tx_msg->type == REMOTE_FRAME) {
       out |= STM32_CAN_TIR_RTR;
   }
 
@@ -467,6 +486,7 @@ uint8_t CANMsgAvail(uint8_t ch)
 
 
 uint8_t counter = 0;
+uint8_t frameLength = 0;
 unsigned long previousMillis = 0;     // stores last time output was updated
 const long interval = 1000;           // transmission interval (milliseconds)
 
@@ -482,7 +502,7 @@ void loop() {
   CAN_msg_t CAN_TX_msg;
   CAN_msg_t CAN_RX_msg;
    
-  CAN_TX_msg.data[0] = counter;
+  CAN_TX_msg.data[0] = 0x00;
   CAN_TX_msg.data[1] = 0x01;
   CAN_TX_msg.data[2] = 0x02;
   CAN_TX_msg.data[3] = 0x03;
@@ -490,28 +510,36 @@ void loop() {
   CAN_TX_msg.data[5] = 0x05;
   CAN_TX_msg.data[6] = 0x06;
   CAN_TX_msg.data[7] = 0x07;
-  CAN_TX_msg.len = 8;
+  CAN_TX_msg.len = frameLength;
 
   uint8_t send_ch = 1;
   unsigned long currentMillis = millis();
   if (currentMillis - previousMillis >= interval) {
     previousMillis = currentMillis;
     if ( ( counter % 2) == 0) {
-        CAN_TX_msg.id = 0x1032F405;
+      CAN_TX_msg.type = DATA_FRAME;
+      if (CAN_TX_msg.len == 0) CAN_TX_msg.type = REMOTE_FRAME;
+      CAN_TX_msg.format = EXTENDED_FORMAT;
+      CAN_TX_msg.id = 0x405;
     } else {
-        CAN_TX_msg.id = 0x105;
+      CAN_TX_msg.type = DATA_FRAME;
+      if (CAN_TX_msg.len == 0) CAN_TX_msg.type = REMOTE_FRAME;
+      CAN_TX_msg.format = STANDARD_FORMAT;
+      CAN_TX_msg.id = 0x405;
     }
     CANSend(send_ch, &CAN_TX_msg);
+    frameLength++;
+    if (frameLength == 9) frameLength = 0;
     counter++;
   }
 
   uint8_t recv_ch = 1;
   if(CANMsgAvail(recv_ch)) {
     CANReceive(recv_ch, &CAN_RX_msg);
+    Serial.print("Channel:");
+    Serial.print(recv_ch);
 
-    if (CAN_RX_msg.id > 0x7ff) {
-      Serial.print("Channel:");
-      Serial.print(recv_ch);
+    if (CAN_RX_msg.format == EXTENDED_FORMAT) {
       Serial.print(" Extended ID: 0x");
       if (CAN_RX_msg.id < 0x10000000) Serial.print("0");
       if (CAN_RX_msg.id < 0x1000000) Serial.print("00");
@@ -519,8 +547,6 @@ void loop() {
       if (CAN_RX_msg.id < 0x10000) Serial.print("0000");
       Serial.print(CAN_RX_msg.id, HEX);
     } else {
-      Serial.print("Channel:");
-      Serial.print(recv_ch);
       Serial.print(" Standard ID: 0x");
       if (CAN_RX_msg.id < 0x100) Serial.print("0");
       if (CAN_RX_msg.id < 0x10) Serial.print("00");
@@ -530,13 +556,17 @@ void loop() {
 
     Serial.print(" DLC: ");
     Serial.print(CAN_RX_msg.len);
-    Serial.print(" Data: ");
-    for(int i=0; i<CAN_RX_msg.len; i++) {
-      Serial.print("0x"); 
-      Serial.print(CAN_RX_msg.data[i], HEX); 
-      if (i != (CAN_RX_msg.len-1))  Serial.print(" ");
+    if (CAN_RX_msg.type == DATA_FRAME) {
+      Serial.print(" Data: ");
+      for(int i=0; i<CAN_RX_msg.len; i++) {
+        Serial.print("0x"); 
+        Serial.print(CAN_RX_msg.data[i], HEX); 
+        if (i != (CAN_RX_msg.len-1))  Serial.print(" ");
+      }
+      Serial.println();
+    } else {
+      Serial.println(" Data: REMOTE REQUEST FRAME");
     }
-    Serial.println();
   }
   
 
