@@ -382,7 +382,7 @@ void loop() {
       CAN_TX_msg.type = DATA_FRAME;
       if (CAN_TX_msg.len == 0) CAN_TX_msg.type = REMOTE_FRAME;
       CAN_TX_msg.format = EXTENDED_FORMAT;
-      CAN_TX_msg.id = 0x303;
+      CAN_TX_msg.id = 0x32F303;
     } else {
       CAN_TX_msg.type = DATA_FRAME;
       if (CAN_TX_msg.len == 0) CAN_TX_msg.type = REMOTE_FRAME;
