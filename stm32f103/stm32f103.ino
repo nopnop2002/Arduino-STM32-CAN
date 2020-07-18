@@ -289,7 +289,7 @@ void CANSend(CAN_msg_t* CAN_tx_msg)
   if (CAN_tx_msg->format == EXTENDED_FORMAT) { // Extended frame format
       out = ((CAN_tx_msg->id & CAN_EXT_ID_MASK) << 3U) | STM32_CAN_TIR_IDE;
   }
-  else {                                  // Standard frame format
+  else {                                       // Standard frame format
       out = ((CAN_tx_msg->id & CAN_STD_ID_MASK) << 21U);
   }
 
