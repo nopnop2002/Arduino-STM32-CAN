@@ -1,6 +1,6 @@
 #define DEBUG 0
 
-/* Symbolic names for bit rate of CAN message                                 */
+/* Symbolic names for bit rate of CAN message                                */
 typedef enum {CAN_50KBPS, CAN_100KBPS, CAN_125KBPS, CAN_250KBPS, CAN_500KBPS, CAN_1000KBPS} BITRATE;
 
 /* Symbolic names for formats of CAN message                                 */
