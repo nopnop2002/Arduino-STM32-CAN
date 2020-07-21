@@ -51,7 +51,7 @@ You can use [this](https://github.com/coryjfowler/MCP_CAN_lib) library.
 
 # Communication with Arduino-DUE
 You can use [this](https://github.com/collin80/due_can) library.
-![STM32F103-CAN-DUO](https://user-images.githubusercontent.com/6020549/88114346-9e7f0180-cbee-11ea-8ef1-87ed58903dde.jpg)
+![STM32F103-CAN-DUO](https://user-images.githubusercontent.com/6020549/88116295-3979da80-cbf3-11ea-8c98-fd6c642c4c98.jpg)
 
 # Communication with ESP8266
 You can use [this](https://github.com/coryjfowler/MCP_CAN_lib) library.
