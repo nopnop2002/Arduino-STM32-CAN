@@ -110,7 +110,7 @@ $ candump can0
 $ cansend can0 123#11223344AABBCCDD
 ```
 
-![STM32F103-CAN-RPI](https://user-images.githubusercontent.com/6020549/88115026-29143080-cbf0-11ea-971f-e7192afa5b6d.jpg)
+![STM32F103-CAN-RPI](https://user-images.githubusercontent.com/6020549/88115429-0c2c2d00-cbf1-11ea-827b-abf0bd26ae96.jpg)
 
 
 # Troubleshooting   
