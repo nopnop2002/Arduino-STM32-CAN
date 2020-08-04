@@ -127,4 +127,4 @@ A transmission error will occur.
 I have removed the terminating resistor.   
 And I used a external resistance of __150 ohms__.   
 The error is fixed.   
-![SN65HVD230-3](https://user-images.githubusercontent.com/6020549/80897501-4eea1180-8d34-11ea-9f26-d3bedc72ea1f.JPG)
+![SN65HVD230-33](https://user-images.githubusercontent.com/6020549/89280710-f7857580-d683-11ea-9b36-12e36910e7d9.JPG)
