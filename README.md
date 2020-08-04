@@ -119,7 +119,7 @@ There is a module of SN65HVD230 like this.
 ![SN65HVD230-1](https://user-images.githubusercontent.com/6020549/80897499-4d204e00-8d34-11ea-80c9-3dc41b1addab.JPG)
 
 There is a __120 ohms__ terminating resistor on the left side.   
-![SN65HVD230-2](https://user-images.githubusercontent.com/6020549/80897500-4e517b00-8d34-11ea-9025-7c43e8b62366.JPG)
+![SN65HVD230-22](https://user-images.githubusercontent.com/6020549/89280463-9eb5dd00-d683-11ea-841d-fe1bf5dae98c.JPG)
 
 A transmission error will occur.   
 ![SendFail](https://user-images.githubusercontent.com/6020549/80897131-98d0f880-8d30-11ea-96b6-05e50ac740a3.jpg)
