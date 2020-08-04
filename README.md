@@ -116,8 +116,9 @@ $ cansend can0 123#11223344AABBCCDD
 
 # Troubleshooting   
 There is a module of SN65HVD230 like this.   
-The terminating resistance is __120 ohms__.   
 ![SN65HVD230-1](https://user-images.githubusercontent.com/6020549/80897499-4d204e00-8d34-11ea-80c9-3dc41b1addab.JPG)
+
+There is a __120 ohms__ terminating resistor on the left side.   
 ![SN65HVD230-2](https://user-images.githubusercontent.com/6020549/80897500-4e517b00-8d34-11ea-9025-7c43e8b62366.JPG)
 
 A transmission error will occur.   
