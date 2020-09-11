@@ -113,7 +113,6 @@ $ cansend can0 123#11223344AABBCCDD
 
 ![STM32F103-CAN-RPI](https://user-images.githubusercontent.com/6020549/88116161-e1db6f00-cbf2-11ea-8892-0e2cc0728a94.jpg)
 
-
 # Troubleshooting   
 There is a module of SN65HVD230 like this.   
 ![SN65HVD230-1](https://user-images.githubusercontent.com/6020549/80897499-4d204e00-8d34-11ea-80c9-3dc41b1addab.JPG)
@@ -128,3 +127,11 @@ I have removed the terminating resistor.
 And I used a external resistance of __150 ohms__.   
 The error is fixed.   
 ![SN65HVD230-33](https://user-images.githubusercontent.com/6020549/89280710-f7857580-d683-11ea-9b36-12e36910e7d9.JPG)
+
+# Reference
+
+https://github.com/nopnop2002/Robotell-USB-CAN-Python
+
+https://github.com/nopnop2002/esp-idf-CANBus-Monitor
+
+
