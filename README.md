@@ -120,12 +120,12 @@ There is a module of SN65HVD230 like this.
 There is a __120 ohms__ terminating resistor on the left side.   
 ![SN65HVD230-22](https://user-images.githubusercontent.com/6020549/89281044-74185400-d684-11ea-9f55-830e0e9e6424.JPG)
 
-A transmission error will occur.   
+A transmission fail will occur.   
 ![SendFail](https://user-images.githubusercontent.com/6020549/80897131-98d0f880-8d30-11ea-96b6-05e50ac740a3.jpg)
 
 I have removed the terminating resistor.   
 And I used a external resistance of __150 ohms__.   
-The error is fixed.   
+A transmission fail is fixed.   
 ![SN65HVD230-33](https://user-images.githubusercontent.com/6020549/89280710-f7857580-d683-11ea-9b36-12e36910e7d9.JPG)
 
 # Reference
