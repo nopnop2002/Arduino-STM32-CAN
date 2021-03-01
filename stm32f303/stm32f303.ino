@@ -1,4 +1,6 @@
 #define DEBUG 0
+#define AF7   0x07
+#define AF9   0x09
 
 /* Symbolic names for bit rate of CAN message                                */
 typedef enum {CAN_50KBPS, CAN_100KBPS, CAN_125KBPS, CAN_250KBPS, CAN_500KBPS, CAN_1000KBPS} BITRATE;
@@ -26,7 +28,8 @@ typedef const struct
   uint8_t BRP;
 } CAN_bit_timing_config_t;
 
-CAN_bit_timing_config_t can_configs[6] = {{2, 13, 45}, {2, 15, 20}, {2, 13, 18}, {2, 13, 9}, {2, 15, 4}, {2, 15, 2}};
+//CAN_bit_timing_config_t can_configs[6] = {{2, 13, 45}, {2, 15, 20}, {2, 13, 18}, {2, 13, 9}, {2, 15, 4}, {2, 15, 2}};
+CAN_bit_timing_config_t can_configs[6] = {{2, 13, 45}, {2, 12, 24}, {2, 13, 18}, {2, 13, 9}, {2, 9, 6}, {1, 7, 4}};
 
 /**
  * Print registers.
@@ -34,6 +37,7 @@ CAN_bit_timing_config_t can_configs[6] = {{2, 13, 45}, {2, 15, 20}, {2, 13, 18},
 void printRegister(char * buf, uint32_t reg) {
   if (DEBUG == 0) return;
   Serial.print(buf);
+  Serial.print("0x");
   Serial.print(reg, HEX);
   Serial.println();
 }
@@ -43,10 +47,11 @@ void printRegister(char * buf, uint32_t reg) {
  *
  * @params: addr    - Specified GPIO register address.
  * @params: index   - Specified GPIO index.
+ * @params: afry    - Specified Alternative function selection AF0-AF15.
  * @params: speed   - Specified OSPEEDR register value.(Optional)
  *
  */
-void CANSetGpio(GPIO_TypeDef * addr, uint8_t index, uint8_t speed = 3) {
+void CANSetGpio(GPIO_TypeDef * addr, uint8_t index, uint8_t afry, uint8_t speed = 3) {
     uint8_t _index2 = index * 2;
     uint8_t _index4 = index * 4;
     uint8_t ofs = 0;
@@ -61,7 +66,8 @@ void CANSetGpio(GPIO_TypeDef * addr, uint8_t index, uint8_t speed = 3) {
     printRegister("GPIO_AFR(b)=", addr->AFR[1]);
     mask = 0xF << _index4;
     addr->AFR[ofs]  &= ~mask;         // Reset alternate function
-    setting = 0x9;                    // AF9
+    //setting = 0x9;                    // AF9
+    setting = afry;                   // Alternative function selection
     mask = setting << _index4;
     addr->AFR[ofs]  |= mask;          // Set alternate function
     printRegister("GPIO_AFR(a)=", addr->AFR[1]);
@@ -122,7 +128,7 @@ void CANSetFilter(uint8_t index, uint8_t scale, uint8_t mode, uint8_t fifo, uint
   } else {
     CAN1->FS1R |= (0x1UL<<index);              // Set filter to single 32 bit configuration
   }
-    if (mode == 0) {
+  if (mode == 0) {
     CAN1->FM1R &= ~(0x1UL<<index);             // Set filter to Mask mode
   } else {
     CAN1->FM1R |= (0x1UL<<index);              // Set filter to List mode
@@ -162,20 +168,20 @@ bool CANInit(BITRATE bitrate, int remap)
 
   if (remap == 0) {
     RCC->AHBENR |= 0x20000UL;           // Enable GPIOA clock 
-    CANSetGpio(GPIOA, 11);              // Set PA11
-    CANSetGpio(GPIOA, 12);              // Set PA12
+    CANSetGpio(GPIOA, 11, AF9);         // Set PA11 to AF9
+    CANSetGpio(GPIOA, 12, AF9);         // Set PA12 to AF9
   }
 
   if (remap == 2) {
     RCC->AHBENR |= 0x40000UL;           // Enable GPIOB clock 
-    CANSetGpio(GPIOB, 8);               // Set PB8
-    CANSetGpio(GPIOB, 9);               // Set PB9
+    CANSetGpio(GPIOB, 8, AF9);          // Set PB8 to AF9
+    CANSetGpio(GPIOB, 9, AF9);          // Set PB9 to AF9
   }
 
   if (remap == 3) {
     RCC->AHBENR |= 0x100000UL;          // Enable GPIOD clock 
-    CANSetGpio(GPIOD, 0);               // Set PD0
-    CANSetGpio(GPIOD, 1);               // Set PD1
+    CANSetGpio(GPIOD, 0, AF7);          // Set PD0 to AF7
+    CANSetGpio(GPIOD, 1, AF7);          // Set PD1 to AF7
   }
 
   CAN1->MCR |= 0x1UL;                   // Set CAN to Initialization mode 
@@ -187,7 +193,8 @@ bool CANInit(BITRATE bitrate, int remap)
   // Set bit rates 
   CAN1->BTR &= ~(((0x03) << 24) | ((0x07) << 20) | ((0x0F) << 16) | (0x1FF)); 
   CAN1->BTR |=  (((can_configs[bitrate].TS2-1) & 0x07) << 20) | (((can_configs[bitrate].TS1-1) & 0x0F) << 16) | ((can_configs[bitrate].BRP-1) & 0x1FF);
-
+  printRegister("CAN1->BTR=", CAN1->BTR);
+      
   // Configure Filters to default values
   CAN1->FMR  |=   0x1UL;                // Set to filter initialization mode
   CAN1->FMR  &= 0xFFFFC0FF;             // Clear CAN2 start bank
