@@ -161,7 +161,7 @@ void CANSetFilter(uint8_t index, uint8_t scale, uint8_t mode, uint8_t fifo, uint
 bool CANInit(BITRATE bitrate, int remap)
 {
   // Reference manual
-  // https://www.st.com/content/ccc/resource/technical/document/reference_manual/4a/19/6e/18/9d/92/43/32/DM00043574.pdf/files/DM00043574.pdf/jcr:content/translations/en.DM00043574.pdf
+  // https://www.st.com/resource/en/reference_manual/dm00031936-stm32f0x1stm32f0x2stm32f0x8-advanced-armbased-32bit-mcus-stmicroelectronics.pdf
 
   RCC->APB1ENR |= 0x2000000UL;          // Enable CAN clock 
 
