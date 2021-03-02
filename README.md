@@ -4,6 +4,7 @@ Can communication example for Arduino Core STM32.
 
 # Hardware requirements
 
+- STM32F072 Development Board.   
 - STM32F103 Development Board.   
 - STM32F303 Development Board.   
 - STM32F405 Development Board.   
@@ -31,6 +32,9 @@ https://github.com/stm32duino/Arduino_Core_STM32
 ![STM32F103-CAN-3V3](https://user-images.githubusercontent.com/6020549/88116865-95912e80-cbf4-11ea-9fdd-43c60e9b1b7c.jpg)
 
 # Transmitter
+
+- from STM32F072   
+![STM32F072_Send](https://user-images.githubusercontent.com/6020549/109580416-e8917380-7b3d-11eb-915e-5d13c6f5fe3f.jpg)
 
 - from STM32F103   
 ![STM32F103_Send](https://user-images.githubusercontent.com/6020549/80896902-3d9e0680-8d2e-11ea-9add-0a102f43c3a7.jpg)
