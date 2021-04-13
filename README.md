@@ -135,8 +135,7 @@ And I used a external resistance of __150 ohms__.
 A transmission fail is fixed.   
 ![SN65HVD230-33](https://user-images.githubusercontent.com/6020549/89280710-f7857580-d683-11ea-9b36-12e36910e7d9.JPG)
 
-If you get a transmission fail, there are three possible causes.
-
+If the transmission fails, these are the possible causes.   
 - There is no receiving app on CanBus.
 - The speed does not match the receiver.
 - There is no terminating resistor on the CanBus.
