@@ -137,7 +137,7 @@ A transmission fail is fixed.
 
 If you get a transmission fail, there are three possible causes.
 
-- The receiving app is not running.
+- There is no receiving app on CanBus..
 - The speed does not match the receiver.
 - The resistance value of the terminating resistor is incorrect.
 
