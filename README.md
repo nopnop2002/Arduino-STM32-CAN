@@ -135,6 +135,12 @@ And I used a external resistance of __150 ohms__.
 A transmission fail is fixed.   
 ![SN65HVD230-33](https://user-images.githubusercontent.com/6020549/89280710-f7857580-d683-11ea-9b36-12e36910e7d9.JPG)
 
+If you get a transmission fail, there are three possible causes.
+
+- The receiving app is not running.
+- The speed does not match the receiver.
+- The resistance value of the terminating resistor is incorrect.
+
 # Reference
 
 https://github.com/nopnop2002/Robotell-USB-CAN-Python
