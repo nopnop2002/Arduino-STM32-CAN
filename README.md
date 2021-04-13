@@ -137,8 +137,10 @@ A transmission fail is fixed.
 
 If you get a transmission fail, there are three possible causes.
 
-- There is no receiving app on CanBus..
+- There is no receiving app on CanBus.
 - The speed does not match the receiver.
+- There is no terminating resistor on the CanBus.
+- There are three terminating resistors on the CanBus.
 - The resistance value of the terminating resistor is incorrect.
 
 # Reference
