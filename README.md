@@ -24,6 +24,8 @@ Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
 STM32 core support for Arduino.   
 https://github.com/stm32duino/Arduino_Core_STM32
 
+_It doesn't work with [Arduino STM32](https://github.com/stm32duino/Arduino_Core_STM32).__
+
 # Wirering   
 - USB power supply (board with 5V pin)   
 ![STM32F103-CAN-5V](https://user-images.githubusercontent.com/6020549/88116844-85794f00-cbf4-11ea-8dfa-6b9db7d2e8f2.jpg)
