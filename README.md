@@ -15,7 +15,8 @@ MCP2551/2561/2562(5V)
 TJA1040/1050/1055(5V)   
 SN65HVD230/231/232(3.3V)   
 
-__NOTE__:3V CAN Trasnceviers are fully interoperable with 5V CAN trasnceviers.   
+__NOTE__   
+3V CAN Trasnceviers are fully interoperable with 5V CAN trasnceviers.   
 Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
 
 
