@@ -31,7 +31,7 @@ __It doesn't work with [Arduino STM32](https://github.com/rogerclarkmelbourne/Ar
 
 # Wirering   
 - USB power supply (board with 5V pin)   
- __Don't connect Windows USB Port.__   
+ __Do not use the Windows USB port.__   
 
 ![STM32F103-CAN-5V](https://user-images.githubusercontent.com/6020549/88116844-85794f00-cbf4-11ea-8dfa-6b9db7d2e8f2.jpg)
 
