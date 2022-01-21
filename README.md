@@ -116,14 +116,21 @@ Install can-utils.
 ```
 $ sudo apt-get install can-utils
 
-#Receiver
+# Receiver
 $ candump can0
 
-#Transmitter
+# Transmitter
 $ cansend can0 123#11223344AABBCCDD
 ```
 
 ![STM32F103-CAN-RPI](https://user-images.githubusercontent.com/6020549/88116161-e1db6f00-cbf2-11ea-8892-0e2cc0728a94.jpg)
+
+
+# How to use Serial objects with Pill Board   
+See [here](https://www.onetransistor.eu/2020/01/stm32-bluepill-arduino-support.html).   
+
+![VitiualComPort-4](https://user-images.githubusercontent.com/6020549/150459373-8de832af-abf2-4d1e-8367-e7227b983c80.jpg)
+
 
 # Troubleshooting   
 There is a module of SN65HVD230 like this.   
