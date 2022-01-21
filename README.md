@@ -127,6 +127,8 @@ $ cansend can0 123#11223344AABBCCDD
 
 
 # How to use Serial objects with Pill Board   
+When writing a sketch, select CDC from Tools -> USB support.   
+Serial object is now available on the onboard USB.   
 See [here](https://www.onetransistor.eu/2020/01/stm32-bluepill-arduino-support.html).   
 
 ![VitiualComPort-4](https://user-images.githubusercontent.com/6020549/150459373-8de832af-abf2-4d1e-8367-e7227b983c80.jpg)
