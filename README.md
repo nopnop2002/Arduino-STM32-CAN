@@ -125,6 +125,11 @@ $ cansend can0 123#11223344AABBCCDD
 
 ![STM32F103-CAN-RPI](https://user-images.githubusercontent.com/6020549/88116161-e1db6f00-cbf2-11ea-8892-0e2cc0728a94.jpg)
 
+# How to use Serial objects with Pill Board   
+Select [Tools]-> [USB Support:CDC] to enable the virtual COM port.   
+But CAN-transceiver and USB Support cannot be used at the same time.   
+Don't use USB Support.   
+If you want to use a Serial object, you need to use a USB-Serial converter.   
 
 # Troubleshooting   
 There is a module of SN65HVD230 like this.   
