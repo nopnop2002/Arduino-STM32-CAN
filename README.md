@@ -133,6 +133,16 @@ But Basic Extended CAN(BxCan) and USB Support cannot be used at the same time.
 Don't use USB Support.   
 If you want to use a Serial object, you need to use a USB-Serial converter.   
 
+# Using PlatformIO   
+```
+git clone https://github.com/nopnop2002/Arduino-STM32-CAN
+cd Arduino-STM32-CAN/stm32f103
+pio init --board bluepill_f103c8
+cp stm32f103.ino src/
+pio run -t upload
+```
+
+
 # Troubleshooting   
 There is a module of SN65HVD230 like this.   
 ![SN65HVD230-1](https://user-images.githubusercontent.com/6020549/80897499-4d204e00-8d34-11ea-80c9-3dc41b1addab.JPG)
