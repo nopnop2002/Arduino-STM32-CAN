@@ -130,7 +130,7 @@ $ cansend can0 123#11223344AABBCCDD
 # How to use Serial objects with Pill Board   
 Select [Tools]-> [USB Support:CDC] to enable the virtual COM port.   
 But Basic Extended CAN(BxCan) and USB Support cannot be used at the same time.   
-Don't use USB Support.   
+__Don't use USB Support.__   
 If you want to use a Serial object, you need to use a USB-Serial converter.   
 
 # Using PlatformIO   
