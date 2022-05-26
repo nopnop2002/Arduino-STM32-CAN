@@ -1,4 +1,6 @@
-# stm32f407
+# stm32f407   
+![F407](https://user-images.githubusercontent.com/6020549/170389354-ff0673ff-2ab7-4774-ad3d-b03744b33f50.JPG)
+
 I used [this](https://github.com/seeers/CAN-Bus-Arduino_Core_STM32) as a reference.
 
 # Changes from the original
