@@ -70,7 +70,7 @@ pio run -t upload
 ```
 git clone https://github.com/nopnop2002/Arduino-STM32-CAN
 cd Arduino-STM32-CAN/stm32f103
-pio init --board blaclpill_f103c8
+pio init --board blackpill_f103c8
 cp stm32f103.ino src/
 pio run -t upload
 ```
