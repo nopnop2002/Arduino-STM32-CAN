@@ -150,7 +150,9 @@ If the transmission fails, these are the possible causes.
 - Stub length in CAN bus is too long.   
  Though the ISO11898 Standard specifies a maximum bus length of 40m and maximum stub length of 0.3m at 1Mbps.
  See [here](https://e2e.ti.com/support/interface-group/interface/f/interface-forum/378932/iso1050-can-bus-stub-length).   
-- Noise effects. It occurs when the wire cable is thin or wire cable is long.   
+- Noise effects.   
+ It occurs when the wire cable is thin or wire cable is crossing.   
+ It is preferable to use twisted wire.   
 
 # Reference
 
