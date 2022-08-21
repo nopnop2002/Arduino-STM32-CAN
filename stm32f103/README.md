@@ -11,6 +11,10 @@ This example support Extended frame format: with 29 identifier bits.
 The original uses PB8 and PB9 as CAN ports.   
 In this example, you can select the CAN port.   
 
+- CAN Timing   
+The original uses a fixed value regardless of clock frequency.   
+In this example, we calculate the timing depending on the clock frequency.   
+
 # Remap CAN port
 
 CAN_RX mapped to PA11, CAN_TX mapped to PA12   
