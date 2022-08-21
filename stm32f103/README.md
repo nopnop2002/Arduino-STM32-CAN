@@ -35,7 +35,6 @@ But Basic Extended CAN(BxCan) and USB Support cannot be used at the same time.
 __Don't use USB Support.__   
 If you want to use a Serial object, you need to use a USB-UART conversion module.   
 
-
 # Serial Output   
 The output destination of Serial.print differs depending on the Board Part Number.   
 
@@ -45,3 +44,33 @@ The output destination of Serial.print differs depending on the Board Part Numbe
 
 You need to check PeripheralPins.c for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F1xx/
+
+
+# Using PlatformIO   
+
+## Blue Pill
+```
+git clone https://github.com/nopnop2002/Arduino-STM32-CAN
+cd Arduino-STM32-CAN/stm32f103
+pio init --board bluepill_f103c8
+cp stm32f103.ino src/
+pio run -t upload
+```
+
+## Black Pill
+```
+git clone https://github.com/nopnop2002/Arduino-STM32-CAN
+cd Arduino-STM32-CAN/stm32f103
+pio init --board blaclpill_f103c8
+cp stm32f103.ino src/
+pio run -t upload
+```
+
+## Generic board
+```
+git clone https://github.com/nopnop2002/Arduino-STM32-CAN
+cd Arduino-STM32-CAN/stm32f103
+pio init --board genericSTM32F103C8
+cp stm32f103.ino src/
+pio run -t upload
+```
