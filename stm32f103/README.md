@@ -27,3 +27,13 @@ CAN_RX mapped to PD0, CAN_TX mapped to PD1 (available on 100-pin and 144-pin pac
 ```
 CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PD0, CAN_TX mapped to PD1
 ```
+
+# Serial Output   
+The output destination of Serial.print differs depending on the Board Part Number.   
+
+- BluePill:PA9   
+- BlackPill:PA9   
+- Generic F103:PA2   
+
+You need to check PeripheralPins.c for your board.    
+https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F1xx/
