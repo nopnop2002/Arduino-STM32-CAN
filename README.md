@@ -127,18 +127,6 @@ $ cansend can0 123#11223344AABBCCDD
 
 ![STM32F103-CAN-RPI](https://user-images.githubusercontent.com/6020549/88116161-e1db6f00-cbf2-11ea-8892-0e2cc0728a94.jpg)
 
-
-
-# Using PlatformIO   
-```
-git clone https://github.com/nopnop2002/Arduino-STM32-CAN
-cd Arduino-STM32-CAN/stm32f103
-pio init --board bluepill_f103c8
-cp stm32f103.ino src/
-pio run -t upload
-```
-
-
 # Troubleshooting   
 There is a module of SN65HVD230 like this.   
 ![SN65HVD230-1](https://user-images.githubusercontent.com/6020549/80897499-4d204e00-8d34-11ea-80c9-3dc41b1addab.JPG)
