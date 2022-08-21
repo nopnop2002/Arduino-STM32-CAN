@@ -14,11 +14,10 @@ In this example, you can select the CAN port.
 - CAN Timing   
 The original uses a fixed value regardless of clock frequency.   
 In this example, we calculate the timing depending on the clock frequency.   
-
- NOTE:   
- Arduino core support for STM32 based boards uses different clock frequencies depending on the Board Part Number.   
- BlackPill & BluePill use 72Mhz.   
- Generic board use use 64Mhz.   
+NOTE:   
+Arduino core support for STM32 based boards uses different clock frequencies depending on the Board Part Number.   
+BlackPill & BluePill use 72Mhz.   
+Generic board use use 64Mhz.   
 
 # Remap CAN port
 
