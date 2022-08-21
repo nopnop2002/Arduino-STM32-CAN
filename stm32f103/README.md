@@ -18,6 +18,7 @@ NOTE:
 Arduino core support for STM32 based boards uses different clock frequencies depending on the Board Part Number.   
 BlackPill & BluePill use 72Mhz.   
 Generic board use use 64Mhz.   
+So the original doesn't work properly on the Generic board.   
 
 # Remap CAN port
 
