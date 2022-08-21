@@ -56,7 +56,6 @@ __It doesn't work with [Arduino STM32](https://github.com/rogerclarkmelbourne/Ar
 ![stm32f446_transfer](https://user-images.githubusercontent.com/6020549/110085501-8900c580-7dd4-11eb-9fb7-311c21800719.jpg)
 
 # Receiver   
-Serial printing goes to PA9.   
 ![STM32-Receive](https://user-images.githubusercontent.com/6020549/75561089-c2984580-5a89-11ea-80d0-90a2af235b80.jpg)
 
 
