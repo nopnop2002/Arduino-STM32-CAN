@@ -22,7 +22,7 @@ Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
 
 # Software requirements
 
-STM32 core support for Arduino.   
+Arduino core support for STM32 based boards.   
 https://github.com/stm32duino/Arduino_Core_STM32
 
 ![](https://img.shields.io/badge/_IMPORTANT-important)  
