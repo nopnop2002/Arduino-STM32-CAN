@@ -6,7 +6,7 @@ GPIO is irregular, but you can use it in the Arduino environment.
 ![F405](https://user-images.githubusercontent.com/6020549/170388891-1d26c489-5fa2-4bf5-81c3-ff4a442368b8.JPG)
 
 # Remap CAN port
-This board don't have PA11/PA12.   
+This board does not have PA11/PA12 pin headers.   
 You definitely need to remap.   
 CAN1_RX mapped to PB8 , CAN1_TX mapped to PB9 (not available on 36-pin package)   
 CAN2_RX mapped to PB12, CAN2_TX mapped to PB13(not available on 36-pin package)   
