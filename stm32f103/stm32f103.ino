@@ -184,7 +184,7 @@ int16_t ComputeCANTimings(const uint32_t peripheral_clock_rate,
 /**
  * Print registers.
 */ 
-void printRegister(char * buf, uint32_t reg) {
+void printRegister(const char * buf, uint32_t reg) {
   if (DEBUG == 0) return;
   Serial.print(buf);
   Serial.print(reg, HEX);
