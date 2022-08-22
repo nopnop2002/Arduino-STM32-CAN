@@ -2,6 +2,7 @@
 Source code is the same as stm32f407.   
 I used this board.   
 This board is called a pyboard.   
+GPIO is irregular, but you can use it in the Arduino environment.   
 ![F405](https://user-images.githubusercontent.com/6020549/170388891-1d26c489-5fa2-4bf5-81c3-ff4a442368b8.JPG)
 
 # Remap CAN port
