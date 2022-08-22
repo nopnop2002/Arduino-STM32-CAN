@@ -31,7 +31,7 @@ CAN_bit_timing_config_t can_configs[6] = {{2, 12, 56}, {2, 12, 28}, {2, 13, 21},
 /**
  * Print registers.
 */ 
-void printRegister(char * buf, uint32_t reg) {
+void printRegister(const char * buf, uint32_t reg) {
   if (DEBUG == 0) return;
   Serial.print(buf);
   Serial.print(reg, HEX);
@@ -482,6 +482,7 @@ uint8_t CANMsgAvail(uint8_t ch)
     return CAN2->RF0R & 0x3UL;
   } // end CAN2
 
+  return 0;
 }
 
 
