@@ -152,7 +152,7 @@ If the transmission fails, these are the possible causes.
  See [here](https://e2e.ti.com/support/interface-group/interface/f/interface-forum/378932/iso1050-can-bus-stub-length).   
 - Noise effects.   
  It occurs when the wire cable is thin or wire cable is crossing.   
- It is preferable to use twisted wire.   
+ It is preferable to use wires that are noise-proof.   
 
 I changed the single wire to twisted wire. It's fixed.   
 ![CAN-SendFail](https://user-images.githubusercontent.com/6020549/185782335-66d1f534-5220-40a2-aee9-5d4a438c59a0.jpg)
