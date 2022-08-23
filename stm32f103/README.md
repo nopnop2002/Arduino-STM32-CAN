@@ -43,6 +43,9 @@ If you enable Virtual COM port, you can use the USB port as a serial port.
 But Basic Extended CAN(BxCan) and Virtual COM port cannot be used at the same time.   
 __Don't use USB Support.__   
 If you want to use a Serial object, you need to use a USB-UART conversion module.   
+Note:   
+For STM32F405/407, BxCan and Virtual COM port can be used at the same time.   
+I don't know why F103 can't use both at the same time.   
 
 # Serial Output   
 The output destination of Serial.print differs depending on the Board Part Number.   
