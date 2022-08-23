@@ -14,8 +14,13 @@ CAN2_RX mapped to PB12, CAN2_TX mapped to PB13(not available on 36-pin package)
 CANInit(CAN_1000KBPS, 2);  // CAN_RX mapped to PB8, CAN_TX mapped to PB9
 ```
 
+# Using Virtual COM port   
+STM32F405 can use a Virtual COM port.   
+If you enable Virtual COM port, you can use the USB port as a serial port.   
+Basic Extended CAN(BxCan) and USB Support can be used at the same time.   
+__When using the USB port, do not supply power from the ST-LINK module.__   
 
-# Serial Output   
+# Serial Output without Virtual COM port   
 The output destination of Serial.print differs depending on the Board Part Number.   
 - genericSTM32F405RG:PA0   
 
