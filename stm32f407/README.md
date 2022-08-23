@@ -38,7 +38,7 @@ CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PD0, CAN_TX mapped to PD1
 # Using Virtual COM port   
 STM32F407 can use a Virtual COM port.   
 If you enable Virtual COM port, you can use the USB port as a serial port.   
-Basic Extended CAN(BxCan) and USB Support can be used at the same time.   
+Basic Extended CAN(BxCan) and Virtual COM port can be used at the same time.   
 __When using the USB port, do not supply power from the ST-LINK module.__   
 
 # Serial Output without Virtual COM port   
