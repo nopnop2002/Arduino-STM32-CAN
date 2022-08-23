@@ -33,14 +33,7 @@ https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F4xx/
 git clone https://github.com/nopnop2002/Arduino-STM32-CAN
 cd Arduino-STM32-CAN/stm32f407
 pio init --board genericSTM32F405RG
-vi platform.ini
----------------------------------------
-[env:genericSTM32F405RG]
-platform = ststm32
-board = genericSTM32F405RG
-framework = arduino
-upload_protocol = stlink ---> Add this
----------------------------------------
+cp _platformio.ini platformio.ini
 cp stm32f407.ino src/
-pio run -t upload
+pio run -t upload -e genericSTM32F405RG
 ```

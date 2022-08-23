@@ -55,6 +55,7 @@ https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F4xx/
 git clone https://github.com/nopnop2002/Arduino-STM32-CAN
 cd Arduino-STM32-CAN/stm32f407
 pio init --board genericSTM32F407VET6
+cp _platformio.ini platformio.ini
 cp stm32f407.ino src/
-pio run -t upload
+pio run -t upload -e genericSTM32F407VET6
 ```
