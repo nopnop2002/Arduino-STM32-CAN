@@ -37,7 +37,7 @@ CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PD0, CAN_TX mapped to PD1
 
 # Serial Output   
 The output destination of Serial.print differs depending on the Board Part Number.   
-- genericSTM32F407Vxxx:PA0   
+- genericSTM32F407xxxx:PA0   
 - black_f407xx:PA9   
 
 You need to check PeripheralPins.c for your board.    
