@@ -40,7 +40,7 @@ CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PD0, CAN_TX mapped to PD1
 # Using Virtual COM port   
 STM32F103 can use a Virtual COM port.   
 If you enable Virtual COM port, you can use the USB port as a serial port.   
-But Basic Extended CAN(BxCan) and USB Support cannot be used at the same time.   
+But Basic Extended CAN(BxCan) and Virtual COM port cannot be used at the same time.   
 __Don't use USB Support.__   
 If you want to use a Serial object, you need to use a USB-UART conversion module.   
 
