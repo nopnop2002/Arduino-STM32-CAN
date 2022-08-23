@@ -35,7 +35,12 @@ CAN2_RX mapped to PB12, CAN2_TX mapped to PB13(not available on 36-pin package)
 CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PD0, CAN_TX mapped to PD1
 ```
 
-# Serial Output   
+# Using Virtual COM port   
+STM32F407 can use a Virtual COM port.   
+If you enable Virtual COM port, you can use the USB port as a serial port.   
+Basic Extended CAN(BxCan) and USB Support can be used at the same time.   
+
+# Serial Output without Virtual COM port   
 The output destination of Serial.print differs depending on the Board Part Number.   
 - genericSTM32F407xxxx:PA0   
 - black_f407xx:PA9   
