@@ -148,7 +148,8 @@ If the transmission fails, these are the possible causes.
 - There are three terminating resistors on the CanBus.
 - The resistance value of the terminating resistor is incorrect.
 - 3.3V transceiver and 5V transceiver are mixed.   
- Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
+ +1V Ground Shift using Split Termination.   
+ Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).   
 - Stub length in CAN bus is too long.   
  Though the ISO11898 Standard specifies a maximum bus length of 40m and maximum stub length of 0.3m at 1Mbps.
  See [here](https://e2e.ti.com/support/interface-group/interface/f/interface-forum/378932/iso1050-can-bus-stub-length).   
