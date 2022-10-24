@@ -74,7 +74,7 @@ You can use [this](https://github.com/coryjfowler/MCP_CAN_lib) library.
 ESP-IDE has a CAN Network example.   
 https://github.com/espressif/esp-idf/tree/master/examples/peripherals/twai/twai_network   
 You can use [it](https://github.com/nopnop2002/esp-idf-candump).   
-![STM32F103-CAN-ESP32](https://user-images.githubusercontent.com/6020549/88114386-b5255880-cbee-11ea-89b4-9b215413fc8a.jpg)
+![STM32F103-CAN-ESP32](https://user-images.githubusercontent.com/6020549/197645374-857ba1bd-5674-4e39-af39-a6cc39ee1d87.jpg)
 
 # Communication with Raspberry Pi
 Edit /boot/config.txt and reboot.   
