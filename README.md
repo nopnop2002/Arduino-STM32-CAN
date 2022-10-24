@@ -124,7 +124,7 @@ $ candump can0
 $ cansend can0 123#11223344AABBCCDD
 ```
 
-![STM32F103-CAN-RPI](https://user-images.githubusercontent.com/6020549/88116161-e1db6f00-cbf2-11ea-8892-0e2cc0728a94.jpg)
+![STM32F103-CAN-RPI](https://user-images.githubusercontent.com/6020549/197644243-073f3150-ce13-4c3e-97ed-8c7e372cb772.jpg)
 
 # Troubleshooting   
 There is a module of SN65HVD230 like this.   
