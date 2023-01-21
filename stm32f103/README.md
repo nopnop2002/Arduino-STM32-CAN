@@ -86,3 +86,8 @@ pio init --board genericSTM32F103C8
 cp stm32f103.ino src/
 pio run -t upload
 ```
+
+# Clone chip
+Doesn't work properly with clone chips.
+https://hackaday.com/2020/10/22/stm32-clones-the-good-the-bad-and-the-ugly/
+
