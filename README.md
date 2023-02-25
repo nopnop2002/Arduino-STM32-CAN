@@ -160,6 +160,24 @@ If the transmission fails, these are the possible causes.
 I changed the single wire to twisted wire. It's fixed.   
 ![CAN-SendFail](https://user-images.githubusercontent.com/6020549/185782335-66d1f534-5220-40a2-aee9-5d4a438c59a0.jpg)
 
+# Using PlatformIO   
+Arduino-IDE only supports ST-LINK V2.1 adapters, but OpenOCD used by PlatformIO supports both V2.0 and V2.1.   
+With ST-LINK, there is no need to change boot mode when writing firmware.   
+PlatformIO allows you to use cheap Chinese ST-LINK adapters like this one.   
+You can get it at a low price (about $2).   
+![ST-LINK-1](https://user-images.githubusercontent.com/6020549/221345715-b86e0a93-bdf4-46dd-a9b9-c05a27b042a4.JPG)
+![ST-LINK-2](https://user-images.githubusercontent.com/6020549/221345711-7749b557-d55f-442f-8390-3632c63d5239.JPG)
+
+Connect the ST-LINK adapter and the STM32 development board as follows.
+|ST-LINK|STM32|
+|:---|:---|
+|3.3V|3.3V|
+|GND|GND|
+|SWDIO|SWIO(=PA13)|
+|SWCLK|SWCLK(=PA14)|
+
+![platformio-2](https://user-images.githubusercontent.com/6020549/221346022-c199e146-2f17-4021-871c-5e1b502ffde7.JPG)
+
 # Reference
 
 https://github.com/nopnop2002/Robotell-USB-CAN-Python
