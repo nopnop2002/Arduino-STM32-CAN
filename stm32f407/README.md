@@ -43,8 +43,11 @@ __When using the USB port, do not supply power from the ST-LINK module.__
 
 # Serial Output without Virtual COM port   
 The output destination of Serial.print differs depending on the Board Part Number.   
+This is a sample of some boards.    
 - genericSTM32F407xxxx:PA0   
+- diymore_f407vgt:PA9   
 - black_f407xx:PA9   
+- disco_f407vg:PA2   
 
 You need to check PeripheralPins.c for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F4xx/
