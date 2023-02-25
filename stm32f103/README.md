@@ -54,7 +54,7 @@ The output destination of Serial.print differs depending on the Board Part Numbe
 - BlackPill:PA9   
 - Generic F103:PA2   
 
-You need to check PeripheralPins.c for your board.    
+You need to check variant_generic.h for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F1xx/
 
 
