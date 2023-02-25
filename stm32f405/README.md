@@ -25,7 +25,7 @@ __When using the USB port, do not supply power from the ST-LINK module.__
 The output destination of Serial.print differs depending on the Board Part Number.   
 - genericSTM32F405RG:PA0   
 
-You need to check PeripheralPins.c for your board.    
+You need to check variant_generic.h for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F4xx/
 
 
