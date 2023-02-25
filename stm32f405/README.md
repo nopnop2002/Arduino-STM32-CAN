@@ -15,7 +15,7 @@ CAN2_RX mapped to PB12, CAN2_TX mapped to PB13(not available on 36-pin package)
 CANInit(CAN_1000KBPS, 2);  // CAN_RX mapped to PB8, CAN_TX mapped to PB9
 ```
 
-# Using Virtual COM port   
+# Serial Output with Virtual COM port   
 STM32F405 can use a Virtual COM port.   
 If you enable Virtual COM port, you can use the USB port as a serial port.   
 Basic Extended CAN(BxCan) and Virtual COM port can be used at the same time.   
@@ -40,6 +40,6 @@ cp stm32f407.ino src/
 # Without Virtual COM port
 pio run -t upload -e genericSTM32F405RG
 
-# Using Virtual COM port
+# With Virtual COM port
 pio run -t upload -e genericSTM32F405RG_usbcon
 ```
