@@ -59,22 +59,6 @@ https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F1xx/
 
 
 # Using PlatformIO   
-Arduino-IDE only supports ST-LINK V2.1 adapters, but OpenOCD used by PlatformIO supports both V2.0 and V2.1.   
-With ST-LINK, there is no need to change boot mode when writing firmware.   
-PlatformIO allows you to use cheap Chinese ST-LINK adapters like this one.   
-You can get it at a low price (about $2).   
-![ST-LINK-1](https://user-images.githubusercontent.com/6020549/221345715-b86e0a93-bdf4-46dd-a9b9-c05a27b042a4.JPG)
-![ST-LINK-2](https://user-images.githubusercontent.com/6020549/221345711-7749b557-d55f-442f-8390-3632c63d5239.JPG)
-
-Connect the ST-LINK adapter and the STM32 development board as follows.
-|ST-LINK|STM32|
-|:---|:---|
-|3.3V|3.3V|
-|GND|GND|
-|SWDIO|SWIO(=PA13)|
-|SWCLK|SWCLK(=PA14)|
-
-![platformio-2](https://user-images.githubusercontent.com/6020549/221346022-c199e146-2f17-4021-871c-5e1b502ffde7.JPG)
 
 ## Blue Pill
 ```
