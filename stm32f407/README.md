@@ -49,7 +49,7 @@ This is a sample of some boards.
 - black_f407xx:PA9   
 - disco_f407vg:PA2   
 
-You need to check PeripheralPins.c for your board.    
+You need to check variant_generic.h for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F4xx/
 
 
