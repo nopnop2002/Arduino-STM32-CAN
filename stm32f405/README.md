@@ -40,6 +40,6 @@ cp stm32f407.ino src/
 # Without Virtual COM port
 pio run -t upload -e genericSTM32F405RG
 
-# With Virtual COM port
+# Using Virtual COM port
 pio run -t upload -e genericSTM32F405RG_usbcon
 ```
