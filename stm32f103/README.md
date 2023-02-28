@@ -89,5 +89,7 @@ pio run -t upload
 
 # Clone chip
 Doesn't work properly with clone chips.   
-https://hackaday.com/2020/10/22/stm32-clones-the-good-the-bad-and-the-ugly/
+https://hackaday.com/2020/10/22/stm32-clones-the-good-the-bad-and-the-ugly/    
+
+[This](https://mecrisp-stellaris-folkdoc.sourceforge.io/bluepill-diagnostics-v1.6.html) is useful for checking if it is a clone or not.   
 
