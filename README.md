@@ -180,6 +180,8 @@ Connect the ST-LINK adapter and the STM32 development board as follows.
 
 # Advanced use of BxCan   
 Skip if you don't need advanced usage.   
+Advanced usage has different purposes depending on the requirements of the application.   
+So I can't give you a concrete code example.   
 
 ### About transmission
 STM32 has three transmit(TX) mailboxes.   
