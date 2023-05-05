@@ -16,7 +16,7 @@ TJA1040/1050/1055(5V)
 SN65HVD230/231/232(3.3V)   
 
 __NOTE__   
-3V CAN Transceiver are fully interoperable with 5V CAN trasnceviers.   
+3V CAN Transceivers are fully interoperable with 5V CAN Transceivers.   
 Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
 
 
