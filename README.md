@@ -178,6 +178,38 @@ Connect the ST-LINK adapter and the STM32 development board as follows.
 
 ![platformio-2](https://user-images.githubusercontent.com/6020549/221346022-c199e146-2f17-4021-871c-5e1b502ffde7.JPG)
 
+# Advanced use of BxCan   
+Skip if you don't need advanced usage.   
+
+### About transmission
+STM32 has three transmit(TX) mailboxes.   
+Three TX mailboxes are provided to the software for setting up messages.   
+This sample code uses only the first TX mailbox and blocks the application until the send is successfully completed.   
+There are two ways to know if the send was successful without blocking.   
+Read the reference manual carefully and modify the source code as needed.   
+
+- Uses a transmission completion interrupt   
+ You need to set the CAN interrupt enable register (CAN_IER) appropriately.   
+
+- Check mailbox space before sending   
+ When there are requests for multiple TX mailboxes, the transmission scheduler decides which mailbox has to be transmitted first.   
+ You can specify which mailbox has priority using the CAN Master Control Register (CAN_MCR).   
+ You can tell if a mailbox is free using the CAN Transmit Status Register (CAN_TSR).   
+ When all three TX mailboxes are pending, no new messages can be sent until the transmit is canceled or completed.   
+ When all three TX mailboxes are pending, you can choose to cancel the transmission, wait until the transmission is complete, or give up on the new transmission.   
+ It depends on your application requirements.   
+ When all three TX mailboxes are pending for a long time, there may be an error.   
+ CAN Error Status Register (CAN_ESR) should be checked.   
+
+### About reception
+STM32 has two receive(RX) mailboxes.   
+Each RX Mailbox allows access to a 3-level depth FIFO, the access being offered only to the oldest received message in the FIFO.   
+This sample code uses only the first RX mailbox.   
+The RX mailbox is closely related to the receive filter settings.   
+By properly setting the receive filter, you can sort the received messages into two Mailboxes.   
+For example, two mailboxes can be used for high priority messages and low priority messages, etc.   
+Read the reference manual carefully and modify the source code as needed.   
+
 # Reference
 
 https://github.com/nopnop2002/Robotell-USB-CAN-Python
