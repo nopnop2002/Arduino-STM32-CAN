@@ -198,7 +198,7 @@ Read the reference manual carefully and modify the source code as needed.
  When all three TX mailboxes are pending, no new messages can be sent until the transmit is canceled or completed.   
  When all three TX mailboxes are pending, you can choose to cancel the transmission, wait until the transmission is complete, or give up on the new transmission.   
  It depends on your application requirements.   
- When all three TX mailboxes are pending for a long time, there may be an error.   
+ When all three TX mailboxes are pending for a long time, it could be a transmission error.   
  CAN Error Status Register (CAN_ESR) should be checked.   
 
 ### About reception
