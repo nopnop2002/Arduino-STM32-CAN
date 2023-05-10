@@ -208,8 +208,8 @@ STM32 has two receive(RX) mailboxes.
 Each RX Mailbox allows access to a 3-level depth FIFO, the access being offered only to the oldest received message in the FIFO.   
 This sample code uses only the first RX mailbox.   
 The RX mailbox is closely related to the receive filter settings.   
-By properly setting the receive filter, you can sort the received messages into two Mailboxes.   
-For example, two mailboxes can be used for high priority messages and low priority messages, etc.   
+By properly setting the receive filter, you can sort the received messages into two RX Mailboxes.   
+For example, high priority messages can be stored in the first RX MailBox and low priority messages can be stored in the second RX MailBox.   
 Read the reference manual carefully and modify the source code as needed.   
 
 # Reference
