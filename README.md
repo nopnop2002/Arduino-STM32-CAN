@@ -194,8 +194,8 @@ Read the reference manual carefully and modify the source code as needed.
  You need to set the CAN interrupt enable register (CAN_IER) appropriately.   
 
 - Check TX mailbox space before sending   
- When there are requests for multiple TX mailboxes, the transmission scheduler decides which mailbox has to be transmitted first.   
  An application can store transmission requests in three TX mailboxes simultaneously.   
+ When there are requests for multiple TX mailboxes, the transmission scheduler decides which mailbox has to be transmitted first.   
  You can specify which mailbox has priority using the CAN Master Control Register (CAN_MCR).   
  You can tell if a mailbox is free using the CAN Transmit Status Register (CAN_TSR).   
  When all three TX mailboxes are pending, no new messages can be sent until the transmit is canceled or completed.   
