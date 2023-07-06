@@ -1,6 +1,16 @@
 # stm32f303
 ![F303](https://user-images.githubusercontent.com/6020549/170388138-d9a89538-34fc-41db-b859-37478162d4df.JPG)
 
+Any 72MHz STM32F3 series will work.   
+- STM32F302
+- STM32F303
+- STM32F328
+- STM32F334
+- STM32F358
+- STM32F373
+- STM32F378
+- STM32F398
+
 I used [this](https://github.com/seeers/CAN-Bus-Arduino_Core_STM32) as a reference.
 
 # Changes from the original
