@@ -1,4 +1,14 @@
 # stm32f446
+
+Any 180MHz STM32F4 series will work.   
+- STM32F427
+- STM32F429
+- STM32F437
+- STM32F439
+- STM32F446
+- STM32F469
+- STM32F479
+
 I used [this](https://github.com/seeers/CAN-Bus-Arduino_Core_STM32) as a reference.
 
 # Changes from the original
