@@ -1,4 +1,10 @@
 # stm32f072
+Any 48Mhz STM32F0 series will work.   
+- STM32F042
+- STM32F072
+- STM32F091
+- STM32F098
+
 I used [this](https://github.com/seeers/CAN-Bus-Arduino_Core_STM32) as a reference.
 
 # Changes from the original
