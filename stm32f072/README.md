@@ -1,5 +1,5 @@
 # stm32f072
-Any 48Mhz STM32F0 series will work.   
+Any 48MHz STM32F0 series will work.   
 - STM32F042
 - STM32F072
 - STM32F091
