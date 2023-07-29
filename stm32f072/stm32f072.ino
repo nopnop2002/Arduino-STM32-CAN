@@ -422,7 +422,7 @@ void loop() {
     } else {
       Serial.print("Standard ID: 0x");
       if (CAN_RX_msg.id < 0x100) Serial.print("0");
-      if (CAN_RX_msg.id < 0x10) Serial.print("00");
+      if (CAN_RX_msg.id < 0x10) Serial.print("0");
       Serial.print(CAN_RX_msg.id, HEX);
       Serial.print("     ");
     }
