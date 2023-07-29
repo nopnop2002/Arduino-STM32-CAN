@@ -363,7 +363,10 @@ const long interval = 1000;           // transmission interval (milliseconds)
 
 void setup() {
   Serial.begin(115200);
-  bool ret = CANInit(CAN_1000KBPS, 0);  // CAN_RX mapped to PA11, CAN_TX mapped to PA12
+  bool ret = CANInit(CAN_500KBPS, 0);  // CAN_RX mapped to PA11, CAN_TX mapped to PA12
+  //bool ret = CANInit(CAN_500KBPS, 2);  // CAN_RX mapped to PB8, CAN_TX mapped to PB9
+  //bool ret = CANInit(CAN_500KBPS, 3);  // CAN_RX mapped to PD0, CAN_TX mapped to PD1
+  //bool ret = CANInit(CAN_1000KBPS, 0);  // CAN_RX mapped to PA11, CAN_TX mapped to PA12
   //bool ret = CANInit(CAN_1000KBPS, 2);  // CAN_RX mapped to PB8, CAN_TX mapped to PB9
   //bool ret = CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PD0, CAN_TX mapped to PD1
   if (!ret) while(true);
@@ -409,9 +412,12 @@ void loop() {
     if (CAN_RX_msg.format == EXTENDED_FORMAT) {
       Serial.print("Extended ID: 0x");
       if (CAN_RX_msg.id < 0x10000000) Serial.print("0");
-      if (CAN_RX_msg.id < 0x1000000) Serial.print("00");
-      if (CAN_RX_msg.id < 0x100000) Serial.print("000");
-      if (CAN_RX_msg.id < 0x10000) Serial.print("0000");
+      if (CAN_RX_msg.id < 0x1000000) Serial.print("0");
+      if (CAN_RX_msg.id < 0x100000) Serial.print("0");
+      if (CAN_RX_msg.id < 0x10000) Serial.print("0");
+      if (CAN_RX_msg.id < 0x1000) Serial.print("0");
+      if (CAN_RX_msg.id < 0x100) Serial.print("0");
+      if (CAN_RX_msg.id < 0x10) Serial.print("0");
       Serial.print(CAN_RX_msg.id, HEX);
     } else {
       Serial.print("Standard ID: 0x");
