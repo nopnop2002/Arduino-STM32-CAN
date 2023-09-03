@@ -35,6 +35,18 @@ These GPIOs can be used as CAN.
 |CAN2|PB5|PB6|
 |CAN2|PB12|PB13|
 
+STM32F427/429/437/439/469/479 has two CAN ports.   
+These GPIOs can be used as CAN.   
+|CAN|RX|TX||
+|:-:|:-:|:-:|:-:|
+|CAN1|PA11|PA12||
+|CAN1|PB8|PB9||
+|CAN1|PD0|PD1||
+|CAN1|PI9|PH13|Not supported|
+|CAN2|PB5|PB6||
+|CAN2|PB12|PB13||
+
+
 CAN1_RX mapped to PA11, CAN1_TX mapped to PA12   
 CAN2_RX mapped to PB5 , CAN2_TX mapped to PB6   
 ```
