@@ -198,7 +198,6 @@ bool CANInit(BITRATE bitrate, int remap)
       
   // Configure Filters to default values
   CAN1->FMR  |=   0x1UL;                // Set to filter initialization mode
-  CAN1->FMR  &= 0xFFFFC0FF;             // Clear CAN2 start bank
 
   // bxCAN has 28 filters.
   // These filters are used for both CAN1 and CAN2.
