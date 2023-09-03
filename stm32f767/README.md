@@ -42,7 +42,7 @@ These GPIOs can be used as CAN.
 |CAN1|PH13|PH14|Not supported|
 |CAN2|PB5|PB6||
 |CAN2|PB12|PB13||
-|CAN3|PA8|PA9|Not supported|
+|CAN3|PA8|PA15|Not supported|
 |CAN3|PB3|PB4|Not supported|
 
 CAN1_RX mapped to PA11, CAN1_TX mapped to PA12   
