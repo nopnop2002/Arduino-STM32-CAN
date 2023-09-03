@@ -23,7 +23,7 @@ In this example, you can use CAN1 and CAN2 port.
 
 # Remap CAN port
 
-STM32F405/F407 have two CAN ports.   
+STM32F405/407 have two CAN ports.   
 These GPIOs can be used as CAN.   
 |CAN|RX|TX||
 |:-:|:-:|:-:|:-:|
