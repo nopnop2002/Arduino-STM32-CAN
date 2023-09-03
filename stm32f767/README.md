@@ -22,13 +22,14 @@ In this example, you can use CAN1 and CAN2 port.
 # Remap CAN port
 STM32F746/756 has two CAN ports.   
 These GPIOs can be used as CAN.   
-|CAN|RX|TX|
-|:-:|:-:|:-:|
-|CAN1|PA11|PA12|
-|CAN1|PB8|PB9|
-|CAN1|PD0|PD1|
-|CAN2|PB5|PB6|
-|CAN2|PB12|PB13|
+|CAN|RX|TX||
+|:-:|:-:|:-:|:-:|
+|CAN1|PA11|PA12||
+|CAN1|PB8|PB9||
+|CAN1|PD0|PD1|Not supported|
+|CAN1|PI9|PH13||
+|CAN2|PB5|PB6||
+|CAN2|PB12|PB13||
 
 
 STM32F767 has three CAN ports.   
