@@ -19,19 +19,19 @@ In this example, you can select the CAN port.
 
 STM32F042 have one CAN ports.   
 These GPIOs can be used as CAN.   
-|CAN|RX|TX||
-|:-:|:-:|:-:|:-:|
-|CAN1|PA11|PA12||
-|CAN1|PB8|PB9||
+|CAN|RX|TX|
+|:-:|:-:|:-:|
+|CAN1|PA11|PA12|
+|CAN1|PB8|PB9|
 
 
 STM32F072/091/098 have one CAN ports.   
 These GPIOs can be used as CAN.   
-|CAN|RX|TX||
-|:-:|:-:|:-:|:-:|
-|CAN1|PA11|PA12||
-|CAN1|PB8|PB9||
-|CAN1|PD0|PD1||
+|CAN|RX|TX|
+|:-:|:-:|:-:|
+|CAN1|PA11|PA12|
+|CAN1|PB8|PB9|
+|CAN1|PD0|PD1|
 
 
 CAN_RX mapped to PA11, CAN_TX mapped to PA12   
