@@ -1,4 +1,6 @@
 #define DEBUG 0
+#define AF8   0x08
+#define AF9   0x09
 
 /* Symbolic names for bit rate of CAN message                                */
 typedef enum {CAN_50KBPS, CAN_100KBPS, CAN_125KBPS, CAN_250KBPS, CAN_500KBPS, CAN_1000KBPS} BITRATE;
@@ -26,7 +28,7 @@ typedef const struct
   uint8_t BRP;
 } CAN_bit_timing_config_t;
 
-CAN_bit_timing_config_t can_configs[6] = {{2, 12, 72}, {2, 12, 36}, {2, 13, 27}, {2, 9, 18}, {2, 9, 9}, {1, 7, 6}};
+CAN_bit_timing_config_t can_configs[6] = {{2, 13, 60}, {2, 13, 30}, {2, 13, 24}, {2, 13, 12}, {2, 13, 6}, {1, 6, 6}};
 
 /**
  * Print registers.
@@ -44,10 +46,11 @@ void printRegister(char * buf, uint32_t reg) {
  *
  * @params: addr    - Specified GPIO register address.
  * @params: index   - Specified GPIO index.
+ * @params: afry    - Specified Alternative function selection AF0-AF15.
  * @params: speed   - Specified OSPEEDR register value.(Optional)
  *
  */
-void CANSetGpio(GPIO_TypeDef * addr, uint8_t index, uint8_t speed = 3) {
+void CANSetGpio(GPIO_TypeDef * addr, uint8_t index, uint8_t afry, uint8_t speed = 3) {
     uint8_t _index2 = index * 2;
     uint8_t _index4 = index * 4;
     uint8_t ofs = 0;
@@ -62,7 +65,8 @@ void CANSetGpio(GPIO_TypeDef * addr, uint8_t index, uint8_t speed = 3) {
     printRegister("GPIO_AFR(b)=", addr->AFR[1]);
     mask = 0xF << _index4;
     addr->AFR[ofs]  &= ~mask;         // Reset alternate function
-    setting = 0x9;                    // AF9
+    //setting = 0x9;                    // AF9
+    setting = afry;                   // Alternative function selection
     mask = setting << _index4;
     addr->AFR[ofs]  |= mask;          // Set alternate function
     printRegister("GPIO_AFR(a)=", addr->AFR[1]);
@@ -149,10 +153,11 @@ void CANSetFilter(uint8_t index, uint8_t scale, uint8_t mode, uint8_t fifo, uint
  * @params: remap   - Select CAN port. 
  *                    =0:CAN1_RX mapped to PA11, CAN1_TX mapped to PA12
  *                       CAN2_RX mapped to PB5 , CAN2_TX mapped to PB6
- *                    =1:Not used
- *                    =2:CAN1_RX mapped to PB8,  CAN1_TX mapped to PB9 (not available on 36-pin package)
+ *                    =1:CAN1_RX mapped to PG0 , CAN1_TX mapped to PG1
+ *                       CAN2_RX mapped to PG11, CAN2_TX mapped to PG12
+ *                    =2:CAN1_RX mapped to PB8,  CAN1_TX mapped to PB9
  *                       CAN2_RX mapped to PB12, CAN2_TX mapped to PB13
- *                    =3:CAN1_RX mapped to PD0,  CAN1_TX mapped to PD1 (available on 100-pin and 144-pin package)
+ *                    =3:CAN1_RX mapped to PD0,  CAN1_TX mapped to PD1
  *                       CAN2_RX mapped to PB12, CAN2_TX mapped to PB13
  *
  */
@@ -167,37 +172,49 @@ bool CANInit(BITRATE bitrate, int remap)
   if (remap == 0) {
     // CAN1
     RCC->AHB1ENR |= 0x1;                 // Enable GPIOA clock 
-    CANSetGpio(GPIOA, 11);               // Set PA11
-    CANSetGpio(GPIOA, 12);               // Set PA12
+    CANSetGpio(GPIOA, 11, AF9);          // Set PA11 to AF9
+    CANSetGpio(GPIOA, 12, AF9);          // Set PA12 to AF9
     
     // CAN2
     RCC->AHB1ENR |= 0x2;                 // Enable GPIOB clock 
-    CANSetGpio(GPIOB, 5);                // Set PB5
-    CANSetGpio(GPIOB, 6);                // Set PB6
+    CANSetGpio(GPIOB, 5, AF9);           // Set PB5 to AF9
+    CANSetGpio(GPIOB, 6, AF9);           // Set PB6 to AF9
+  }
+
+  if (remap == 1) {
+    // CAN1
+    RCC->AHB1ENR |= 0x40;                // Enable GPIOG clock 
+    CANSetGpio(GPIOG, 0, AF9);           // Set PG0 to AF9
+    CANSetGpio(GPIOG, 1, AF9);           // Set PG1 to AF9
+
+    // CAN2
+    RCC->AHB1ENR |= 0x40;                // Enable GPIOG clock 
+    CANSetGpio(GPIOG, 11, AF9);          // Set PG11 to AF9
+    CANSetGpio(GPIOG, 12, AF9);          // Set PG11 to AF9
   }
 
   if (remap == 2) {
     // CAN1
     RCC->AHB1ENR |= 0x2;                 // Enable GPIOB clock 
-    CANSetGpio(GPIOB, 8);                // Set PB8
-    CANSetGpio(GPIOB, 9);                // Set PB9
+    CANSetGpio(GPIOB, 8, AF8);           // Set PB8 to AF8
+    CANSetGpio(GPIOB, 9, AF8);           // Set PB9 to AF8
 
     // CAN2
     RCC->AHB1ENR |= 0x2;                 // Enable GPIOB clock 
-    CANSetGpio(GPIOB, 12);               // Set PB12
-    CANSetGpio(GPIOB, 13);               // Set PB13
+    CANSetGpio(GPIOB, 12, AF9);          // Set PB12 to AF9
+    CANSetGpio(GPIOB, 13, AF9);          // Set PB13 to AF9
   }
     
   if (remap == 3) {
     // CAN1
     RCC->AHB1ENR |= 0x8;                 // Enable GPIOD clock 
-    CANSetGpio(GPIOD, 0);                // Set PD0
-    CANSetGpio(GPIOD, 1);                // Set PD1
+    CANSetGpio(GPIOD, 0, AF9);           // Set PD0 to AF9
+    CANSetGpio(GPIOD, 1, AF9);           // Set PD1 to AF9
 
     // CAN2
     RCC->AHB1ENR |= 0x2;                 // Enable GPIOB clock 
-    CANSetGpio(GPIOB, 12);               // Set PB12
-    CANSetGpio(GPIOB, 13);               // Set PB13
+    CANSetGpio(GPIOB, 12, AF9);          // Set PB12 to AF9
+    CANSetGpio(GPIOB, 13, AF9);          // Set PB13 to AF9
   }
 
   CAN1->MCR |= 0x1UL;                    // Require CAN1 to Initialization mode 
@@ -231,7 +248,7 @@ bool CANInit(BITRATE bitrate, int remap)
 
   // bxCAN has 28 filters.
   // These filters are used for both CAN1 and CAN2.
-  // STM32F405 has CAN1 and CAN2, so CAN2 filters are offset by 14
+  // STM32F413 has CAN1 and CAN2, so CAN2 filters are offset by 14
   CAN1->FMR  |= 0xE00;                   // Start bank for the CAN2 interface
 
   // Set fileter 0
@@ -500,11 +517,12 @@ const long interval = 1000;           // transmission interval (milliseconds)
 
 void setup() {
   Serial.begin(115200);
-  delay(1000);
   bool ret = CANInit(CAN_500KBPS, 0);  // CAN_RX mapped to PA11, CAN_TX mapped to PA12
+  //bool ret = CANInit(CAN_500KBPS, 1);  // CAN_RX mapped to PG0, CAN_TX mapped to PG1
   //bool ret = CANInit(CAN_500KBPS, 2);  // CAN_RX mapped to PB8, CAN_TX mapped to PB9
   //bool ret = CANInit(CAN_500KBPS, 3);  // CAN_RX mapped to PD0, CAN_TX mapped to PD1
   //bool ret = CANInit(CAN_1000KBPS, 0);  // CAN_RX mapped to PA11, CAN_TX mapped to PA12
+  //bool ret = CANInit(CAN_1000KBPS, 1);  // CAN_RX mapped to PG0, CAN_TX mapped to PG1
   //bool ret = CANInit(CAN_1000KBPS, 2);  // CAN_RX mapped to PB8, CAN_TX mapped to PB9
   //bool ret = CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PD0, CAN_TX mapped to PD1
   if (!ret) while(true);
@@ -532,12 +550,12 @@ void loop() {
       CAN_TX_msg.type = DATA_FRAME;
       if (CAN_TX_msg.len == 0) CAN_TX_msg.type = REMOTE_FRAME;
       CAN_TX_msg.format = EXTENDED_FORMAT;
-      CAN_TX_msg.id = 0x32F767;
+      CAN_TX_msg.id = 0x32F412;
     } else {
       CAN_TX_msg.type = DATA_FRAME;
       if (CAN_TX_msg.len == 0) CAN_TX_msg.type = REMOTE_FRAME;
       CAN_TX_msg.format = STANDARD_FORMAT;
-      CAN_TX_msg.id = 0x767;
+      CAN_TX_msg.id = 0x412;
     }
     CANSend(send_ch, &CAN_TX_msg);
     frameLength++;
@@ -583,6 +601,5 @@ void loop() {
       Serial.println(" Data: REMOTE REQUEST FRAME");
     }
   }
-  
 
 }
