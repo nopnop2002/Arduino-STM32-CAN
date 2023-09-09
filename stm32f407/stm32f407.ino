@@ -98,6 +98,8 @@ void CANSetGpio(GPIO_TypeDef * addr, uint8_t index, uint8_t speed = 3) {
 /**
  * Initializes the CAN filter registers.
  *
+ * The bxCAN provides up to 28 scalable/configurable identifier filter banks for selecting the incoming messages the software needs and discarding the others. 
+ *
  * @preconditions   - This register can be written only when the filter initialization mode is set (FINIT=1) in the CAN_FMR register.
  * @params: index   - Specified filter index. index 27:14 are available in connectivity line devices only.
  * @params: scale   - Select filter scale.
