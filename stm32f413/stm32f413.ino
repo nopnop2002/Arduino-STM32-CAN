@@ -550,12 +550,12 @@ void loop() {
       CAN_TX_msg.type = DATA_FRAME;
       if (CAN_TX_msg.len == 0) CAN_TX_msg.type = REMOTE_FRAME;
       CAN_TX_msg.format = EXTENDED_FORMAT;
-      CAN_TX_msg.id = 0x32F412;
+      CAN_TX_msg.id = 0x32F413;
     } else {
       CAN_TX_msg.type = DATA_FRAME;
       if (CAN_TX_msg.len == 0) CAN_TX_msg.type = REMOTE_FRAME;
       CAN_TX_msg.format = STANDARD_FORMAT;
-      CAN_TX_msg.id = 0x412;
+      CAN_TX_msg.id = 0x413;
     }
     CANSend(send_ch, &CAN_TX_msg);
     frameLength++;
