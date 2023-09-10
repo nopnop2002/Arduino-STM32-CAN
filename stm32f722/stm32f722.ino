@@ -188,7 +188,7 @@ bool CANInit(BITRATE bitrate, int remap)
   CAN1->MCR = 0x41UL;                    // Hardware initialization(With automatic retransmission)
   
   // Set bit rates 
-  CAN1->BTR &= ~(((0x03) << 24) | ((0x07) << 20) | ((0x0F) << 16) | (0x1FF)); 
+  CAN1->BTR &= ~(((0x03) << 24) | ((0x07) << 20) | ((0x0F) << 16) | (0x3FF)); 
   CAN1->BTR |=  (((can_configs[bitrate].TS2-1) & 0x07) << 20) | (((can_configs[bitrate].TS1-1) & 0x0F) << 16) | ((can_configs[bitrate].BRP-1) & 0x1FF);
   printRegister("CAN1->BTR=", CAN1->BTR);
 
