@@ -158,8 +158,8 @@ void CANSetFilter(uint8_t index, uint8_t scale, uint8_t mode, uint8_t fifo, uint
  * @params: remap   - Select CAN port. 
  *                    =0:CAN_RX mapped to PA11, CAN_TX mapped to PA12
  *                    =1:CAN_RX mapped to PB5 , CAN_TX mapped to PB6
- *                    =2:CAN_RX mapped to PB8 , CAN_TX mapped to PB9 (not available on 36-pin package)
- *                    =3:CAN_RX mapped to PB12, CAN_TX mapped to PB13(not available on 36-pin package)
+ *                    =2:CAN_RX mapped to PB8 , CAN_TX mapped to PB9
+ *                    =3:CAN_RX mapped to PB12, CAN_TX mapped to PB13
  *
  */
 bool CANInit(BITRATE bitrate, int remap)
