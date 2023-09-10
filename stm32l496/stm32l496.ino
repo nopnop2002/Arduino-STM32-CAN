@@ -231,14 +231,14 @@ bool CANInit(BITRATE bitrate, int remap)
   printRegister("CAN1->BTR=", CAN1->BTR);
 
   // Configure Filters to default values
-  CAN1->FMR  |=   0x1UL;                // Set to filter initialization mode
-  CAN1->FMR  &= 0xFFFFC0FF;             // Clear CAN2 start bank
+  CAN1->FMR |=   0x1UL;                 // Set to filter initialization mode
+  CAN1->FMR &= 0xFFFFC0FF;              // Clear CAN2 start bank
   printRegister("CAN1->FMR=", CAN1->FMR);
 
   // bxCAN has 28 filters.
   // These filters are used for both CAN1 and CAN2.
   // STM32L496 has CAN1 and CAN2, so CAN2 filters are offset by 14
-  CAN1->FMR  |= 0xE00;                  // Start bank for the CAN2 interface
+  CAN1->FMR |= 0xE00;                   // Start bank for the CAN2 interface
 
   // Set fileter 0
   // Single 32-bit scale configuration 
@@ -254,7 +254,7 @@ bool CANInit(BITRATE bitrate, int remap)
   // Filter bank register to all 0
   CANSetFilter(14, 1, 0, 0, 0x0UL, 0x0UL); 
   
-  CAN1->FMR   &= ~(0x1UL);              // Deactivate initialization mode
+  CAN1->FMR &= ~(0x1UL);                // Deactivate initialization mode
 
   uint16_t TimeoutMilliseconds = 1000;
   bool can2 = false;
@@ -502,10 +502,10 @@ void setup() {
   Serial.begin(115200);
   bool ret = CANInit(CAN_500KBPS, 0);  // CAN_RX mapped to PA11, CAN_TX mapped to PA12
   //bool ret = CANInit(CAN_500KBPS, 2);  // CAN_RX mapped to PB8 , CAN_TX mapped to PB9
-  //bool ret = CANInit(CAN_500KBPS, 3);  // CAN_RX mapped to PB12, CAN_TX mapped to PB13
+  //bool ret = CANInit(CAN_500KBPS, 3);  // CAN_RX mapped to PD0 , CAN_TX mapped to PD1
   //bool ret = CANInit(CAN_1000KBPS, 0);  // CAN_RX mapped to PA11, CAN_TX mapped to PA12
   //bool ret = CANInit(CAN_1000KBPS, 2);  // CAN_RX mapped to PB8 , CAN_TX mapped to PB9
-  //bool ret = CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PB12, CAN_TX mapped to PB13
+  //bool ret = CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PD0 , CAN_TX mapped to PD1
   if (!ret) while(true);
 }
 
