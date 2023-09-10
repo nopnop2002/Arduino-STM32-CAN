@@ -43,5 +43,5 @@ CANInit(CAN_1000KBPS, 2);  // CAN_RX mapped to PB8, CAN_TX mapped to PB9
 CAN1_RX mapped to PD0 , CAN1_TX mapped to PD1   
 CAN2_RX mapped to PB12, CAN2_TX mapped to PB13   
 ```
-CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PB12, CAN_TX mapped to PB13
+CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PD0, CAN_TX mapped to PD1
 ```
