@@ -5,8 +5,6 @@ It also works with the following STM32L4 series.
 - STM32L433
 - STM32L452
 - STM32L476
-- STM32L496
-- STM32L4A6
 
 I used [this](https://github.com/seeers/CAN-Bus-Arduino_Core_STM32) as a reference.
 
