@@ -207,7 +207,7 @@ bool CANInit(BITRATE bitrate, int remap)
   printRegister("CAN1->BTR=", CAN1->BTR);
       
   // Configure Filters to default values
-  CAN1->FMR  |=   0x1UL;                // Set to filter initialization mode
+  CAN1->FMR |=   0x1UL;                 // Set to filter initialization mode
 
   // Set fileter 0
   // Single 32-bit scale configuration 
@@ -216,11 +216,11 @@ bool CANInit(BITRATE bitrate, int remap)
   // Filter bank register to all 0
   CANSetFilter(0, 1, 0, 0, 0x0UL, 0x0UL); 
 
-  CAN1->FMR   &= ~(0x1UL);              // Deactivate initialization mode
+  CAN1->FMR &= ~(0x1UL);                // Deactivate initialization mode
 
   uint16_t TimeoutMilliseconds = 1000;
   bool can1 = false;
-  CAN1->MCR   &= ~(0x1UL);              // Require CAN1 to normal mode 
+  CAN1->MCR &= ~(0x1UL);                // Require CAN1 to normal mode 
 
   // Wait for normal mode
   // If the connection is not correct, it will not return to normal mode.

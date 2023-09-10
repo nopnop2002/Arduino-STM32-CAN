@@ -344,13 +344,13 @@ bool CANInit(BITRATE bitrate, int remap)
               ((timings.baud_rate_prescaler - 1U)           & 1023U);
 
   // Configure Filters to default values
-  CAN1->FMR  |=   0x1UL;                // Set to filter initialization mode
-  CAN1->FMR  &= 0xFFFFC0FF;             // Clear CAN2 start bank
+  CAN1->FMR |= 0x1UL;                   // Set to filter initialization mode
+  CAN1->FMR &= 0xFFFFC0FF;              // Clear CAN2 start bank
 
   // bxCAN has 28 filters.
   // These filters are shared by both CAN1 and CAN2.
   // STM32F103 has only CAN1, so all 28 are used for CAN1
-  CAN1->FMR  |= 0x1C << 8;              // Assign all filters to CAN1
+  CAN1->FMR |= 0x1C << 8;               // Assign all filters to CAN1
 
   // Set fileter 0
   // Single 32-bit scale configuration 
@@ -359,11 +359,11 @@ bool CANInit(BITRATE bitrate, int remap)
   // Filter bank register to all 0
   CANSetFilter(0, 1, 0, 0, 0x0UL, 0x0UL); 
   
-  CAN1->FMR   &= ~(0x1UL);              // Deactivate initialization mode
+  CAN1->FMR &= ~(0x1UL);                // Deactivate initialization mode
 
   uint16_t TimeoutMilliseconds = 1000;
   bool can1 = false;
-  CAN1->MCR   &= ~(0x1UL);              // Require CAN1 to normal mode 
+  CAN1->MCR &= ~(0x1UL);                // Require CAN1 to normal mode 
 
   // Wait for normal mode
   // If the connection is not correct, it will not return to normal mode.
