@@ -13,6 +13,7 @@ Basic Extended CAN(BxCan) communication example for Arduino Core STM32.
 - STM32F446 Development Board.   
 - STM32F722 Development Board.   
 - STM32F767 Development Board.   
+- STM32F452 Development Board.   
 - CAN Transceiver.   
 MCP2551/2561/2562(5V)   
 TJA1040/1050/1055(5V)   
@@ -62,6 +63,9 @@ __It doesn't work with [Arduino STM32](https://github.com/rogerclarkmelbourne/Ar
 
 - from STM32F767   
 ![stm32f767_transfer](https://github.com/nopnop2002/Arduino-STM32-CAN/assets/6020549/39d5fc41-8b22-4f28-be5d-e65fa936e0ac)
+
+- from STM32L452   
+![stm32l452_transfer](https://github.com/nopnop2002/Arduino-STM32-CAN/assets/6020549/d92ab5c4-b708-4b5f-8114-7a59914402c8)
 
 # Receiver   
 ![STM32-Receive](https://user-images.githubusercontent.com/6020549/75561089-c2984580-5a89-11ea-80d0-90a2af235b80.jpg)
