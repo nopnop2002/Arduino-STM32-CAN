@@ -1,6 +1,6 @@
 # stm32l452
 
-It also works with the following STM32l4 series.   
+It also works with the following STM32L4 series.   
 - STM32L432
 - STM32L433
 - STM32L452
