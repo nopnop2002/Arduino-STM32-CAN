@@ -28,7 +28,7 @@ These GPIOs can be used as CAN.
 |CAN1|PA11|PA12||
 |CAN1|PB8|PB9||
 |CAN1|PD0|PD1||
-|CAN1|PG0|PG1|not available on 64-pin package|
+|CAN1|PG0|PG1|not available on 48/64-pin package|
 |CAN2|PB5|PB6||
 |CAN2|PB12|PB13||
 |CAN2|PG11|PG12||
