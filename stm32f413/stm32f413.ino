@@ -183,6 +183,7 @@ bool CANInit(BITRATE bitrate, int remap)
     CANSetGpio(GPIOB, 6, AF9);           // Set PB6 to AF9
   }
 
+#if defined GPIOG
   if (remap == 1) {
     // CAN1
     RCC->AHB1ENR |= 0x40;                // Enable GPIOG clock 
@@ -194,6 +195,7 @@ bool CANInit(BITRATE bitrate, int remap)
     CANSetGpio(GPIOG, 11, AF9);          // Set PG11 to AF9
     CANSetGpio(GPIOG, 12, AF9);          // Set PG11 to AF9
   }
+#endif
 
   if (remap == 2) {
     // CAN1
