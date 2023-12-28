@@ -89,6 +89,14 @@ https://github.com/espressif/esp-idf/tree/master/examples/peripherals/twai/twai_
 You can use [it](https://github.com/nopnop2002/esp-idf-candump).   
 ![STM32F103-CAN-ESP32](https://user-images.githubusercontent.com/6020549/197652614-974f925d-af85-4c7b-b4db-689d12750d5e.jpg)
 
+__Notes on ESP32 bitrate__   
+In ESP32 whose chip version is Rev2 or higher, the role of register bits related to CAN communication has been changed to mean "halve the communication speed".   
+This is to support slower bitrates below 25K.   
+This fuature can be controlled by CONFIG_ESP32_REV_MIN.   
+This fuature is enabled when CONFIG_ESP32_REV_MIN >= 2.   
+See [here](https://www.esp32.com/viewtopic.php?t=15581) for detail.
+
+
 # Communication with Raspberry Pi
 Edit /boot/config.txt and reboot.   
 ```
