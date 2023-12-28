@@ -91,7 +91,7 @@ You can use [it](https://github.com/nopnop2002/esp-idf-candump).
 
 __Notes on ESP32 bitrate__   
 In ESP32 whose chip version is Rev2 or higher, the role of register bits related to CAN communication has been changed to mean "halve the communication speed".   
-This is to support slower bitrates below 25K.   
+This is to support slower bitrates below 25Kbps.   
 This fuature can be controlled by CONFIG_ESP32_REV_MIN.   
 This fuature is enabled when CONFIG_ESP32_REV_MIN >= 2.   
 See [here](https://www.esp32.com/viewtopic.php?t=15581) for detail.
