@@ -90,11 +90,12 @@ You can use [it](https://github.com/nopnop2002/esp-idf-candump).
 ![STM32F103-CAN-ESP32](https://user-images.githubusercontent.com/6020549/197652614-974f925d-af85-4c7b-b4db-689d12750d5e.jpg)
 
 __Notes on ESP32 bitrate__   
-In ESP32 whose chip version is Rev2 or higher, the role of register bits related to CAN communication has been changed to mean "halve the communication speed".   
+In ESP-IDF V4, CONFIG_ESP32_REV_MIN >= 2 means "halve communication speed".   
 This is to support slower bitrates below 25Kbps.   
 This fuature can be controlled by CONFIG_ESP32_REV_MIN.   
 This fuature is enabled when CONFIG_ESP32_REV_MIN >= 2.   
-See [here](https://www.esp32.com/viewtopic.php?t=15581) for detail.
+See [here](https://www.esp32.com/viewtopic.php?t=15581) for detail.   
+This specification is not available in ESP-IDF V5.   
 
 
 # Communication with Raspberry Pi
