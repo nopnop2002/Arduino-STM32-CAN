@@ -42,6 +42,12 @@ __It doesn't work with [Arduino STM32](https://github.com/rogerclarkmelbourne/Ar
 - Board without 5V pin, such as BlackPill, or ST-Link power supply  
 ![STM32F103-CAN-3V3](https://user-images.githubusercontent.com/6020549/197652750-0583ef5f-8324-4fc3-b5f2-85e2a548ecc5.jpg)
 
+# My test circuit
+The Nano on the left is a receiver with a terminating resistor.   
+The Nano on the right is a transmitter without a terminating resistor.   
+The STM32 transceiver has a terminating resistor.   
+![Test-Circuit](https://github.com/nopnop2002/Arduino-STM32-CAN/assets/6020549/c377a1fa-44ed-4b1f-b372-80be856fd66c)
+
 # Transmitter
 
 - from STM32F072   
