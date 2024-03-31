@@ -46,7 +46,11 @@ __It doesn't work with [Arduino STM32](https://github.com/rogerclarkmelbourne/Ar
 The Nano on the left is a receiver with a terminating resistor.   
 The Nano on the right is a transmitter without a terminating resistor.   
 The STM32 transceiver has a terminating resistor.   
-![Test-Circuit](https://github.com/nopnop2002/Arduino-STM32-CAN/assets/6020549/c377a1fa-44ed-4b1f-b372-80be856fd66c)
+- Using SN65HVD230   
+![Test-Circuit-SN65HVD230](https://github.com/nopnop2002/Arduino-STM32-CAN/assets/6020549/cd69745e-c7c9-4419-aeb0-4611c17f800a)
+
+- Using TJA1051   
+![Test-Circuit-TJA1051](https://github.com/nopnop2002/Arduino-STM32-CAN/assets/6020549/1cddb8be-1a83-473e-ae6c-d63528da4e81)
 
 # Transmitter
 
