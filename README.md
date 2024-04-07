@@ -37,7 +37,7 @@ __It doesn't work with [Arduino STM32](https://github.com/rogerclarkmelbourne/Ar
 # Wirering   
 - USB power supply (board with 5V pin)   
  STM32 CAN RX GPIO has 5V tolerant.   
-![STM32F103-CAN-5V](https://user-images.githubusercontent.com/6020549/88116844-85794f00-cbf4-11ea-8dfa-6b9db7d2e8f2.jpg)
+![STM32F103-CAN-5V](https://github.com/nopnop2002/Arduino-STM32-CAN/assets/6020549/b344eaaf-9b73-4321-a84b-d0715269126c)
 
 - Board without 5V pin, such as BlackPill, or ST-Link power supply  
 ![STM32F103-CAN-3V3](https://github.com/nopnop2002/Arduino-STM32-CAN/assets/6020549/4bf2508f-ac6f-4b5b-8ded-e700beced1ca)
