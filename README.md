@@ -97,7 +97,7 @@ You can use [this](https://github.com/coryjfowler/MCP_CAN_lib) library.
 ESP-IDE has a CAN Network example.   
 https://github.com/espressif/esp-idf/tree/master/examples/peripherals/twai/twai_network   
 You can use [it](https://github.com/nopnop2002/esp-idf-candump).   
-![STM32F103-CAN-ESP32](https://github.com/nopnop2002/Arduino-STM32-CAN/assets/6020549/84f625fd-737c-41de-8a71-daf5faf1e405)
+![STM32F103-CAN-ESP32](https://github.com/nopnop2002/Arduino-STM32-CAN/assets/6020549/fbf48367-d134-43f3-9891-ff714b38eb32)
 
 __Notes on ESP32 bitrate__   
 In ESP-IDF V4, CONFIG_ESP32_REV_MIN >= 2 means "halve communication speed".   
