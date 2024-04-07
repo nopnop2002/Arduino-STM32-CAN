@@ -87,11 +87,11 @@ You can use [this](https://github.com/coryjfowler/MCP_CAN_lib) library.
 
 # Communication with Arduino-DUE
 You can use [this](https://github.com/collin80/due_can) library.
-![STM32F103-CAN-DUO](https://user-images.githubusercontent.com/6020549/88116991-e7d24f80-cbf4-11ea-9111-1978edc8281f.jpg)
+![STM32F103-CAN-DUO](https://github.com/nopnop2002/Arduino-STM32-CAN/assets/6020549/7bd4e8dd-77b2-4b25-9123-a3596a006e5f)
 
 # Communication with ESP8266
 You can use [this](https://github.com/coryjfowler/MCP_CAN_lib) library.
-![STM32F103-CAN-ESP8266](https://user-images.githubusercontent.com/6020549/88117018-f6206b80-cbf4-11ea-9bd4-964c557492f8.jpg)
+![STM32F103-CAN-ESP8266](https://github.com/nopnop2002/Arduino-STM32-CAN/assets/6020549/b7046d49-7e4a-40b0-bbc4-7a55fc5dc427)
 
 # Communication with ESP32
 ESP-IDE has a CAN Network example.   
