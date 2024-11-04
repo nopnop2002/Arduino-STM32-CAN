@@ -26,13 +26,22 @@ Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
 
 
 # Software requirements
+- Arduino IDE   
+ I used V1.8.19   
+ ![ArduinoIDE_V1 8 19](https://github.com/nopnop2002/Arduino-STM32-Ethernet-LAN8720/assets/6020549/d0211c18-b77e-436f-b931-8a9759f833eb)
 
-Arduino core support for STM32 based boards.   
-https://github.com/stm32duino/Arduino_Core_STM32
+- Arduino core support for STM32 based boards.   
+ https://github.com/stm32duino/Arduino_Core_STM32   
+ ___Note for Core version___   
+ Requires core version 2.3 or higher.   
+ Core version 2.8 or later requires Arduino IDE 2.x.   
+ I used version 2.7.1.   
+ This is the final version available for Arduino IDE 1.x.   
+ ![STM32_Core_2 7 1](https://github.com/user-attachments/assets/e135c6b2-61f5-4ac8-a4e5-8878a29a2be4)
 
-![](https://img.shields.io/badge/_IMPORTANT-important)  
-__There is some core library for STM32.__   
-__It doesn't work with [Arduino STM32](https://github.com/rogerclarkmelbourne/Arduino_STM32).__
+ ![](https://img.shields.io/badge/_IMPORTANT-important)  
+ __There is some core library for STM32.__   
+ __It doesn't work with [Arduino STM32](https://github.com/rogerclarkmelbourne/Arduino_STM32).__
 
 # Wirering   
 - USB power supply (board with 5V pin)   
