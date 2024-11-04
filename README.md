@@ -38,7 +38,6 @@ Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
  I used version 2.7.1.   
  This is the final version available for Arduino IDE 1.x.   
  ![STM32_Core_2 7 1](https://github.com/user-attachments/assets/e135c6b2-61f5-4ac8-a4e5-8878a29a2be4)
-
  ![](https://img.shields.io/badge/_IMPORTANT-important)  
  __There is some core library for STM32.__   
  __It doesn't work with [Arduino STM32](https://github.com/rogerclarkmelbourne/Arduino_STM32).__
