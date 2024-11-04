@@ -33,7 +33,6 @@ Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
 - Arduino core support for STM32 based boards.   
  https://github.com/stm32duino/Arduino_Core_STM32   
  ___Note for Core version___   
- Requires core version 2.3 or higher.   
  Core version 2.8 or later requires Arduino IDE 2.x.   
  I used version 2.7.1.   
  This is the final version available for Arduino IDE 1.x.   
