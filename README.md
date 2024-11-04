@@ -28,7 +28,7 @@ Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
 # Software requirements
 - Arduino IDE   
  I used V1.8.19   
- ![ArduinoIDE_V1 8 19](https://github.com/nopnop2002/Arduino-STM32-Ethernet-LAN8720/assets/6020549/d0211c18-b77e-436f-b931-8a9759f833eb)
+ ![Arduino_V1_8_19](https://github.com/user-attachments/assets/f3179568-cce6-4762-99e3-509852c7fa5d)
 
 - Arduino core support for STM32 based boards.   
  https://github.com/stm32duino/Arduino_Core_STM32   
