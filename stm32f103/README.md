@@ -89,8 +89,8 @@ pio run -t upload
 
 # STM3232F103 with built-in CAN transceiver   
 This board can be connected directly to CAN-BUS.   
-![SN65HVD230-1](https://github.com/user-attachments/assets/fb169495-074a-4212-bf0d-e8c2723b4aba)
-![SN65HVD230-3](https://github.com/user-attachments/assets/80f1e802-05a8-424b-920b-f9ae1613b8fa)
+![STM32VET6-1](https://github.com/user-attachments/assets/8464af16-9563-45c1-aa5a-88cb2b194cc8)
+![STM32VET6-3](https://github.com/user-attachments/assets/c66dde18-3f7c-43a2-81b5-f98aec9247ae)
 
 # Clone chip
 Doesn't work properly with clone chips.   
