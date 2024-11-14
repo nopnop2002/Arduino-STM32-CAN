@@ -87,7 +87,7 @@ cp stm32f103.ino src/
 pio run -t upload
 ```
 
-# STM3232F103 with built-in CAN transceiver   
+# STM32F103 with built-in CAN transceiver   
 This board can be connected directly to CAN-BUS.   
 ![STM32VET6-1](https://github.com/user-attachments/assets/8464af16-9563-45c1-aa5a-88cb2b194cc8)
 ![STM32VET6-3](https://github.com/user-attachments/assets/c66dde18-3f7c-43a2-81b5-f98aec9247ae)
