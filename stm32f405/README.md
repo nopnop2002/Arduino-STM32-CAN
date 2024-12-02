@@ -17,10 +17,10 @@ CANInit(CAN_1000KBPS, 2);  // CAN_RX mapped to PB8, CAN_TX mapped to PB9
 
 # Using STLINK   
 The following GPIOs can be used as STLINK.   
-|STLINK|GPIO|
-|:-:|:-:|
-|SWDIO|PA13|
-|SDCLK|PA14|
+|STLINK|GPIO|MARK|
+|:-:|:-:|:-:|
+|SWDIO|PA13|P5|
+|SDCLK|PA14|P4|
 
 
 # Serial Output with Virtual COM port   
