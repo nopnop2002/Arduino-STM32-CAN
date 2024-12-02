@@ -46,5 +46,11 @@ cd Arduino-STM32-CAN/stm32f407
 pio init --board genericSTM32F405RG
 cp _platformio.ini platformio.ini
 cp stm32f407.ino src/
+
+# Without Virtual COM port
 pio run -t upload -e genericSTM32F405RG
+
+# With Virtual COM port
+pio run -t upload -e genericSTM32F405RG_usbcon
+
 ```
