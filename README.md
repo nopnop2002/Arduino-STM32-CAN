@@ -95,7 +95,7 @@ You can use [this](https://github.com/coryjfowler/MCP_CAN_lib) library.
 # Communication with Arduino-UNO R4
 Arduino-UNO R4 has a built-in CAN controller.    
 You can use [this](https://github.com/arduino/ArduinoCore-renesas/tree/main/libraries/Arduino_CAN) library.   
-![Image](https://github.com/user-attachments/assets/b819b20e-326b-4620-8bf2-67610d6ba779)
+![Image](https://github.com/user-attachments/assets/d482ea79-bcea-4a40-b9cd-f60f937b6794)
 
 # Communication with Arduino-DUE
 You can use [this](https://github.com/collin80/due_can) library.   
