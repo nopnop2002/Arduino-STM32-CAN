@@ -89,15 +89,20 @@ The STM32 transceiver has a terminating resistor.
 ![STM32-Receive](https://user-images.githubusercontent.com/6020549/75561089-c2984580-5a89-11ea-80d0-90a2af235b80.jpg)
 
 
-# Communication with Arduino-UNO
+# Communication with Arduino-UNO R3
 You can use [this](https://github.com/coryjfowler/MCP_CAN_lib) library.
 
+# Communication with Arduino-UNO R4
+Arduino-UNO R4 has a built-in CAN controller.    
+You can use [this](https://github.com/arduino/ArduinoCore-renesas/tree/main/libraries/Arduino_CAN) library.   
+![Image](https://github.com/user-attachments/assets/b819b20e-326b-4620-8bf2-67610d6ba779)
+
 # Communication with Arduino-DUE
-You can use [this](https://github.com/collin80/due_can) library.
+You can use [this](https://github.com/collin80/due_can) library.   
 ![STM32F103-CAN-DUO](https://github.com/nopnop2002/Arduino-STM32-CAN/assets/6020549/7bd4e8dd-77b2-4b25-9123-a3596a006e5f)
 
 # Communication with ESP8266
-You can use [this](https://github.com/coryjfowler/MCP_CAN_lib) library.
+You can use [this](https://github.com/coryjfowler/MCP_CAN_lib) library.   
 ![STM32F103-CAN-ESP8266](https://github.com/nopnop2002/Arduino-STM32-CAN/assets/6020549/b7046d49-7e4a-40b0-bbc4-7a55fc5dc427)
 
 # Communication with ESP32
