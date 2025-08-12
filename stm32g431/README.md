@@ -65,6 +65,7 @@ This example sets the filter as follows:
 
 # Serial Output   
 The output destination for Serial.print is PA2.   
+However, this may vary depending on the Board Part Number.   
 
 You need to check variant_generic.h for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32G4xx/
