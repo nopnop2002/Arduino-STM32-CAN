@@ -3,7 +3,7 @@ I based this on [this](https://github.com/pierremolinaro/acanfd-stm32).
 
 # Changes from the original
 
-- Change to local library   
+- Changed to local library   
 	The original use global library.   
 	This example use local library.   
 
