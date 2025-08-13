@@ -73,36 +73,35 @@ When setting a mask, always manipulate the FMR register.
 
 - One 32-Bit Filter - Identifier Mask   
 	This can be used for both standard and extended IDs.   
-```
-  // One 32-Bit Filter - Identifier Mask
-  bank1 = 0x101 << 21;
-  bank2 = 0xFFE00006; // Must be IDE=0 RTR=0  
-  CANSetFilter(0, 1, 0, 0, bank1, bank2); // use 1 filter(filter number 0)
+	```
+	  // One 32-Bit Filter - Identifier Mask
+	  bank1 = 0x101 << 21;
+	  bank2 = 0xFFE00006; // Must be IDE=0 RTR=0  
+	  CANSetFilter(0, 1, 0, 0, bank1, bank2); // use 1 filter(filter number 0)
 
-  // One 32-Bit Filter - Identifier Mask
-  bank1 = 0x101 << 3;
-  bank1 = bank1 + 0x04; // Ext
-  bank2 = 0xFFFFFFFE; // Must be IDE=1 RTR=0
-  CANSetFilter(1, 1, 0, 0, bank1, bank2); // use 1 filter(filter number 1)
-```
-
+	  // One 32-Bit Filter - Identifier Mask
+	  bank1 = 0x101 << 3;
+	  bank1 = bank1 + 0x04; // Ext
+	  bank2 = 0xFFFFFFFE; // Must be IDE=1 RTR=0
+	  CANSetFilter(1, 1, 0, 0, bank1, bank2); // use 1 filter(filter number 1)
+	```
 	![Image](https://github.com/user-attachments/assets/c2b10523-5eb6-4ce3-85e3-026becf89c34)
 
 - Two 32-Bit Filters - Identifier List   
 	This can be used for both standard and extended IDs.   
 	Note that this use two filters.   
-```
-  // Two 32-Bit Filters - Identifier List
-  bank1 = 0x102 << 21;
-  bank2 = 0x103 << 21;
-  CANSetFilter(0, 1, 1, 0, bank1, bank2); // use 2 filter(filter number 0-1)
+	```
+	  // Two 32-Bit Filters - Identifier List
+	  bank1 = 0x102 << 21;
+	  bank2 = 0x103 << 21;
+	  CANSetFilter(0, 1, 1, 0, bank1, bank2); // use 2 filter(filter number 0-1)
 
-  bank1 = 0x102 << 3;
-  bank1 = bank1 + 0x04; // Ext
-  bank2 = 0x103 << 3;
-  bank2 = bank2 + 0x04; // Ext
-  CANSetFilter(2, 1, 1, 0, bank1, bank2); // use 2 filter(filter number 2-3)
-```
+	  bank1 = 0x102 << 3;
+	  bank1 = bank1 + 0x04; // Ext
+	  bank2 = 0x103 << 3;
+	  bank2 = bank2 + 0x04; // Ext
+	  CANSetFilter(2, 1, 1, 0, bank1, bank2); // use 2 filter(filter number 2-3)
+	```
 	![Image](https://github.com/user-attachments/assets/81ca9205-d0cb-4e5f-87c7-c7a69f850827)
 
 - Two 16-Bit Filters - Identifier Mask   
