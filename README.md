@@ -180,8 +180,12 @@ Please refer to the reference manual for each model for more information.
 	```
 	![Image](https://github.com/user-attachments/assets/dc1022da-f9e0-4c32-8e08-c49d240e74bd)
 
-The BxCan has two receive FIFOs.   
-By setting a filter, you can use both FIFOs.   
+STM32 has two receive(RX) FIFOs.   
+Each RX FIFO has three mailboxes and provides access only to the oldest received message in the mailbox.   
+This sample code uses only the FIFO 0.   
+The RX FIFO is closely related to the receive filter settings.   
+By properly setting the receive filter, you can sort the received messages into two RX FIFOs.   
+For example, high priority messages can be stored in the FIFO0 and low priority messages can be stored in the FIFO1.   
 [Here](https://github.com/nopnop2002/Arduino-STM32-CAN/tree/master/stm32f103_fifo) is an example for STM32F103.   
 
 # Communication with Arduino-UNO R3
@@ -322,7 +326,6 @@ Skip if you don't need advanced usage.
 Advanced usage has different purposes depending on the requirements of the application.   
 So I can't give you a concrete code example.   
 
-### About transmission
 STM32 has three transmit(TX) mailboxes.   
 Three TX mailboxes are provided to the software for setting up messages.   
 This sample code uses only the first TX mailbox and blocks the application until the send is successfully completed.   
@@ -343,14 +346,6 @@ Read the reference manual carefully and modify the source code as needed.
  When all three TX mailboxes are pending for a long time, it could be a transmission error.   
  CAN Error Status Register (CAN_ESR) should be checked.   
 
-### About reception
-STM32 has two receive(RX) mailboxes.   
-Each RX Mailbox allows access to a 3-level depth FIFO, the access being offered only to the oldest received message in the FIFO.   
-This sample code uses only the first RX mailbox.   
-The RX mailbox is closely related to the receive filter settings.   
-By properly setting the receive filter, you can sort the received messages into two RX Mailboxes.   
-For example, high priority messages can be stored in the first RX MailBox and low priority messages can be stored in the second RX MailBox.   
-Read the reference manual carefully and modify the source code as needed.   
 
 # Reference
 
