@@ -112,6 +112,10 @@ When configuring a filter, you must manipulate the FMR register.
 	CAN1->FMR   &= ~(0x1UL);              // Deactivate initialization mode
 ```
 
+This is the simplest usage.   
+The filter and FIFO work together.   
+Please refer to the reference manual for each model for more information.   
+
 - One 32-Bit Filter - Identifier Mask   
 	This can be used for both standard and extended IDs.   
 	```
@@ -120,13 +124,13 @@ When configuring a filter, you must manipulate the FMR register.
 	  int fbm = 0;
 	  bank1 = 0x101 << 21;
 	  bank2 = 0xFFE00006; // Must be IDE=0 RTR=0  
-	  CANSetFilter(0, fsc, fbm, 0, bank1, bank2); // use 1 filter(filter number 0)
+	  CANSetFilter(0, fsc, fbm, 0, bank1, bank2);
 
 	  // One 32-Bit Filter - Identifier Mask
 	  bank1 = 0x101 << 3;
 	  bank1 = bank1 + 0x04; // Ext
 	  bank2 = 0xFFFFFFFE; // Must be IDE=1 RTR=0
-	  CANSetFilter(1, fsc, fbm, 0, bank1, bank2); // use 1 filter(filter number 1)
+	  CANSetFilter(1, fsc, fbm, 0, bank1, bank2);
 	```
 	![Image](https://github.com/user-attachments/assets/c2b10523-5eb6-4ce3-85e3-026becf89c34)
 
@@ -138,13 +142,13 @@ When configuring a filter, you must manipulate the FMR register.
 	  int fbm = 1;
 	  bank1 = 0x102 << 21;
 	  bank2 = 0x103 << 21;
-	  CANSetFilter(0, fsc, fbm, 0, bank1, bank2); // use 2 filter(filter number 0-1)
+	  CANSetFilter(0, fsc, fbm, 0, bank1, bank2);
 
 	  bank1 = 0x102 << 3;
 	  bank1 = bank1 + 0x04; // Ext
 	  bank2 = 0x103 << 3;
 	  bank2 = bank2 + 0x04; // Ext
-	  CANSetFilter(2, fsc, fbm, 0, bank1, bank2); // use 2 filter(filter number 2-3)
+	  CANSetFilter(1, fsc, fbm, 0, bank1, bank2);
 	```
 	![Image](https://github.com/user-attachments/assets/81ca9205-d0cb-4e5f-87c7-c7a69f850827)
 
@@ -158,7 +162,7 @@ When configuring a filter, you must manipulate the FMR register.
 	  bank1 = bank1 | 0x104 << 5;
 	  bank2 = 0xFFFF << 16;
 	  bank2 = bank1 | 0x105 << 5;
-	  CANSetFilter(0, fsc, fbm, 0, bank1, bank2); // use 2 filter(filter number 0-1)
+	  CANSetFilter(0, fsc, fbm, 0, bank1, bank2);
 	```
 	![Image](https://github.com/user-attachments/assets/b2dfa2bb-659f-480c-af69-895c844a93c3)
 
@@ -172,7 +176,7 @@ When configuring a filter, you must manipulate the FMR register.
 	  bank1 = bank1 | 0x105 << 5;
 	  bank2 = 0x106 << 21;
 	  bank2 = bank2 | 0x107 << 5;
-	  CANSetFilter(0, fsc, fbm, 0, bank1, bank2); // use 4 filter(filter number 0-3)
+	  CANSetFilter(0, fsc, fbm, 0, bank1, bank2);
 	```
 	![Image](https://github.com/user-attachments/assets/dc1022da-f9e0-4c32-8e08-c49d240e74bd)
 
