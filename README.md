@@ -93,8 +93,9 @@ The STM32 transceiver has a terminating resistor.
 ![STM32-Receive](https://user-images.githubusercontent.com/6020549/75561089-c2984580-5a89-11ea-80d0-90a2af235b80.jpg)
 
 # Using the BxCan receiving filter   
-The bxCAN controller provides your application with 28 configurable and scalable filter banks (27-0).   
-On models with only one CAN port, all 28 filters are available.   
+The bxCAN Controller provides 14 or 28 configurable and scalable filter banks to the application.
+The number of filter banks (=numbank) varies by model and is specified in the Reference manual.   
+On models with only one CAN port, all filters are available on this port.   
 On models with two CAN ports, they are shared between ports 1 and 2.   
 In this example, filter numbers 0-13 are on port 1, and filter numbers 14-27 are on port 2.
 
