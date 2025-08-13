@@ -58,6 +58,7 @@ You need to check variant_generic.h for your board.
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F1xx/
 
 # Using receive filters   
+STM32F103 provides 28 configurable and scalable filter banks (27-0) to the application.   
 STM32F103 has four types of reception filters.   
 ![Image](https://github.com/user-attachments/assets/adc56930-8681-4e57-b102-c8a9ac1105f0)   
 
