@@ -102,7 +102,7 @@ In this example, filter numbers 0-13 are on port 1, and filter numbers 14-27 are
 The bxCAN controller has four types of reception filters.   
 ![Image](https://github.com/user-attachments/assets/adc56930-8681-4e57-b102-c8a9ac1105f0)   
 
-When setting a mask, always manipulate the FMR register.   
+When configuring a filter, you must manipulate the FMR register.   
 ```
 	uint32_t bank1, bank2;
 	CAN1->FMR  |=   0x1UL;                // Set to filter initialization mode
