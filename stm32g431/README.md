@@ -68,3 +68,7 @@ However, this may vary depending on the Board Part Number.
 You need to check variant_generic.h for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32G4xx/
 
+
+# Known issues   
+If we use a 3.3V transceiver such as the VP230, transmission will not work, only reception will work.   
+I don't know the reason. Please let me know if you find out the reason.   
