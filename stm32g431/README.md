@@ -1,5 +1,6 @@
 # stm32g431
-I based this on [this](https://github.com/pierremolinaro/acanfd-stm32).
+![Image](https://github.com/user-attachments/assets/85013bac-8e1e-45eb-aa72-3b504fa7d8a0)   
+I based this on [this](https://github.com/pierremolinaro/acanfd-stm32).   
 
 # Changes from the original
 
