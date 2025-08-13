@@ -57,7 +57,7 @@ The output destination of Serial.print differs depending on the Board Part Numbe
 You need to check variant_generic.h for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F1xx/
 
-# Using receive masks   
+# Using receive filters   
 STM32F103 has four types of reception masks.   
 ![Image](https://github.com/user-attachments/assets/adc56930-8681-4e57-b102-c8a9ac1105f0)   
 
