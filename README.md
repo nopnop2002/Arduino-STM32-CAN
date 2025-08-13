@@ -97,7 +97,7 @@ The bxCAN Controller provides 14 or 28 configurable and scalable filter banks to
 The number of filter banks varies by model and is specified in the Reference manual.   
 On models with only one CAN port, all filters are available on this port.   
 On models with two CAN ports, they are shared between ports 1 and 2.   
-In this example, filter banks 0-13 are on port 1, and filter banks 14-27 are on port 2.
+In this example, filter banks 0 to 13 are used on port 1, and filter banks 14 to 27 are used on port 2.   
 
 The bxCAN controller has four types of reception filters.   
 ![Image](https://github.com/user-attachments/assets/adc56930-8681-4e57-b102-c8a9ac1105f0)   
