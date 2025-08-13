@@ -11,12 +11,6 @@ I based this on [this](https://github.com/pierremolinaro/acanfd-stm32).
 	The original support only NUCLEO-G431KB.   
 	This example support Generic STM32G431 Development board.   
 
-- Normal operation mode   
-	The original support only CAN FD operation.   
-	We need a transceiver that supports CAN FD, such as the TJA1441AT.   
-	This example support Normal operation and CAN FD operation.   
-	When using Normal operation, we can use transceivers that do not support CAN FD, such as the MCP2551.   
-
 - CAN port   
 	The original support PA11/PA12 and PB8/PB9.   
 	This example support PA11/PA12,PB8/PB9 and PD0/PD1.   
@@ -62,6 +56,10 @@ This example sets the filter as follows:
 
 - Use both filter   
 	![Image](https://github.com/user-attachments/assets/f4da1340-9bd0-4ec4-b385-66ed609037cf)
+
+
+Filter and Receive FIFO are closely related.   
+Details can be found [here](https://github.com/pierremolinaro/acanfd-stm32/blob/main/extras/acanfd-stm32.pdf).   
 
 # Serial Output   
 The output destination for Serial.print is PA2.   
