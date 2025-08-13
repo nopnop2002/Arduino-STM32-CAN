@@ -97,7 +97,7 @@ The bxCAN Controller provides 14 or 28 configurable and scalable filter banks to
 The number of filter banks varies by model and is specified in the Reference manual.   
 On models with only one CAN port, all filters are available on this port.   
 On models with two CAN ports, they are shared between ports 1 and 2.   
-In this example, filter numbers 0-13 are on port 1, and filter numbers 14-27 are on port 2.
+In this example, filter banks 0-13 are on port 1, and filter banks 14-27 are on port 2.
 
 The bxCAN controller has four types of reception filters.   
 ![Image](https://github.com/user-attachments/assets/adc56930-8681-4e57-b102-c8a9ac1105f0)   
@@ -132,7 +132,6 @@ When configuring a filter, you must manipulate the FMR register.
 
 - Two 32-Bit Filters - Identifier List   
 	This can be used for both standard and extended IDs.   
-	Note that this use two filters.   
 	```
 	  // Two 32-Bit Filters - Identifier List
 	  int fsc = 1;
@@ -151,7 +150,6 @@ When configuring a filter, you must manipulate the FMR register.
 
 - Two 16-Bit Filters - Identifier Mask   
 	This can only be used with standard IDs.   
-	Note that this use two filters.   
 	```
 	  // Two 16-Bit Filters - Identifier Mask
 	  int fsc = 0;
@@ -166,7 +164,6 @@ When configuring a filter, you must manipulate the FMR register.
 
 - Four 16-Bit Filters - Identifier List   
 	This can only be used with standard IDs.   
-	Note that this use four filters.   
 	```
 	  // Four 16-Bit Filters - Identifier List
 	  int fsc = 0;
