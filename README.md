@@ -116,15 +116,17 @@ When setting a mask, always manipulate the FMR register.
 	This can be used for both standard and extended IDs.   
 	```
 	  // One 32-Bit Filter - Identifier Mask
+	  int fsc = 1;
+	  int fbm = 0;
 	  bank1 = 0x101 << 21;
 	  bank2 = 0xFFE00006; // Must be IDE=0 RTR=0  
-	  CANSetFilter(0, 1, 0, 0, bank1, bank2); // use 1 filter(filter number 0)
+	  CANSetFilter(0, fsc, fbm, 0, bank1, bank2); // use 1 filter(filter number 0)
 
 	  // One 32-Bit Filter - Identifier Mask
 	  bank1 = 0x101 << 3;
 	  bank1 = bank1 + 0x04; // Ext
 	  bank2 = 0xFFFFFFFE; // Must be IDE=1 RTR=0
-	  CANSetFilter(1, 1, 0, 0, bank1, bank2); // use 1 filter(filter number 1)
+	  CANSetFilter(1, fsc, fbm, 0, bank1, bank2); // use 1 filter(filter number 1)
 	```
 	![Image](https://github.com/user-attachments/assets/c2b10523-5eb6-4ce3-85e3-026becf89c34)
 
@@ -133,15 +135,17 @@ When setting a mask, always manipulate the FMR register.
 	Note that this use two filters.   
 	```
 	  // Two 32-Bit Filters - Identifier List
+	  int fsc = 1;
+	  int fbm = 1;
 	  bank1 = 0x102 << 21;
 	  bank2 = 0x103 << 21;
-	  CANSetFilter(0, 1, 1, 0, bank1, bank2); // use 2 filter(filter number 0-1)
+	  CANSetFilter(0, fsc, fbm, 0, bank1, bank2); // use 2 filter(filter number 0-1)
 
 	  bank1 = 0x102 << 3;
 	  bank1 = bank1 + 0x04; // Ext
 	  bank2 = 0x103 << 3;
 	  bank2 = bank2 + 0x04; // Ext
-	  CANSetFilter(2, 1, 1, 0, bank1, bank2); // use 2 filter(filter number 2-3)
+	  CANSetFilter(2, fsc, fbm, 0, bank1, bank2); // use 2 filter(filter number 2-3)
 	```
 	![Image](https://github.com/user-attachments/assets/81ca9205-d0cb-4e5f-87c7-c7a69f850827)
 
@@ -150,11 +154,13 @@ When setting a mask, always manipulate the FMR register.
 	Note that this use two filters.   
 	```
 	  // Two 16-Bit Filters - Identifier Mask
-	  bank1 = 0x104 << 21;
-	  bank1 = bank1 | 0xFFFF;
-	  bank2 = 0x105 << 21;
-	  bank2 = bank2 | 0xFFFF;
-	  CANSetFilter(0, 0, 1, 0, bank1, bank2); // use 2 filter(filter number 0-1)
+	  int fsc = 0;
+	  int fbm = 0;
+	  bank1 = 0xFFFF << 16;
+	  bank1 = bank1 | 0x104 << 5;
+	  bank2 = 0xFFFF << 16;
+	  bank2 = bank1 | 0x105 << 5;
+	  CANSetFilter(0, fsc, fbm, 0, bank1, bank2); // use 2 filter(filter number 0-1)
 	```
 	![Image](https://github.com/user-attachments/assets/b2dfa2bb-659f-480c-af69-895c844a93c3)
 
@@ -163,11 +169,13 @@ When setting a mask, always manipulate the FMR register.
 	Note that this use four filters.   
 	```
 	  // Four 16-Bit Filters - Identifier List
+	  int fsc = 0;
+	  int fbm = 1;
 	  bank1 = 0x104 << 21;
 	  bank1 = bank1 | 0x105 << 5;
 	  bank2 = 0x106 << 21;
 	  bank2 = bank2 | 0x107 << 5;
-	  CANSetFilter(0, 0, 1, 0, bank1, bank2); // use 4 filter(filter number 0-3)
+	  CANSetFilter(0, fsc, fbm, 0, bank1, bank2); // use 4 filter(filter number 0-3)
 	```
 	![Image](https://github.com/user-attachments/assets/dc1022da-f9e0-4c32-8e08-c49d240e74bd)
 
