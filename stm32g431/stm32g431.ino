@@ -21,7 +21,7 @@ void setup () {
     delay (50) ;
   }
 
-  // Data Phase Bit Rate is not used.
+  // The data phase bit rate is used when in FD CAN mode.
   //ACANFD_STM32_Settings settings (125 * 1000, DataBitRateFactor::x5) ;
   //ACANFD_STM32_Settings settings (250 * 1000, DataBitRateFactor::x5) ;
   ACANFD_STM32_Settings settings (500 * 1000, DataBitRateFactor::x5) ;
@@ -58,10 +58,10 @@ void setup () {
   Serial.print ("Exact Data Bit Rate ? ") ;
   Serial.println (settings.exactDataBitRate () ? "yes" : "no") ;
 
-  // Disable FD operation. A regular transceiver required.
-  settings.mModuleMode = ACANFD_STM32_Settings::DISABLE_FD ;
-  // Enable FD operation. FDCAN compatible transceiver required.
-  //settings.mModuleMode = ACANFD_STM32_Settings::NORMAL_FD ;
+  // Disable FD operation.
+  //settings.mModuleMode = ACANFD_STM32_Settings::DISABLE_FD ;
+  // Enable FD operation.
+  settings.mModuleMode = ACANFD_STM32_Settings::NORMAL_FD ;
   
   // Using PA11/PA12 as CAN port.
   settings.mTxPin = PA12;
