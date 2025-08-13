@@ -180,6 +180,9 @@ Please refer to the reference manual for each model for more information.
 	```
 	![Image](https://github.com/user-attachments/assets/dc1022da-f9e0-4c32-8e08-c49d240e74bd)
 
+The BxCan has two receive FIFOs.   
+By setting a filter, you can use both FIFOs.   
+[Here](https://github.com/nopnop2002/Arduino-STM32-CAN/tree/master/stm32f103_fifo) is an example for STM32F103.   
 
 # Communication with Arduino-UNO R3
 You can use [this](https://github.com/coryjfowler/MCP_CAN_lib) library.
