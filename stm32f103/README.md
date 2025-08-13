@@ -58,7 +58,7 @@ You need to check variant_generic.h for your board.
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F1xx/
 
 # Using receive filters   
-STM32F103 has four types of reception masks.   
+STM32F103 has four types of reception filters.   
 ![Image](https://github.com/user-attachments/assets/adc56930-8681-4e57-b102-c8a9ac1105f0)   
 
 When setting a mask, always manipulate the FMR register.   
