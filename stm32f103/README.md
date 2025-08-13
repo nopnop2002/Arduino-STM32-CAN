@@ -108,14 +108,14 @@ When setting a mask, always manipulate the FMR register.
 - Two 16-Bit Filters - Identifier Mask   
 	This can only be used with standard IDs.   
 	Note that this use two filters.   
-```
-  // Two 16-Bit Filters - Identifier Mask
-  bank1 = 0x104 << 21;
-  bank1 = bank1 | 0xFFFF;
-  bank2 = 0x105 << 21;
-  bank2 = bank2 | 0xFFFF;
-  CANSetFilter(0, 0, 1, 0, bank1, bank2); // use 2 filter(filter number 0-1)
-```
+	```
+	  // Two 16-Bit Filters - Identifier Mask
+	  bank1 = 0x104 << 21;
+	  bank1 = bank1 | 0xFFFF;
+	  bank2 = 0x105 << 21;
+	  bank2 = bank2 | 0xFFFF;
+	  CANSetFilter(0, 0, 1, 0, bank1, bank2); // use 2 filter(filter number 0-1)
+	```
 	![Image](https://github.com/user-attachments/assets/b2dfa2bb-659f-480c-af69-895c844a93c3)
 
 - Four 16-Bit Filters - Identifier List   
