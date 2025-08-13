@@ -129,7 +129,7 @@ When setting a mask, always manipulate the FMR register.
   bank2 = bank2 | 0x107 << 5;
   CANSetFilter(0, 0, 1, 0, bank1, bank2); // use 4 filter(filter number 0-3)
 ```
-	![Image](https://github.com/user-attachments/assets/dc1022da-f9e0-4c32-8e08-c49d240e74bd)
+![Image](https://github.com/user-attachments/assets/dc1022da-f9e0-4c32-8e08-c49d240e74bd)
 
 # Using PlatformIO   
 
