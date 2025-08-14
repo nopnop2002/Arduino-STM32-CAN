@@ -189,6 +189,7 @@ This sample code uses only the FIFO 0.
 The RX FIFO is closely related to the receive filter settings.   
 By properly setting the receive filter, you can sort the received messages into two RX FIFOs.   
 For example, high priority messages can be stored in the FIFO0 and low priority messages can be stored in the FIFO1.   
+As a result, up to six incoming messages can be stored in the mailbox.   
 Please refer to the reference manual for each model for more information.   
 ![Image](https://github.com/user-attachments/assets/df76b046-78b5-4fe4-85bb-a3bf5835c8fd)
 
