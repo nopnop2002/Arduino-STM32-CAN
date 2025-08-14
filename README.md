@@ -116,8 +116,6 @@ When configuring a filter, you must set to filter initialization mode.
 ```
 
 This is the simplest usage.   
-The filter and FIFO work together.   
-Please refer to the reference manual for each model for more information.   
 
 - One 32-Bit Filter - Identifier Mask   
 	This can be used for both standard and extended IDs.   
@@ -193,6 +191,7 @@ By properly setting the receive filter, you can sort the received messages into 
 For example, high priority messages can be stored in the FIFO0 and low priority messages can be stored in the FIFO1.   
 ![Image](https://github.com/user-attachments/assets/df76b046-78b5-4fe4-85bb-a3bf5835c8fd)
 
+Please refer to the reference manual for each model for more information.   
 [Here](https://github.com/nopnop2002/Arduino-STM32-CAN/tree/master/stm32f103_fifo) is an example for STM32F103.   
 
 # Communication with Arduino-UNO R3
