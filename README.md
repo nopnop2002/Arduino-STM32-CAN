@@ -99,7 +99,7 @@ On models with only one CAN port, all filters are available on master port (CAN1
 ![Image](https://github.com/user-attachments/assets/f22fcbc6-795f-4f4c-b8ba-aec5880c30d7)
 
 On models with two CAN ports, they are shared between master ports (CAN1) and slave port (CAN2).   
-In this example, filter banks 0 to 13 are used on port 1, and filter banks 14 to 27 are used on port 2.   
+In this example, filter banks 0 to 13 are used on CAN1, and filter banks 14 to 27 are used on CAN2.   
 ![Image](https://github.com/user-attachments/assets/8badf2c4-0edc-47ff-95e4-1b0bc53719b0)
 
 The bxCAN controller has four types of reception filters.   
