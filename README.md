@@ -183,9 +183,12 @@ Please refer to the reference manual for each model for more information.
 STM32 has two receive(RX) FIFOs.   
 Each RX FIFO has three mailboxes and provides access only to the oldest received message in the mailbox.   
 This sample code uses only the FIFO 0.   
+![Image](https://github.com/user-attachments/assets/8badf2c4-0edc-47ff-95e4-1b0bc53719b0)   
+
 The RX FIFO is closely related to the receive filter settings.   
 By properly setting the receive filter, you can sort the received messages into two RX FIFOs.   
 For example, high priority messages can be stored in the FIFO0 and low priority messages can be stored in the FIFO1.   
+![Image](https://github.com/user-attachments/assets/f8742348-4967-4ea3-a185-65f270275ba0)   
 [Here](https://github.com/nopnop2002/Arduino-STM32-CAN/tree/master/stm32f103_fifo) is an example for STM32F103.   
 
 # Communication with Arduino-UNO R3
