@@ -102,10 +102,10 @@ On models with two CAN ports, all filters are shared between master ports (CAN1)
 In this example, filter banks 0 to 13 are used on CAN1, and filter banks 14 to 27 are used on CAN2.   
 ![Image](https://github.com/user-attachments/assets/8badf2c4-0edc-47ff-95e4-1b0bc53719b0)
 
-The bxCAN controller has four types of reception filters.   
+The bxCAN controller provides four types of receive filters:   
 ![Image](https://github.com/user-attachments/assets/adc56930-8681-4e57-b102-c8a9ac1105f0)   
 
-When configuring a filter, you must set to filter initialization mode.   
+Before you can configure a filter, you must set it to filter initialization mode.   
 ```
 	uint32_t bank1, bank2;
 	CAN1->FMR  |=   0x1UL;                // Set to filter initialization mode
@@ -116,6 +116,7 @@ When configuring a filter, you must set to filter initialization mode.
 ```
 
 This is the simplest usage.   
+[Here](https://github.com/nopnop2002/Arduino-STM32-CAN/tree/master/stm32f103_filter) is an example for STM32F103.   
 
 - One 32-Bit Filter - Identifier Mask   
 	This can be used for both standard and extended IDs.   
