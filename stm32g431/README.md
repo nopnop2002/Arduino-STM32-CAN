@@ -12,11 +12,11 @@ I based this on [this](https://github.com/pierremolinaro/acanfd-stm32).
 	The original support only NUCLEO-G431KB.   
 	This example support Generic STM32G431 Development board.   
 
-- CAN port   
+- FDCAN port   
 	The original support PA11/PA12 and PB8/PB9.   
 	This example support PA11/PA12,PB8/PB9 and PD0/PD1.   
 
-# Remap CAN port
+# Remap FDCAN port
 
 CAN_RX mapped to PA11, CAN_TX mapped to PA12   
 ```
