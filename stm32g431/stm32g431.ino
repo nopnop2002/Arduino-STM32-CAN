@@ -63,16 +63,6 @@ void setup () {
   // Enable FD operation.
   settings.mModuleMode = ACANFD_STM32_Settings::NORMAL_FD ;
   
-  // Using PA11/PA12 as CAN port.
-  settings.mTxPin = PA12;
-  settings.mRxPin = PA11;
-  // Using PB8/PB9 as CAN port.
-  //settings.mTxPin = PB9;
-  //settings.mRxPin = PB8;
-  // Using PD0/PD1 as CAN port.
-  //settings.mTxPin = PD1;
-  //settings.mRxPin = PD0;
-
   // Automatic retransmission of messages not transmitted successfully enabled
   settings.mEnableRetransmission = false;
   // Automatic retransmission disabled
@@ -97,14 +87,26 @@ void setup () {
     //--- Reject extended frames that do not match any filter
     settings.mNonMatchingExtendedFrameReception = ACANFD_STM32_FilterAction::REJECT ;
   }
+
+  // Using PA11/PA12 as FDCAN1 port.
+  settings.mTxPin = PA_12;
+  settings.mRxPin = PA_11;
+  // Using PB8/PB9 as FDCAN1 port.
+  //settings.mTxPin = PB_9;
+  //settings.mRxPin = PB_8;
+  // Using PD0/PD1 as FDCAN1 port.
+  //settings.mTxPin = PD_1;
+  //settings.mRxPin = PD_0;
+    
   uint32_t errorCode = fdcan1.beginFD (settings, standardFilters, extendedFilters) ;
   if (0 == errorCode) {
     Serial.println ("fdcan1 ok") ;
   }else{
-    Serial.print ("Error can: 0x") ;
+    Serial.print ("fdcan1 fail: 0x") ;
     Serial.println (errorCode, HEX) ;
     while(true);
   }
+
   Serial.print ("Systick ") ;
   Serial.println (SysTick->LOAD + 1) ;
 }
@@ -170,7 +172,7 @@ void loop () {
       //Serial.print ("fdcan1 sent: ") ;
       //Serial.println (gSentCount) ;
     } else {
-      Serial.print("sendStatus=");
+      Serial.print("sendStatus: ");
       Serial.println(sendStatus);
       while(true);
     }

@@ -20,20 +20,20 @@ I based this on [this](https://github.com/pierremolinaro/acanfd-stm32).
 
 CAN_RX mapped to PA11, CAN_TX mapped to PA12   
 ```
-  settings.mTxPin = PA12;
-  settings.mRxPin = PA11;
+  settings.mTxPin = PA_12;
+  settings.mRxPin = PA_11;
 ```
 
 CAN_RX mapped to PB8, CAN_TX mapped to PB9 (not available on 32-pin package)   
 ```
-  settings.mTxPin = PB9;
-  settings.mRxPin = PB8;
+  settings.mTxPin = PB_9;
+  settings.mRxPin = PB_8;
 ```
 
 CAN_RX mapped to PD0, CAN_TX mapped to PD1 (available on 80-pin and 100-pin package)   
 ```
-  settings.mTxPin = PD1;
-  settings.mRxPin = PD0;
+  settings.mTxPin = PD_1;
+  settings.mRxPin = PD_0;
 ```
 
 # Using Filter   
