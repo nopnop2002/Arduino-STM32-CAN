@@ -44,6 +44,7 @@ Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
  ![STM32_Core_2 7 1](https://github.com/user-attachments/assets/e135c6b2-61f5-4ac8-a4e5-8878a29a2be4)
 
 - STM32 Cube Programmer   
+ The Arduino IDE uses the STM32CubeProgrammer to write firmware to the STM32.   
  I used version 2.20.   
  ![Image](https://github.com/user-attachments/assets/d6b365b8-6955-4e2a-9937-7d5607e65da4)
 
