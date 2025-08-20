@@ -38,13 +38,13 @@ CAN_RX mapped to PA11, CAN_TX mapped to PA12
   settings.mRxPin = PA_11;
 ```
 
-CAN_RX mapped to PB8, CAN_TX mapped to PB9 (not available on 36-pin package)   
+CAN_RX mapped to PB8, CAN_TX mapped to PB9   
 ```
   settings.mTxPin = PB_9;
   settings.mRxPin = PB_8;
 ```
 
-CAN_RX mapped to PD0, CAN_TX mapped to PD1 (available on 100-pin and 144-pin package)   
+CAN_RX mapped to PD0, CAN_TX mapped to PD1 (not available on 48-pin package and 64-pin package)   
 ```
   settings.mTxPin = PD_1;
   settings.mRxPin = PD_0;
@@ -58,7 +58,7 @@ CAN_RX mapped to PB5, CAN_TX mapped to PB6
   settings.mRxPin = PB_5;
 ```
 
-CAN_RX mapped to PB12, CAN_TX mapped to PB13 (not available on 36-pin package)   
+CAN_RX mapped to PB12, CAN_TX mapped to PB13   
 ```
   settings.mTxPin = PB_13;
   settings.mRxPin = PB_12;
