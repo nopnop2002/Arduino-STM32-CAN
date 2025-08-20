@@ -15,8 +15,8 @@ Basic Extended CAN(BxCan) communication example for Arduino Core STM32.
 - STM32F767 Development Board.   
 - STM32L452 Development Board.   
 - STM32L496 Development Board.   
-- STM32G431 Development Board.   
-- STM32G474 Development Board.   
+- STM32G431 Development Board(Supports FDCAN).   
+- STM32G474 Development Board(Supports FDCAN).   
 - CAN Transceiver.   
 MCP2551/2561/2562(5V)   
 TJA1040/1050/1051/1055(5V)   
