@@ -118,10 +118,10 @@ CAN_RX mapped to PD14, CAN_TX mapped to PD15 (available on 80-pin and 100-pin pa
 	![Image](https://github.com/user-attachments/assets/f4da1340-9bd0-4ec4-b385-66ed609037cf)
 
 # Serial Output   
-The output destination for Serial.print is PA2.   
+The output destination for Serial.print is PA0.   
 
 You need to check variant_generic.h for your board.    
-https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32G4xx/
+https://github.com/stm32duino/Arduino_Core_STM32/tree/main/variants/STM32G0xx
 
 # Known issues   
 If we use a 3.3V transceiver such as the VP230, transmission will not work, only reception will work.   
