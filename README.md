@@ -45,7 +45,7 @@ Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
 
 - STM32 Cube Programmer   
  The Arduino IDE uses the STM32CubeProgrammer to write firmware to the STM32.   
- Please note that older versions of STM32CubeProgrammer do not support newer models such as STM32G0.
+ Please note that older versions of STM32CubeProgrammer do not support newer models such as STM32G0.   
  I used version 2.20.   
  ![Image](https://github.com/user-attachments/assets/d6b365b8-6955-4e2a-9937-7d5607e65da4)
 
