@@ -32,7 +32,7 @@ Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
  I used V1.8.19   
  ![Arduino_V1_8_19](https://github.com/user-attachments/assets/f3179568-cce6-4762-99e3-509852c7fa5d)
 
-- Arduino core support for STM32 based boards.   
+- Arduino core support for STM32 based boards   
  https://github.com/stm32duino/Arduino_Core_STM32   
  ___Note for Core version___   
  Core version 2.8 or later requires Arduino IDE 2.x.   
@@ -42,6 +42,10 @@ Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
  __There is some core library for STM32.__   
  __It doesn't work with [Arduino STM32](https://github.com/rogerclarkmelbourne/Arduino_STM32).__
  ![STM32_Core_2 7 1](https://github.com/user-attachments/assets/e135c6b2-61f5-4ac8-a4e5-8878a29a2be4)
+
+- STM32 Cube Programmer   
+ I used version 2.20.   
+ ![Image](https://github.com/user-attachments/assets/d6b365b8-6955-4e2a-9937-7d5607e65da4)
 
 # Wirering   
 - USB power supply (board with 5V pin)   
