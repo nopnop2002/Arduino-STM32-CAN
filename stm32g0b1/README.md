@@ -1,5 +1,5 @@
 # stm32g0b1
-It also works with the following STM32F4 series.   
+It also works with the following STM32G0 series.   
 - STM32G0B1   
 - STM32G0C1   
 
