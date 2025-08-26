@@ -1,9 +1,10 @@
 # stm32g474
+![Image](https://github.com/user-attachments/assets/145c1189-efd3-4738-ad77-69c817020750)
+
 It also works with the following STM32F4 series.   
 - STM32G474   
 - STM32G484   
 
-![Image](https://github.com/user-attachments/assets/b7c6039e-4ff6-4978-8520-081577ceac82)   
 I based this on [this](https://github.com/pierremolinaro/acanfd-stm32).
 
 # Changes from the original
