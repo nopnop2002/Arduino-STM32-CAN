@@ -2,6 +2,9 @@
 #define AF8   0x08
 #define AF9   0x09
 
+#define CAN_PORT CAN1 // Using CAN1
+//#define CAN_PORT CAN2 // Using CAN2
+
 /* Symbolic names for bit rate of CAN message                                */
 typedef enum {CAN_50KBPS, CAN_100KBPS, CAN_125KBPS, CAN_250KBPS, CAN_500KBPS, CAN_1000KBPS} BITRATE;
 
@@ -323,6 +326,44 @@ bool CANInit(BITRATE bitrate, int remap)
   return true;
 }
 
+void CANMsgPrint(CAN_TypeDef * can, CAN_msg_t CAN_RX_msg) {
+  if (can == CAN1) {
+    Serial.print("CAN1 ");
+  } else {
+    Serial.print("CAN2 ");
+  }
+  if (CAN_RX_msg.format == EXTENDED_FORMAT) {
+    Serial.print("Extended ID: 0x");
+    if (CAN_RX_msg.id < 0x10000000) Serial.print("0");
+    if (CAN_RX_msg.id < 0x1000000) Serial.print("0");
+    if (CAN_RX_msg.id < 0x100000) Serial.print("0");
+    if (CAN_RX_msg.id < 0x10000) Serial.print("0");
+    if (CAN_RX_msg.id < 0x1000) Serial.print("0");
+    if (CAN_RX_msg.id < 0x100) Serial.print("0");
+    if (CAN_RX_msg.id < 0x10) Serial.print("0");
+    Serial.print(CAN_RX_msg.id, HEX);
+  } else {
+    Serial.print("Standard ID: 0x");
+    if (CAN_RX_msg.id < 0x100) Serial.print("0");
+    if (CAN_RX_msg.id < 0x10) Serial.print("0");
+    Serial.print(CAN_RX_msg.id, HEX);
+    Serial.print("     ");
+  }
+
+  Serial.print(" DLC: ");
+  Serial.print(CAN_RX_msg.len);
+  if (CAN_RX_msg.type == DATA_FRAME) {
+    Serial.print(" Data: ");
+    for(int i=0; i<CAN_RX_msg.len; i++) {
+      Serial.print("0x"); 
+      Serial.print(CAN_RX_msg.data[i], HEX); 
+      if (i != (CAN_RX_msg.len-1))  Serial.print(" ");
+    }
+    Serial.println();
+  } else {
+    Serial.println(" Data: REMOTE REQUEST FRAME");
+  }
+}
 
 #define STM32_CAN_TIR_TXRQ              (1U << 0U)  // Bit 0: Transmit Mailbox Request
 #define STM32_CAN_RIR_RTR               (1U << 1U)  // Bit 1: Remote Transmission Request
@@ -341,10 +382,9 @@ bool CANInit(BITRATE bitrate, int remap)
  * @params CAN_rx_msg - CAN message structure for reception
  * 
  */
-void CANReceive(uint8_t ch, CAN_msg_t* CAN_rx_msg)
+void CANReceive(CAN_TypeDef * can, CAN_msg_t* CAN_rx_msg)
 {
-  if(ch == 1) {
-    uint32_t id = CAN1->sFIFOMailBox[0].RIR;
+    uint32_t id = can->sFIFOMailBox[0].RIR;
     if ((id & STM32_CAN_RIR_IDE) == 0) { // Standard frame format
         CAN_rx_msg->format = STANDARD_FORMAT;;
         CAN_rx_msg->id = (CAN_STD_ID_MASK & (id >> 21U));
@@ -362,52 +402,18 @@ void CANReceive(uint8_t ch, CAN_msg_t* CAN_rx_msg)
     }
 
     
-    CAN_rx_msg->len = (CAN1->sFIFOMailBox[0].RDTR) & 0xFUL;
+    CAN_rx_msg->len = (can->sFIFOMailBox[0].RDTR) & 0xFUL;
     
-    CAN_rx_msg->data[0] = 0xFFUL &  CAN1->sFIFOMailBox[0].RDLR;
-    CAN_rx_msg->data[1] = 0xFFUL & (CAN1->sFIFOMailBox[0].RDLR >> 8);
-    CAN_rx_msg->data[2] = 0xFFUL & (CAN1->sFIFOMailBox[0].RDLR >> 16);
-    CAN_rx_msg->data[3] = 0xFFUL & (CAN1->sFIFOMailBox[0].RDLR >> 24);
-    CAN_rx_msg->data[4] = 0xFFUL &  CAN1->sFIFOMailBox[0].RDHR;
-    CAN_rx_msg->data[5] = 0xFFUL & (CAN1->sFIFOMailBox[0].RDHR >> 8);
-    CAN_rx_msg->data[6] = 0xFFUL & (CAN1->sFIFOMailBox[0].RDHR >> 16);
-    CAN_rx_msg->data[7] = 0xFFUL & (CAN1->sFIFOMailBox[0].RDHR >> 24);
+    CAN_rx_msg->data[0] = 0xFFUL &  can->sFIFOMailBox[0].RDLR;
+    CAN_rx_msg->data[1] = 0xFFUL & (can->sFIFOMailBox[0].RDLR >> 8);
+    CAN_rx_msg->data[2] = 0xFFUL & (can->sFIFOMailBox[0].RDLR >> 16);
+    CAN_rx_msg->data[3] = 0xFFUL & (can->sFIFOMailBox[0].RDLR >> 24);
+    CAN_rx_msg->data[4] = 0xFFUL &  can->sFIFOMailBox[0].RDHR;
+    CAN_rx_msg->data[5] = 0xFFUL & (can->sFIFOMailBox[0].RDHR >> 8);
+    CAN_rx_msg->data[6] = 0xFFUL & (can->sFIFOMailBox[0].RDHR >> 16);
+    CAN_rx_msg->data[7] = 0xFFUL & (can->sFIFOMailBox[0].RDHR >> 24);
     
-    CAN1->RF0R |= 0x20UL;
-  } // end CAN1
-
-  if(ch == 2) {
-    uint32_t id = CAN2->sFIFOMailBox[0].RIR;
-    if ((id & STM32_CAN_RIR_IDE) == 0) { // Standard frame format
-        CAN_rx_msg->format = STANDARD_FORMAT;;
-        CAN_rx_msg->id = (CAN_STD_ID_MASK & (id >> 21U));
-    } 
-    else {                               // Extended frame format
-        CAN_rx_msg->format = EXTENDED_FORMAT;;
-        CAN_rx_msg->id = (CAN_EXT_ID_MASK & (id >> 3U));
-    }
-
-    if ((id & STM32_CAN_RIR_RTR) == 0) {  // Data frame
-        CAN_rx_msg->type = DATA_FRAME;
-    }
-    else {                                // Remote frame
-        CAN_rx_msg->type = REMOTE_FRAME;
-    }
-
-    
-    CAN_rx_msg->len = (CAN2->sFIFOMailBox[0].RDTR) & 0xFUL;
-    
-    CAN_rx_msg->data[0] = 0xFFUL &  CAN2->sFIFOMailBox[0].RDLR;
-    CAN_rx_msg->data[1] = 0xFFUL & (CAN2->sFIFOMailBox[0].RDLR >> 8);
-    CAN_rx_msg->data[2] = 0xFFUL & (CAN2->sFIFOMailBox[0].RDLR >> 16);
-    CAN_rx_msg->data[3] = 0xFFUL & (CAN2->sFIFOMailBox[0].RDLR >> 24);
-    CAN_rx_msg->data[4] = 0xFFUL &  CAN2->sFIFOMailBox[0].RDHR;
-    CAN_rx_msg->data[5] = 0xFFUL & (CAN2->sFIFOMailBox[0].RDHR >> 8);
-    CAN_rx_msg->data[6] = 0xFFUL & (CAN2->sFIFOMailBox[0].RDHR >> 16);
-    CAN_rx_msg->data[7] = 0xFFUL & (CAN2->sFIFOMailBox[0].RDHR >> 24);
-    
-    CAN2->RF0R |= 0x20UL;
-  } // END CAN2
+    can->RF0R |= 0x20UL;
 
 }
  
@@ -418,7 +424,7 @@ void CANReceive(uint8_t ch, CAN_msg_t* CAN_rx_msg)
  * @params CAN_tx_msg - CAN message structure for transmission
  * 
  */
-void CANSend(uint8_t ch, CAN_msg_t* CAN_tx_msg)
+void CANSend(CAN_TypeDef * can, CAN_msg_t* CAN_tx_msg)
 {
   volatile int count = 0;
 
@@ -435,62 +441,31 @@ void CANSend(uint8_t ch, CAN_msg_t* CAN_tx_msg)
       out |= STM32_CAN_TIR_RTR;
   }
 
-  if (ch == 1) {
-    CAN1->sTxMailBox[0].TDTR &= ~(0xF);
-    CAN1->sTxMailBox[0].TDTR |= CAN_tx_msg->len & 0xFUL;
-    
-    CAN1->sTxMailBox[0].TDLR  = (((uint32_t) CAN_tx_msg->data[3] << 24) |
-                                 ((uint32_t) CAN_tx_msg->data[2] << 16) |
-                                 ((uint32_t) CAN_tx_msg->data[1] <<  8) |
-                                 ((uint32_t) CAN_tx_msg->data[0]      ));
-    CAN1->sTxMailBox[0].TDHR  = (((uint32_t) CAN_tx_msg->data[7] << 24) |
-                                 ((uint32_t) CAN_tx_msg->data[6] << 16) |
-                                 ((uint32_t) CAN_tx_msg->data[5] <<  8) |
-                                 ((uint32_t) CAN_tx_msg->data[4]      ));
+  can->sTxMailBox[0].TDTR &= ~(0xF);
+  can->sTxMailBox[0].TDTR |= CAN_tx_msg->len & 0xFUL;
+  
+  can->sTxMailBox[0].TDLR  = (((uint32_t) CAN_tx_msg->data[3] << 24) |
+                              ((uint32_t) CAN_tx_msg->data[2] << 16) |
+                              ((uint32_t) CAN_tx_msg->data[1] <<  8) |
+                              ((uint32_t) CAN_tx_msg->data[0]      ));
+  can->sTxMailBox[0].TDHR  = (((uint32_t) CAN_tx_msg->data[7] << 24) |
+                              ((uint32_t) CAN_tx_msg->data[6] << 16) |
+                              ((uint32_t) CAN_tx_msg->data[5] <<  8) |
+                              ((uint32_t) CAN_tx_msg->data[4]      ));
 
-    // Send Go
-    CAN1->sTxMailBox[0].TIR = out | STM32_CAN_TIR_TXRQ;
+  // Send Go
+  can->sTxMailBox[0].TIR = out | STM32_CAN_TIR_TXRQ;
 
-    // Wait until the mailbox is empty
-    while(CAN1->sTxMailBox[0].TIR & 0x1UL && count++ < 1000000);
+  // Wait until the mailbox is empty
+  while(can->sTxMailBox[0].TIR & 0x1UL && count++ < 1000000);
 
-    // The mailbox don't becomes empty while loop
-    if (CAN1->sTxMailBox[0].TIR & 0x1UL) {
-      Serial.println("Send Fail");
-      Serial.println(CAN1->ESR);
-      Serial.println(CAN1->MSR);
-      Serial.println(CAN1->TSR);
-    }
-  } // end CAN1
-
-  if (ch == 2) {
-    CAN2->sTxMailBox[0].TDTR &= ~(0xF);
-    CAN2->sTxMailBox[0].TDTR |= CAN_tx_msg->len & 0xFUL;
-    
-    CAN2->sTxMailBox[0].TDLR  = (((uint32_t) CAN_tx_msg->data[3] << 24) |
-                                 ((uint32_t) CAN_tx_msg->data[2] << 16) |
-                                 ((uint32_t) CAN_tx_msg->data[1] <<  8) |
-                                 ((uint32_t) CAN_tx_msg->data[0]      ));
-    CAN2->sTxMailBox[0].TDHR  = (((uint32_t) CAN_tx_msg->data[7] << 24) |
-                                 ((uint32_t) CAN_tx_msg->data[6] << 16) |
-                                 ((uint32_t) CAN_tx_msg->data[5] <<  8) |
-                                 ((uint32_t) CAN_tx_msg->data[4]      ));
-
-    // Send Go
-    CAN2->sTxMailBox[0].TIR = out | STM32_CAN_TIR_TXRQ;
-
-    // Wait until the mailbox is empty
-    while(CAN2->sTxMailBox[0].TIR & 0x1UL && count++ < 1000000);
-
-    // The mailbox don't becomes empty while loop
-    if (CAN2->sTxMailBox[0].TIR & 0x1UL) {
-      Serial.println("Send Fail");
-      Serial.println(CAN1->ESR);
-      Serial.println(CAN1->MSR);
-      Serial.println(CAN1->TSR);
-    }
-  } // end CAN2
-
+  // The mailbox don't becomes empty while loop
+  if (can->sTxMailBox[0].TIR & 0x1UL) {
+    Serial.println("Send Fail");
+    Serial.println(can->ESR);
+    Serial.println(can->MSR);
+    Serial.println(can->TSR);
+  }
 }
 
  /**
@@ -499,20 +474,11 @@ void CANSend(uint8_t ch, CAN_msg_t* CAN_tx_msg)
  * @returns If pending CAN messages are in the CAN controller
  *
  */
-uint8_t CANMsgAvail(uint8_t ch)
+uint8_t CANMsgAvail(CAN_TypeDef * can)
 {
-  if (ch == 1) {
-    // Check for pending FIFO 0 messages
-    return CAN1->RF0R & 0x3UL;
-  } // end CAN1
-
-  if (ch == 2) {
-    // Check for pending FIFO 0 messages
-    return CAN2->RF0R & 0x3UL;
-  } // end CAN2
-
+  // Check for pending FIFO 0 messages
+  return can->RF0R & 0x3UL;
 }
-
 
 uint8_t counter = 0;
 uint8_t frameLength = 0;
@@ -546,7 +512,6 @@ void loop() {
   CAN_TX_msg.data[7] = 0x07;
   CAN_TX_msg.len = frameLength;
 
-  uint8_t send_ch = 1;
   unsigned long currentMillis = millis();
   if (currentMillis - previousMillis >= interval) {
     previousMillis = currentMillis;
@@ -561,49 +526,15 @@ void loop() {
       CAN_TX_msg.format = STANDARD_FORMAT;
       CAN_TX_msg.id = 0x413;
     }
-    CANSend(send_ch, &CAN_TX_msg);
+    CANSend(CAN_PORT, &CAN_TX_msg);
     frameLength++;
     if (frameLength == 9) frameLength = 0;
     counter++;
   }
 
-  uint8_t recv_ch = 1;
-  if(CANMsgAvail(recv_ch)) {
-    CANReceive(recv_ch, &CAN_RX_msg);
-    Serial.print("Channel:");
-    Serial.print(recv_ch);
-
-    if (CAN_RX_msg.format == EXTENDED_FORMAT) {
-      Serial.print(" Extended ID: 0x");
-      if (CAN_RX_msg.id < 0x10000000) Serial.print("0");
-      if (CAN_RX_msg.id < 0x1000000) Serial.print("0");
-      if (CAN_RX_msg.id < 0x100000) Serial.print("0");
-      if (CAN_RX_msg.id < 0x10000) Serial.print("0");
-      if (CAN_RX_msg.id < 0x1000) Serial.print("0");
-      if (CAN_RX_msg.id < 0x100) Serial.print("0");
-      if (CAN_RX_msg.id < 0x10) Serial.print("0");
-      Serial.print(CAN_RX_msg.id, HEX);
-    } else {
-      Serial.print(" Standard ID: 0x");
-      if (CAN_RX_msg.id < 0x100) Serial.print("0");
-      if (CAN_RX_msg.id < 0x10) Serial.print("0");
-      Serial.print(CAN_RX_msg.id, HEX);
-      Serial.print("     ");
-    }
-
-    Serial.print(" DLC: ");
-    Serial.print(CAN_RX_msg.len);
-    if (CAN_RX_msg.type == DATA_FRAME) {
-      Serial.print(" Data: ");
-      for(int i=0; i<CAN_RX_msg.len; i++) {
-        Serial.print("0x"); 
-        Serial.print(CAN_RX_msg.data[i], HEX); 
-        if (i != (CAN_RX_msg.len-1))  Serial.print(" ");
-      }
-      Serial.println();
-    } else {
-      Serial.println(" Data: REMOTE REQUEST FRAME");
-    }
+  if(CANMsgAvail(CAN_PORT)) {
+    CANReceive(CAN_PORT, &CAN_RX_msg);
+    CANMsgPrint(CAN_PORT, CAN_RX_msg); 
   }
 
 }

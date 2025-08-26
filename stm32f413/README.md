@@ -1,4 +1,5 @@
 # stm32f413
+![Image](https://github.com/user-attachments/assets/2f2cc078-5c10-417d-bc01-8dfa5e5928d6)
 
 It also works with the following STM32F4 series.   
 - STM32F412
@@ -17,6 +18,30 @@ In this example, you can select the CAN port.
 - CAN1 and CAN2   
 In this example, you can use CAN1 and CAN2 port.   
 
+# CAN Port   
+The STM32F412/413 has two CAN ports.   
+You specify which port to use.   
+It is possible to use multiple ports simultaneously, but this example does not support this.   
+```
+#define CAN_PORT CAN1 // Using CAN1
+//#define CAN_PORT CAN2 // Using CAN2
+```
+
+CAN2 is a slave port of CAN1.   
+If you use the CAN2 port, you need a transceiver for both CAN1 and CAN2.   
+```
+ Transceiver              STM32
++-----------+         +-----------+ 
+|        CRX|---------|CAN1       |
+|        CTX|---------|CAN1       |
++-----------+         |           |
+                      |           |
+ Trancseiver          |           |
++-----------+         |           |
+|        CRX|---------|CAN2       |
+|        CTX|---------|CAN2       |
++-----------+         +-----------+
+```
 
 # Remap CAN port
 STM32F412/413 has two CAN ports.   
