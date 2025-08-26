@@ -1,9 +1,10 @@
 # stm32g431
+![Image](https://github.com/user-attachments/assets/20c4fe8d-da96-4db9-ac8a-a7072161d242)
+
 It also works with the following STM32F4 series.   
 - STM32G431   
 - STM32G441   
 
-![Image](https://github.com/user-attachments/assets/85013bac-8e1e-45eb-aa72-3b504fa7d8a0)   
 I based this on [this](https://github.com/pierremolinaro/acanfd-stm32).   
 
 # Changes from the original
