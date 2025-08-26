@@ -30,16 +30,18 @@ It is possible to use multiple ports simultaneously, but this example does not s
 ```
 
 CAN2 is a slave port of CAN1.   
-When using the CAN2 port, a transceiver is also required for the CAN1 port.   
-One transceiver can be shared by two ports.   
+If you use the CAN2 port, you need a transceiver for both CAN1 and CAN2.   
 ```
  Transceiver              STM32
 +-----------+         +-----------+ 
-|        CRX|--+------|CAN1       |
-|           |  +------|CAN2       |
-|           |         |           |
-|        CTX|--+------|CAN1       |
-|           |  +------|CAN2       |
+|        CRX|---------|CAN1       |
+|        CTX|---------|CAN1       |
++-----------+         |           |
+                      |           |
+ Trancseiver          |           |
++-----------+         |           |
+|        CRX|---------|CAN2       |
+|        CTX|---------|CAN2       |
 +-----------+         +-----------+
 ```
 
