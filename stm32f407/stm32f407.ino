@@ -413,8 +413,6 @@ uint8_t CANMsgAvail(CAN_TypeDef * can)
 {
   // Check for pending FIFO 0 messages
   return can->RF0R & 0x3UL;
-
-  return 0;
 }
 
 void CANMsgPrint(CAN_TypeDef * can, CAN_msg_t CAN_RX_msg) {
@@ -486,7 +484,6 @@ void loop() {
   CAN_TX_msg.data[7] = 0x07;
   CAN_TX_msg.len = frameLength;
 
-  uint8_t send_ch = 1;
   unsigned long currentMillis = millis();
   if (currentMillis - previousMillis >= interval) {
     previousMillis = currentMillis;
