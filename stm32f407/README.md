@@ -21,7 +21,7 @@ In this example, you can select the CAN port.
 In this example, you can use CAN1 and CAN2 port.   
 
 # CAN Port   
-The STM32F407 has two CAN ports.   
+STM32F407 has two CAN ports.   
 You specify which port to use.   
 It is possible to use multiple ports simultaneously, but this example does not support this.   
 ```
