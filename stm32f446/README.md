@@ -22,6 +22,30 @@ In this example, you can select the CAN port.
 - CAN1 and CAN2   
 In this example, you can use CAN1 and CAN2 port.   
 
+# CAN Port   
+STM32F427/429/437/439/446/469/479 has two CAN ports.   
+You specify which port to use.   
+It is possible to use multiple ports simultaneously, but this example does not support this.   
+```
+#define CAN_PORT CAN1 // Using CAN1
+//#define CAN_PORT CAN2 // Using CAN2
+```
+
+CAN2 is a slave port of CAN1.   
+If you use the CAN2 port, you need a transceiver for both CAN1 and CAN2.   
+```
+ Transceiver              STM32
++-----------+         +-----------+ 
+|        CRX|---------|CAN1       |
+|        CTX|---------|CAN1       |
++-----------+         |           |
+                      |           |
+ Trancseiver          |           |
++-----------+         |           |
+|        CRX|---------|CAN2       |
+|        CTX|---------|CAN2       |
++-----------+         +-----------+
+```
 
 # Remap CAN port
 
