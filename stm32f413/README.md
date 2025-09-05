@@ -36,7 +36,7 @@ If you use the CAN2 port, you need a transceiver for both CAN1 and CAN2.
 |        CTX|---------|CAN1       |
 +-----------+         |           |
                       |           |
- Trancseiver          |           |
+ Transceiver          |           |
 +-----------+         |           |
 |        CRX|---------|CAN2       |
 |        CTX|---------|CAN2       |
