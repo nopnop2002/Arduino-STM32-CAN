@@ -50,7 +50,7 @@ Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
  I used version 2.20.   
  ![Image](https://github.com/user-attachments/assets/d6b365b8-6955-4e2a-9937-7d5607e65da4)
 
-# Wirering   
+# Wiring   
 - USB power supply (board with 5V pin)   
  STM32 CAN RX GPIO has 5V tolerant.   
 ![STM32F103-CAN-5V](https://github.com/nopnop2002/Arduino-STM32-CAN/assets/6020549/b344eaaf-9b73-4321-a84b-d0715269126c)
