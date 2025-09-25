@@ -122,11 +122,11 @@ The bxCAN controller provides four types of receive filters:
 Before you can configure a filter, you must set it to filter initialization mode.   
 ```
 	uint32_t bank1, bank2;
-	CAN1->FMR  |=   0x1UL;                // Set to filter initialization mode
+	CAN1->FMR |=  0x1UL;                // Set to filter initialization mode
 	bank1 = your settings
 	bank2 = your settings
 	CANSetFilter(0, 0, 1, 0, bank1, bank2);
-	CAN1->FMR   &= ~(0x1UL);              // Deactivate initialization mode
+	CAN1->FMR &= ~(0x1UL);              // Deactivate initialization mode
 ```
 
 This is the simplest usage.   
@@ -292,7 +292,7 @@ $ candump can0
 $ cansend can0 123#11223344AABBCCDD
 ```
 
-![STM32F103-CAN-RPI](https://github.com/nopnop2002/Arduino-STM32-CAN/assets/6020549/bebd8b14-5565-4cc8-b6ba-82e23c1ef14c)
+![Image](https://github.com/user-attachments/assets/3d7342e0-75ce-4070-b0b3-d06076a17eba)
 
 # Troubleshooting   
 There is a module of SN65HVD230 like this.   
