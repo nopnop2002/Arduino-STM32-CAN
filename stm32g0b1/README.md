@@ -3,7 +3,8 @@ It also works with the following STM32G0 series.
 - STM32G0B1   
 - STM32G0C1   
 
-![Image](https://github.com/user-attachments/assets/88e6b331-5397-477f-bf85-cf86c8700685)
+![Image](https://github.com/user-attachments/assets/88e6b331-5397-477f-bf85-cf86c8700685)   
+
 I based this on [this](https://github.com/pierremolinaro/acanfd-stm32).
 
 # Changes from the original
