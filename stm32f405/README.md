@@ -2,7 +2,7 @@
 Source code is the same as stm32f407.   
 I used this board.   
 This board is called a pyboard.   
-Pin out is [here](https://www.pianshen.com/article/8473671420/).   
+<img width="1125" height="583" alt="Image" src="https://github.com/user-attachments/assets/9be4714d-e3c7-4aaf-b6b2-e3e7bfb98614" />   
 GPIO is irregular, but you can use it in the Arduino environment.   
 ![F405](https://user-images.githubusercontent.com/6020549/170388891-1d26c489-5fa2-4bf5-81c3-ff4a442368b8.JPG)
 
