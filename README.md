@@ -30,19 +30,19 @@ Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
 
 # Software requirements
 - Arduino IDE   
- I used V1.8.19   
- ![Arduino_V1_8_19](https://github.com/user-attachments/assets/f3179568-cce6-4762-99e3-509852c7fa5d)
+ I used version 2.3.10   
+ <img width="1046" height="685" alt="arduino-2 3 10" src="https://github.com/user-attachments/assets/d587e882-2bfe-423b-8fc2-5d605ebc97fa" />
 
 - Arduino core support for STM32 based boards   
  https://github.com/stm32duino/Arduino_Core_STM32   
  ___Note for Core version___   
  Core version 2.8 or later requires Arduino IDE 2.x.   
- I used version 2.7.1.   
- This is the final version available for Arduino IDE 1.x.   
+ I used version 2.12.0.   
+ This is the final version of V2.   
  ![](https://img.shields.io/badge/_IMPORTANT-important)  
  __There is some core library for STM32.__   
  __It doesn't work with [Arduino STM32](https://github.com/rogerclarkmelbourne/Arduino_STM32).__
- ![STM32_Core_2 7 1](https://github.com/user-attachments/assets/e135c6b2-61f5-4ac8-a4e5-8878a29a2be4)
+ <img width="1046" height="685" alt="stm32-core-library" src="https://github.com/user-attachments/assets/54d5d1d6-3281-44ad-b013-e8867726b5f5" />
 
 - STM32 Cube Programmer   
  The Arduino IDE uses the STM32CubeProgrammer to write firmware to the STM32.   
