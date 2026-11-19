@@ -44,7 +44,7 @@ Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
 	__It doesn't work with [Arduino STM32](https://github.com/rogerclarkmelbourne/Arduino_STM32).__
 	<img width="1046" height="685" alt="stm32-core-library" src="https://github.com/user-attachments/assets/54d5d1d6-3281-44ad-b013-e8867726b5f5" />
 
-	- STM32 Cube Programmer   
+- STM32 Cube Programmer   
 	The Arduino IDE uses the STM32CubeProgrammer to write firmware to the STM32.   
 	Please note that older versions of STM32CubeProgrammer do not support newer models such as STM32G0.   
 	I used version 2.20.   
