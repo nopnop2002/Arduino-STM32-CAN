@@ -1,7 +1,7 @@
 # stm32g474
 ![Image](https://github.com/user-attachments/assets/145c1189-efd3-4738-ad77-69c817020750)
 
-It also works with the following STM32F4 series.   
+It also works with the following STM32G4 series.   
 - STM32G473   
 - STM32G474   
 - STM32G483   

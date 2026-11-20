@@ -1,7 +1,7 @@
 # stm32g431
 ![Image](https://github.com/user-attachments/assets/20c4fe8d-da96-4db9-ac8a-a7072161d242)
 
-It also works with the following STM32F4 series.   
+It also works with the following STM32G4 series.   
 - STM32G431   
 - STM32G441   
 
