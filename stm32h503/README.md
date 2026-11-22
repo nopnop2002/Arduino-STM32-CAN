@@ -1,10 +1,6 @@
 # stm32h503
 <img width="864" height="576" alt="stm32h503_DevelopmentBoard" src="https://github.com/user-attachments/assets/33502840-0bfe-492f-a913-05ddbc31574f" />
 
-It also works with the following STM32H5 series.   
-- STM32H503   
-- STM32H562   
-
 I based this on [this](https://github.com/pierremolinaro/acanfd-stm32).
 
 # Remap FDCAN1 port
