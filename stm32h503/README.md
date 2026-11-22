@@ -58,5 +58,5 @@ CAN_RX mapped to PB12, CAN_TX mapped to PB13 (available on 100-pin and 144-pin p
 The output destination for Serial.print is PA2.   
 
 You need to check variant_generic.h for your board.    
-https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32G4xx/
+https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32H5xx/
 
