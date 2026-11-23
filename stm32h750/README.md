@@ -1,6 +1,10 @@
 # stm32h750
 <img width="864" height="576" alt="stm32h750_DevelopmentBoard" src="https://github.com/user-attachments/assets/c6423ddb-9da9-4254-9366-fc20c2b78102" />
 
+It also works with the following STM32H7 series.   
+- STM32H743   
+- STM32H750   
+
 I based this on [this](https://github.com/pierremolinaro/acanfd-stm32).
 
 # FDCAN port   
