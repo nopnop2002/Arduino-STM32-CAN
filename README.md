@@ -20,6 +20,7 @@ Basic Extended CAN(BxCan) communication example for Arduino Core STM32.
 - STM32G474 Development Board(Supports FDCAN).   
 - STM32G491 Development Board(Supports FDCAN).   
 - STM32H503 Development Board(Supports FDCAN).   
+- STM32H562 Development Board(Supports FDCAN).   
 - STM32H750 Development Board(Supports FDCAN).   
 - CAN Transceiver.   
 MCP2551/2561/2562(5V)   
@@ -111,6 +112,9 @@ The STM32 transceiver has a terminating resistor.
 
 - from STM32H503   
 	<img width="659" height="486" alt="stm32h503_transfer" src="https://github.com/user-attachments/assets/6c4a322c-f1e3-450e-8b7e-b53639dd0b1a" />
+
+- from STM32H562   
+	<img width="659" height="486" alt="stm32h562_transfer" src="https://github.com/user-attachments/assets/8fbb1fd1-3f7f-4cb7-a30d-42a946894b0d" />
 
 - from STM32H750   
 	<img width="659" height="486" alt="stm32h750_transfer" src="https://github.com/user-attachments/assets/2e52a409-8b39-4b56-819e-376f26784b3b" />
