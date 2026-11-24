@@ -84,12 +84,23 @@ CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PD0, CAN_TX mapped to PD1
 ```
 
 # Serial Output   
-
-- STM32F412   
-	The output destination for Serial.print is PA2.   
-- STM32F413   
-	The output destination for Serial.print is PA0.   
-
 You need to check variant_generic.h for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F4xx/
 
+```
+F412C(E-G)U\variant_generic.h(149):   #define PIN_SERIAL_TX         PA2
+F412R(E-G)(T-Y)x(P)\variant_generic.h(167):   #define PIN_SERIAL_TX         PA2
+F412R(E-G)(T-Y)x(P)\variant_PYBSTICK26_PRO.h(168):   #define PIN_SERIAL_TX         PA2
+F412V(E-G)H\variant_generic.h(206):   #define PIN_SERIAL_TX         PA2
+F412V(E-G)T\variant_generic.h(206):   #define PIN_SERIAL_TX         PA2
+F412Z(E-G)(J-T)\variant_generic.h(239):   #define PIN_SERIAL_TX         PA2
+F412Z(E-G)(J-T)\variant_NUCLEO_F412ZG.h(214):   #define PIN_SERIAL_TX         PD8
+F413C(G-H)U_F423CHU\variant_generic.h(152):   #define PIN_SERIAL_TX         PA0
+F413M(G-H)Y_F423MHY\variant_generic.h(185):   #define PIN_SERIAL_TX         PA0
+F413R(G-H)T_F423RHT\variant_generic.h(171):   #define PIN_SERIAL_TX         PA0
+F413V(G-H)H_F423VHH\variant_generic.h(210):   #define PIN_SERIAL_TX         PA0
+F413V(G-H)T_F423VHT\variant_generic.h(210):   #define PIN_SERIAL_TX         PA0
+F413Z(G-H)(J-T)_F423ZH(J-T)\variant_DISCO_F413ZH.h(217):   #define PIN_SERIAL_TX         PG14
+F413Z(G-H)(J-T)_F423ZH(J-T)\variant_generic.h(243):   #define PIN_SERIAL_TX         PA0
+F413Z(G-H)(J-T)_F423ZH(J-T)\variant_NUCLEO_F413ZH.h(218):   #define PIN_SERIAL_TX         PD8
+```
