@@ -33,11 +33,17 @@ __Do not supply power from both the USB port and the ST-LINK module.__
 
 # Serial Output using GPIO   
 The output destination of Serial.print differs depending on the Board Part Number.   
-- genericSTM32F405RG:PA0   
-
 You need to check variant_generic.h for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F4xx/
 
+```
+F405O(E-G)Y_F415OGY\variant_generic.h(197):   #define PIN_SERIAL_TX         PA0
+F405RGT_F415RGT\variant_FEATHER_F405.h(174):   #define PIN_SERIAL_TX         PB10
+F405RGT_F415RGT\variant_generic.h(180):   #define PIN_SERIAL_TX         PA0
+F405RGT_F415RGT\variant_MICROMOD_F405.h(205):   #define PIN_SERIAL_TX         PA2
+F405VGT_F415VGT\variant_generic.h(211):   #define PIN_SERIAL_TX         PA0
+F405ZGT_F415ZGT\variant_generic.h(243):   #define PIN_SERIAL_TX         PA0
+```
 
 # Using PlatformIO   
 ```
