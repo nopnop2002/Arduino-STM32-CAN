@@ -84,7 +84,11 @@ CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PD0, CAN_TX mapped to PD1
 ```
 
 # Serial Output   
-The output destination for Serial.print is PA2.   
+
+- STM32F412
+	The output destination for Serial.print is PA2.   
+- STM32F413
+	The output destination for Serial.print is PA0.   
 
 You need to check variant_generic.h for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F4xx/
