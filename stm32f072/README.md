@@ -48,3 +48,18 @@ CAN_RX mapped to PD0, CAN_TX mapped to PD1 (available on 100-pin and 144-pin pac
 ```
 CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PD0, CAN_TX mapped to PD1
 ```
+
+# Serial Output   
+The output destination of Serial.print differs depending on the Board Part Number.   
+You need to check variant_generic.h for your board.    
+https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F0xx/
+
+```
+F072C8(T-U)_F072CB(T-U-Y)\variant_ELEKTOR_F072Cx.h(100): #define PIN_SERIAL_TX           PA9
+F072C8(T-U)_F072CB(T-U-Y)\variant_generic.h(135):   #define PIN_SERIAL_TX         PA0
+F072R8T_F072RB(H-I-T)\variant_DISCO_F072RB.h(173):   #define PIN_SERIAL_TX         PA9
+F072R8T_F072RB(H-I-T)\variant_generic.h(151):   #define PIN_SERIAL_TX         PA0
+F072R8T_F072RB(H-I-T)\variant_NUCLEO_F072RB.h(126):   #define PIN_SERIAL_TX         PA2
+F072R8T_F072RB(H-I-T)\variant_PYBSTICK26_DUINO.h(127): #define PIN_SERIAL_TX           PA2
+F072V(8-B)(H-T)\variant_generic.h(187):   #define PIN_SERIAL_TX         PA0
+```
