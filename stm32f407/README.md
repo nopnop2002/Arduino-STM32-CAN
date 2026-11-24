@@ -95,6 +95,21 @@ This is a sample of some boards.
 You need to check variant_generic.h for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F4xx/
 
+```
+F407I(E-G)(H-T)_F417I(E-G)(H-T)\variant_generic.h(269):   #define PIN_SERIAL_TX         PA0
+F407V(E-G)T_F417V(E-G)T\variant_ARMED_V1.h(207):   #define PIN_SERIAL_TX         PC10
+F407V(E-G)T_F417V(E-G)T\variant_BLACK_F407VX.h(213):   #define PIN_SERIAL_TX         PA9
+F407V(E-G)T_F417V(E-G)T\variant_BLUE_F407VE_MINI.h(224):   #define PIN_SERIAL_TX         PA9
+F407V(E-G)T_F417V(E-G)T\variant_DISCO_F407VG.h(217):   #define PIN_SERIAL_TX         PA2
+F407V(E-G)T_F417V(E-G)T\variant_DIYMORE_F407VGT.h(215):   #define PIN_SERIAL_TX         PA9
+F407V(E-G)T_F417V(E-G)T\variant_FK407M1.h(203):   #define PIN_SERIAL_TX         PA9
+F407V(E-G)T_F417V(E-G)T\variant_generic.h(211):   #define PIN_SERIAL_TX         PA0
+F407V(E-G)T_F417V(E-G)T\variant_PRNTR_V1.h(203):   #define PIN_SERIAL_TX         PA9
+F407V(E-G)T_F417V(E-G)T\variant_PRNTR_V2.h(158):   #define PIN_SERIAL_TX         PA9
+F407Z(E-G)T_F417Z(E-G)T\variant_BLACK_F407ZX.h(247):   #define PIN_SERIAL_TX         PA9
+F407Z(E-G)T_F417Z(E-G)T\variant_generic.h(243):   #define PIN_SERIAL_TX         PA0
+F407Z(E-G)T_F417Z(E-G)T\variant_VCCGND_F407ZG_MINI.h(239):   #define PIN_SERIAL_TX         PA9
+```
 
 # Using PlatformIO   
 ```
