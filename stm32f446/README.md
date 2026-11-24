@@ -91,3 +91,20 @@ CAN2_RX mapped to PB12, CAN2_TX mapped to PB13(not available on 36-pin package)
 ```
 CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PD0, CAN_TX mapped to PD1
 ```
+
+# Serial Output   
+The output destination for Serial.print is PA0.   
+
+You need to check variant_generic.h for your board.    
+https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F4xx/
+
+```
+F446R(C-E)T\variant_generic.h(181):   #define PIN_SERIAL_TX         PA0
+F446R(C-E)T\variant_NUCLEO_F446RE.h(159):   #define PIN_SERIAL_TX         PA2
+F446V(C-E)T\variant_FYSETC_S6.h(203):   #define PIN_SERIAL_TX         PA9
+F446V(C-E)T\variant_generic.h(212):   #define PIN_SERIAL_TX         PA0
+F446V(C-E)T\variant_RUMBA32.h(210):   #define PIN_SERIAL_TX         PA9
+F446V(C-E)T\variant_VAKE_V1.h(177):   #define PIN_SERIAL_TX         PA9
+F446Z(C-E)(H-J-T)\variant_generic.h(245):   #define PIN_SERIAL_TX         PA0
+F446Z(C-E)(H-J-T)\variant_NUCLEO_F446ZE.h(220):   #define PIN_SERIAL_TX         PD8
+```
