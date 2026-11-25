@@ -119,8 +119,20 @@ CAN_RX mapped to PD14, CAN_TX mapped to PD15 (available on 80-pin and 100-pin pa
 	![Image](https://github.com/user-attachments/assets/f4da1340-9bd0-4ec4-b385-66ed609037cf)
 
 # Serial Output   
-The output destination for Serial.print is PA0.   
-
+The output destination of Serial.print differs depending on the Board Part Number.   
 You need to check variant_generic.h for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/tree/main/variants/STM32G0xx
 
+```
+G0B1C(B-C-E)(T-U)xN_G0C1C(C-E)(T-U)xN\variant_generic.h(160):   #define PIN_SERIAL_TX         PA0
+G0B1C(B-C-E)(T-U)_G0C1C(C-E)(T-U)\variant_EBB42_V1_1.h(164):   #define PIN_SERIAL_TX         PA0
+G0B1C(B-C-E)(T-U)_G0C1C(C-E)(T-U)\variant_generic.h(164):   #define PIN_SERIAL_TX         PA0
+G0B1K(B-C-E)(T-U)xN_G0C1K(C-E)(T-U)xN\variant_generic.h(140):   #define PIN_SERIAL_TX         PA0
+G0B1K(B-C-E)(T-U)_G0C1K(C-E)(T-U)\variant_generic.h(145):   #define PIN_SERIAL_TX         PA0
+G0B1M(B-C-E)T_G0C1M(C-E)T\variant_generic.h(203):   #define PIN_SERIAL_TX         PA0
+G0B1NEY_G0C1NEY\variant_generic.h(168):   #define PIN_SERIAL_TX         PA0
+G0B1R(B-C-E)(I-T)xN_G0C1R(C-E)(I-T)xN\variant_generic.h(187):   #define PIN_SERIAL_TX         PA0
+G0B1R(B-C-E)T_G0C1R(C-E)T\variant_generic.h(189):   #define PIN_SERIAL_TX         PA0
+G0B1R(B-C-E)T_G0C1R(C-E)T\variant_NUCLEO_G0B1RE.h(164):   #define PIN_SERIAL_TX         PA2
+G0B1V(B-C-E)(I-T)_G0C1V(C-E)(I-T)\variant_generic.h(224):   #define PIN_SERIAL_TX         PA0
+```
