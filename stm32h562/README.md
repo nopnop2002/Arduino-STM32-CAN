@@ -51,8 +51,16 @@ CAN_RX mapped to PE0, CAN_TX mapped to PE1 (available on 100-pin and 144-pin pac
 	![Image](https://github.com/user-attachments/assets/f4da1340-9bd0-4ec4-b385-66ed609037cf)
 
 # Serial Output   
-The output destination for Serial.print is PA0.   
-
+The output destination of Serial.print differs depending on the Board Part Number.   
 You need to check variant_generic.h for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32H5xx/
 
+```
+H562A(G-I)I\variant_generic.h(293):   #define PIN_SERIAL_TX         PA0
+H562I(G-I)(K-T)\variant_generic.h(299):   #define PIN_SERIAL_TX         PA0
+H562R(G-I)T\variant_generic.h(192):   #define PIN_SERIAL_TX         PA0
+H562R(G-I)T\variant_WEACT_H562RG.h(219):   #define PIN_SERIAL_TX         PA9
+H562R(G-I)V\variant_generic.h(197):   #define PIN_SERIAL_TX         PA0
+H562V(G-I)T\variant_generic.h(224):   #define PIN_SERIAL_TX         PA0
+H562Z(G-I)T\variant_generic.h(259):   #define PIN_SERIAL_TX         PA0
+```
