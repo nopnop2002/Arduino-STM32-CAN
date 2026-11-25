@@ -47,3 +47,26 @@ CAN2_RX mapped to PB12, CAN2_TX mapped to PB13
 ```
 CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PD0, CAN_TX mapped to PD1
 ```
+
+# Serial Output   
+The output destination of Serial.print differs depending on the Board Part Number.   
+You need to check variant_generic.h for your board.    
+https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32L4xx/
+
+```
+L496A(E-G)I_L4A6AGI\variant_generic.h(269):   #define PIN_SERIAL_TX         PA0
+L496AGIxP_L4A6AGIxP\variant_generic.h(267):   #define PIN_SERIAL_TX         PA0
+L496QEI_L496QGIx(S)_L4A6QGI\variant_generic.h(243):   #define PIN_SERIAL_TX         PA0
+L496QGIxP_L4A6QGIxP\variant_generic.h(240):   #define PIN_SERIAL_TX         PA0
+L496R(E-G)T_L4A6RGT\variant_generic.h(185):   #define PIN_SERIAL_TX         PA0
+L496RGTxP\variant_generic.h(182):   #define PIN_SERIAL_TX         PA0
+L496V(E-G)T_L4A6VGT\variant_generic.h(216):   #define PIN_SERIAL_TX         PA0
+L496VGTxP_L4A6VGTxP\variant_generic.h(213):   #define PIN_SERIAL_TX         PA0
+L496VGYxP_L4A6VGYxP\variant_generic.h(212):   #define PIN_SERIAL_TX         PA0
+L496VGY_L4A6VGY\variant_generic.h(214):   #define PIN_SERIAL_TX         PA0
+L496WGYxP\variant_generic.h(220):   #define PIN_SERIAL_TX         PA0
+L496Z(E-G)T_L4A6ZGT\variant_generic.h(249):   #define PIN_SERIAL_TX         PA0
+L496Z(E-G)T_L4A6ZGT\variant_NUCLEO_L496ZG.h(239):   #define PIN_SERIAL_TX           PG7
+L496ZGTxP_L4A6ZGTxP\variant_generic.h(246):   #define PIN_SERIAL_TX         PA0
+L496ZGTxP_L4A6ZGTxP\variant_NUCLEO_L496ZG_P.h(237):   #define PIN_SERIAL_TX           PG7
+```
