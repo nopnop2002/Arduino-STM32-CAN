@@ -60,3 +60,34 @@ CAN_RX mapped to PB12, CAN_TX mapped to PB13
 ```
 CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PB12, CAN_TX mapped to PB13
 ```
+
+# Serial Output   
+The output destination of Serial.print differs depending on the Board Part Number.   
+You need to check variant_generic.h for your board.    
+https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32L4xx/
+
+```
+L432K(B-C)U_L442KCU\variant_generic.h(119):   #define PIN_SERIAL_TX         PA2
+L432K(B-C)U_L442KCU\variant_NUCLEO_L432KC.h(95):   #define PIN_SERIAL_TX           PA2_ALT1
+L433C(B-C)(T-U)_L443CC(T-U)\variant_CYGNET.h(194):   #define PIN_SERIAL_TX           PA9
+L433C(B-C)(T-U)_L443CC(T-U)\variant_generic.h(136):   #define PIN_SERIAL_TX         PA2
+L433C(B-C)Y_L443CC(F-Y)\variant_generic.h(137):   #define PIN_SERIAL_TX         PA2
+L433R(B-C)(I-T-Y)_L443RC(I-T-Y)\variant_generic.h(150):   #define PIN_SERIAL_TX         PA2
+L433RCTxP\variant_generic.h(148):   #define PIN_SERIAL_TX         PA2
+L433RCTxP\variant_NUCLEO_L433RC_P.h(125):   #define PIN_SERIAL_TX           PA2
+L433VC(I-T)_L443VC(I-T)\variant_generic.h(181):   #define PIN_SERIAL_TX         PA2
+L452CCU_L452CE(T-U)x(P)_L462CE(T-U)\variant_generic.h(142):   #define PIN_SERIAL_TX         PA0
+L452RC(I-T-Y)_L452RE(I-T-Y)x(P)_L462RE(I-T-Y)\variant_generic.h(160):   #define PIN_SERIAL_TX         PA0
+L452RC(I-T-Y)_L452RE(I-T-Y)x(P)_L462RE(I-T-Y)\variant_LEAFONY_AP03.h(121):   #define PIN_SERIAL_TX         PA2
+L452RC(I-T-Y)_L452RE(I-T-Y)x(P)_L462RE(I-T-Y)\variant_NUCLEO_L452RE.h(133):   #define PIN_SERIAL_TX           PA2
+L452RETxP\variant_generic.h(158):   #define PIN_SERIAL_TX         PA0
+L452RETxP\variant_NUCLEO_L452RE_P.h(132): #define PIN_SERIAL_TX           PA2
+L452V(C-E)(I-T)_L462VE(I-T)\variant_generic.h(191):   #define PIN_SERIAL_TX         PA0
+L476J(E-G)Y_L485J(C-E)Y_L486JGY\variant_generic.h(188):   #define PIN_SERIAL_TX         PA0
+L476JGYxP\variant_generic.h(185):   #define PIN_SERIAL_TX         PA0
+L476M(E-G)Y\variant_generic.h(196):   #define PIN_SERIAL_TX         PA0
+L476QEI_L476QGIx(P)_L486QGI\variant_generic.h(240):   #define PIN_SERIAL_TX         PA0
+L476VGYxP\variant_generic.h(196):   #define PIN_SERIAL_TX         PA0
+L476ZET_L476ZG(J-T)_L486ZGT\variant_generic.h(246):   #define PIN_SERIAL_TX         PA0
+L476ZGTxP\variant_generic.h(244):   #define PIN_SERIAL_TX         PA0
+```
