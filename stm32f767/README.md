@@ -91,3 +91,8 @@ CAN2_RX mapped to PB12, CAN2_TX mapped to PB13
 ```
 CANInit(CAN_1000KBPS, 3);  // CAN_RX mapped to PD0, CAN_TX mapped to PD1
 ```
+
+# Serial Output   
+The output destination of Serial.print differs depending on the Board Part Number.   
+You need to check variant_generic.h for your board.    
+https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F7xx/
