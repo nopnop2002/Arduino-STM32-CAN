@@ -19,6 +19,7 @@ CANInit(CAN_1000KBPS, 2);  // CAN_RX mapped to PB8, CAN_TX mapped to PB9
 The following GPIOs can be used as the SWD port for the ST-LINK.   
 If you are unable to flash firmware onto the device using an ST-LINK, you can put the device into DFU mode by connecting the DFU pin to 3V3 and then performing a reset.   
 After flashing firmware via DFU mode, disconnect the DFU pin (leave it open) and perform a reset.   
+The firmware will start up.   
 |STLINK|GPIO|MARK|
 |:-:|:-:|:-:|
 |SWDIO|PA13|P5|
