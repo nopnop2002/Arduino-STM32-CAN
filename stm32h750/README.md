@@ -73,8 +73,21 @@ CAN_RX mapped to PB12, CAN_TX mapped to PB13 (not available on 36-pin package)
 	![Image](https://github.com/user-attachments/assets/f4da1340-9bd0-4ec4-b385-66ed609037cf)
 
 # Serial Output   
-The output destination for Serial.print is PA0.   
-
+The output destination of Serial.print differs depending on the Board Part Number.   
 You need to check variant_generic.h for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32H7xx/
 
+```
+H742I(G-I)(K-T)_H743I(G-I)(K-T)_H750IB(K-T)_H753II(K-T)\variant_DAISY_PATCH_SM.h(243):   #define PIN_SERIAL_TX         PA0
+H742I(G-I)(K-T)_H743I(G-I)(K-T)_H750IB(K-T)_H753II(K-T)\variant_DAISY_PETAL_SM.h(138): #define PIN_SERIAL_TX           PB6
+H742I(G-I)(K-T)_H743I(G-I)(K-T)_H750IB(K-T)_H753II(K-T)\variant_DAISY_SEED.h(133): #define PIN_SERIAL_TX           PB6
+H742I(G-I)(K-T)_H743I(G-I)(K-T)_H750IB(K-T)_H753II(K-T)\variant_generic.h(279):   #define PIN_SERIAL_TX         PA0
+H742V(G-I)(H-T)_H743V(G-I)(H-T)_H750VBT_H753VI(H-T)\variant_DevEBoxH7xx.h(229):   #define PIN_SERIAL_TX         PA9
+H742V(G-I)(H-T)_H743V(G-I)(H-T)_H750VBT_H753VI(H-T)\variant_generic.h(219):   #define PIN_SERIAL_TX         PA0
+H742V(G-I)(H-T)_H743V(G-I)(H-T)_H750VBT_H753VI(H-T)\variant_WeActMiniH7xx.h(228):   #define PIN_SERIAL_TX         PA9
+H742X(G-I)H_H743X(G-I)H_H745X(G-I)H_H747X(G-I)H_H750XBH_H753XIH_H755XIH_H757XIH\variant_generic.h(323):   #define PIN_SERIAL_TX         PA0
+H742X(G-I)H_H743X(G-I)H_H745X(G-I)H_H747X(G-I)H_H750XBH_H753XIH_H755XIH_H757XIH\variant_STM32H747I_DISCO.h(297):   #define PIN_SERIAL_TX         PA9
+H742Z(G-I)T_H743Z(G-I)T_H747A(G-I)I_H747I(G-I)T_H750ZBT_H753ZIT_H757AII_H757IIT\variant_generic.h(253):   #define PIN_SERIAL_TX         PA0
+H742Z(G-I)T_H743Z(G-I)T_H747A(G-I)I_H747I(G-I)T_H750ZBT_H753ZIT_H757AII_H757IIT\variant_NUCLEO_H743ZI.h(362):   #define PIN_SERIAL_TX         PD8
+H742Z(G-I)T_H743Z(G-I)T_H747A(G-I)I_H747I(G-I)T_H750ZBT_H753ZIT_H757AII_H757IIT\variant_NUCLEO_H753ZI.h(234):   #define PIN_SERIAL_TX         PD8
+```
