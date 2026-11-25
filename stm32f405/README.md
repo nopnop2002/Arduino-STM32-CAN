@@ -16,7 +16,7 @@ CANInit(CAN_1000KBPS, 2);  // CAN_RX mapped to PB8, CAN_TX mapped to PB9
 ```
 
 # Using STLINK   
-The following GPIOs can be used as STLINK.   
+The following GPIOs can be used as the SWD port for the STLINK.   
 If you are unable to flash the device using an STLINK, connecting the DFU pin to 3V3 will put the device into DFU mode.   
 |STLINK|GPIO|MARK|
 |:-:|:-:|:-:|
