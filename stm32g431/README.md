@@ -68,9 +68,21 @@ Filter and Receive FIFO are closely related.
 Details can be found [here](https://github.com/pierremolinaro/acanfd-stm32/blob/main/extras/acanfd-stm32.pdf).   
 
 # Serial Output   
-The output destination for Serial.print is PA2.   
-However, this may vary depending on the Board Part Number.   
-
+The output destination of Serial.print differs depending on the Board Part Number.   
 You need to check variant_generic.h for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/tree/main/variants/STM32G4xx
 
+```
+G431C(6-8-B)T_G441CBT\variant_generic.h(164):   #define PIN_SERIAL_TX         PA2
+G431C(6-8-B)U_G441CBU\variant_B_G431B_ESC1.h(213):   #define PIN_SERIAL_TX         PB3
+G431C(6-8-B)U_G441CBU\variant_generic.h(171):   #define PIN_SERIAL_TX         PA2
+G431C(6-8-B)U_G441CBU\variant_PHOQUE2.h(221):   #define PIN_SERIAL_TX     PB11
+G431CBTxZ\variant_generic.h(164):   #define PIN_SERIAL_TX         PA2
+G431CBY_G441CBY\variant_generic.h(168):   #define PIN_SERIAL_TX         PA2
+G431K(6-8-B)(T-U)_G441KB(T-U)\variant_generic.h(141):   #define PIN_SERIAL_TX         PA2
+G431K(6-8-B)(T-U)_G441KB(T-U)\variant_NUCLEO_G431KB.h(138):   #define PIN_SERIAL_TX         PA2
+G431M(6-8-B)T_G441MBT\variant_generic.h(202):   #define PIN_SERIAL_TX         PA2
+G431R(6-8)(I-T)_G431RB(I-T)x(Z)_G441RB(I-T)\variant_generic.h(188):   #define PIN_SERIAL_TX         PA2
+G431R(6-8)(I-T)_G431RB(I-T)x(Z)_G441RB(I-T)\variant_NUCLEO_G431RB.h(167):   #define PIN_SERIAL_TX         PA2
+G431V(6-8-B)T_G441VBT\variant_generic.h(222):   #define PIN_SERIAL_TX         PA2
+```
