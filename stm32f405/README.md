@@ -17,10 +17,11 @@ CANInit(CAN_1000KBPS, 2);  // CAN_RX mapped to PB8, CAN_TX mapped to PB9
 
 # Using STLINK   
 The following GPIOs can be used as STLINK.   
+Connecting the DFU pin to 3V3 puts the device into DFU mode.   
 |STLINK|GPIO|MARK|
 |:-:|:-:|:-:|
 |SWDIO|PA13|P5|
-|SDCLK|PA14|P4|
+|SWCLK|PA14|P4|
 
 
 # Serial Output with Virtual COM port   
