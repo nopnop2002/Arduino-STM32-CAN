@@ -109,3 +109,15 @@ The output destination for Serial.print is PA2.
 You need to check variant_generic.h for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/tree/main/variants/STM32G4xx
 
+```
+G473C(B-C-E)T_G474C(B-C-E)T_G483CET_G484CET\variant_generic.h(169):   #define PIN_SERIAL_TX         PA2
+G473C(B-C-E)U_G474C(B-C-E)U_G483CEU_G484CEU\variant_generic.h(176):   #define PIN_SERIAL_TX         PA2
+G473C(B-C-E)U_G474C(B-C-E)U_G483CEU_G484CEU\variant_WEACT_G474CE.h(176):   #define PIN_SERIAL_TX         PA2
+G473M(B-C-E)T_G474M(B-C-E)T_G483MET_G484MET\variant_generic.h(222):   #define PIN_SERIAL_TX         PA2
+G473MEY_G474MEY_G483MEY_G484MEY\variant_generic.h(225):   #define PIN_SERIAL_TX         PA2
+G473P(B-C-E)I_G474P(B-C-E)I_G483PEI_G484PEI\variant_generic.h(274):   #define PIN_SERIAL_TX         PA2
+G473Q(B-C)T_G473QETx(Z)_G474Q(B-C-E)T_G483QET_G484QET\variant_generic.h(279):   #define PIN_SERIAL_TX         PA2
+G473R(B-C)T_G473RETx(Z)_G474R(B-C-E)T_G483RET_G484RET\variant_generic.h(195):   #define PIN_SERIAL_TX         PA2
+G473R(B-C)T_G473RETx(Z)_G474R(B-C-E)T_G483RET_G484RET\variant_NUCLEO_G474RE.h(171):   #define PIN_SERIAL_TX         PA2
+G473V(B-C-E)(H-T)_G474V(B-C-E)(H-T)_G483VE(H-T)_G484VE(H-T)\variant_generic.h(257):   #define PIN_SERIAL_TX         PA2
+```
