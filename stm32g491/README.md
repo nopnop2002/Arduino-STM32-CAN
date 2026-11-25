@@ -78,3 +78,11 @@ The output destination for Serial.print is PA2.
 You need to check variant_generic.h for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32G4xx/
 
+```
+G491C(C-E)T_G4A1CET\variant_generic.h(164):   #define PIN_SERIAL_TX         PA2
+G491C(C-E)U\variant_generic.h(171):   #define PIN_SERIAL_TX         PA2
+G491K(C-E)U_G4A1KEU\variant_generic.h(141):   #define PIN_SERIAL_TX         PA2
+G491M(C-E)(S-T)_G4A1ME(S-T)\variant_generic.h(203):   #define PIN_SERIAL_TX         PA2
+G491RC(I-T)_G491RE(I-T-Y)x(Z)_G4A1RE(I-T-Y)\variant_generic.h(189):   #define PIN_SERIAL_TX         PA2
+G491V(C-E)T_G4A1VET\variant_generic.h(229):   #define PIN_SERIAL_TX         PA2
+```
