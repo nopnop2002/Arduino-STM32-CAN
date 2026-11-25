@@ -362,7 +362,7 @@ Connect the ST-LINK adapter and the STM32 development board as follows.
 
 ![platformio-2](https://user-images.githubusercontent.com/6020549/221346022-c199e146-2f17-4021-871c-5e1b502ffde7.JPG)
 
-# Advanced use of BxCan   
+# Advanced use of transmit(TX) mailboxes   
 Skip if you don't need advanced usage.   
 Advanced usage has different purposes depending on the requirements of the application.   
 So I can't give you a concrete code example.   
