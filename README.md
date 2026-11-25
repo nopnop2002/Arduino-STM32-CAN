@@ -369,6 +369,7 @@ So I can't give you a concrete code example.
 
 STM32 has three transmit(TX) mailboxes.   
 Three TX mailboxes are provided to the software for setting up outgoing messages.   
+An application can store transmission requests in three TX mailboxes simultaneously.   
 This sample code uses only the first TX mailbox and blocks the application until the send is successfully completed.   
 There are two ways to know if the send was successful without blocking.   
 Read the reference manual carefully and modify the source code as needed.   
@@ -377,7 +378,6 @@ Read the reference manual carefully and modify the source code as needed.
  You need to set the CAN interrupt enable register (CAN_IER) appropriately.   
 
 - Check TX mailbox space before sending   
- An application can store transmission requests in three TX mailboxes simultaneously.   
  When there are requests for multiple TX mailboxes, the transmission scheduler decides which mailbox has to be transmitted first.   
  You can specify which mailbox has priority using the CAN Master Control Register (CAN_MCR).   
  You can tell if a mailbox is free using the CAN Transmit Status Register (CAN_TSR).   
