@@ -51,8 +51,14 @@ CAN_RX mapped to PB12, CAN_TX mapped to PB13 (available on 100-pin and 144-pin p
 	![Image](https://github.com/user-attachments/assets/f4da1340-9bd0-4ec4-b385-66ed609037cf)
 
 # Serial Output   
-The output destination for Serial.print is PA2.   
-
+The output destination of Serial.print differs depending on the Board Part Number.   
 You need to check variant_generic.h for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32H5xx/
 
+```
+H503CB(T-U)\variant_generic.h(162):   #define PIN_SERIAL_TX         PA2
+H503EBY\variant_generic.h(135):   #define PIN_SERIAL_TX         PA5
+H503KBU\variant_generic.h(149):   #define PIN_SERIAL_TX         PA2
+H503RBT\variant_generic.h(184):   #define PIN_SERIAL_TX         PA2
+H503RBT\variant_NUCLEO_H503RB.h(157):   #define PIN_SERIAL_TX         PA4
+```
