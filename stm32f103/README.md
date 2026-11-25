@@ -57,6 +57,38 @@ The output destination of Serial.print differs depending on the Board Part Numbe
 You need to check variant_generic.h for your board.    
 https://github.com/stm32duino/Arduino_Core_STM32/blob/main/variants/STM32F1xx/
 
+```
+F103C4T_F103C6(T-U)\variant_BLUEPILL_F103C6.h(136):   #define PIN_SERIAL_TX         PA9
+F103C4T_F103C6(T-U)\variant_generic.h(142):   #define PIN_SERIAL_TX         PA2
+F103C8T_F103CB(T-U)\variant_AFROFLIGHT_F103CB_XX.h(137):   #define PIN_SERIAL_TX         PA9
+F103C8T_F103CB(T-U)\variant_DATABOARD.h(245):   #define PIN_SERIAL_TX         PA2
+F103C8T_F103CB(T-U)\variant_generic.h(144):   #define PIN_SERIAL_TX         PA2
+F103C8T_F103CB(T-U)\variant_MALYANM200_F103CB.h(137):   #define PIN_SERIAL_TX         PA9
+F103C8T_F103CB(T-U)\variant_MAPLEMINI_F103CB.h(137):   #define PIN_SERIAL_TX         PA9
+F103C8T_F103CB(T-U)\variant_PILL_F103Cx.h(144):   #define PIN_SERIAL_TX         PA9
+F103R(4-6)H\variant_generic.h(160):   #define PIN_SERIAL_TX         PA2
+F103R(4-6)T\variant_generic.h(162):   #define PIN_SERIAL_TX         PA2
+F103R(8-B)H\variant_generic.h(162):   #define PIN_SERIAL_TX         PA2
+F103R(8-B)T\variant_BLUEBUTTON_F103R8T.h(44):   #define PIN_SERIAL_TX         PA9
+F103R(8-B)T\variant_generic.h(164):   #define PIN_SERIAL_TX         PA2
+F103R(8-B)T\variant_NUCLEO_F103RB.h(129):   #define PIN_SERIAL_TX         PA2
+F103R(C-D-E)T\variant_BLUEBUTTON_F103RCT.h(44):   #define PIN_SERIAL_TX         PA9
+F103R(C-D-E)T\variant_generic.h(183):   #define PIN_SERIAL_TX         PA2
+F103R(C-D-E)T\variant_STORM32_V1_31_RC.h(120):   #define PIN_SERIAL_TX         USART3_TX
+F103R(C-D-E)Y\variant_generic.h(180):   #define PIN_SERIAL_TX         PA2
+F103R(F-G)T\variant_generic.h(189):   #define PIN_SERIAL_TX         PA2
+F103T(4-6)U\variant_generic.h(129):   #define PIN_SERIAL_TX         PA2
+F103T(8-B)U\variant_generic.h(129):   #define PIN_SERIAL_TX         PA2
+F103T(8-B)U\variant_HY_TINYSTM103TB.h(120):   #define PIN_SERIAL_TX         PA9
+F103V(C-D-E)(H-T)\variant_generic.h(212):   #define PIN_SERIAL_TX         PA2
+F103V(F-G)T\variant_generic.h(218):   #define PIN_SERIAL_TX         PA2
+F103V8(H-T)_F103VB(H-I-T)\variant_generic.h(193):   #define PIN_SERIAL_TX         PA2
+F103Z(C-D-E)(H-T)\variant_generic.h(244):   #define PIN_SERIAL_TX         PA2
+F103Z(C-D-E)(H-T)\variant_VCCGND_F103ZET6.h(52):   #define PIN_SERIAL_TX         PA9
+F103Z(C-D-E)(H-T)\variant_VCCGND_F103ZET6_MINI.h(43):   #define PIN_SERIAL_TX         PA9
+F103Z(F-G)(H-T)\variant_generic.h(250):   #define PIN_SERIAL_TX         PA2
+```
+
 # Using PlatformIO   
 
 ## Blue Pill
