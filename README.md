@@ -369,7 +369,7 @@ Advanced usage has different purposes depending on the requirements of the appli
 STM32 has three transmit(TX) mailboxes.   
 Three TX mailboxes are provided to the software for setting up outgoing messages.   
 An application can store transmission requests in three TX mailboxes simultaneously.   
-This sample code uses only the first TX mailbox and blocks the application until the send is successfully completed.   
+The sample code uses only the first TX mailbox and blocks the application until the send is successfully completed.   
 There are two ways to know if the send was successful without blocking.   
 Read the reference manual carefully and modify the source code as needed.   
 
