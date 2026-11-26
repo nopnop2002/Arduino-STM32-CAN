@@ -78,7 +78,7 @@ Therefore, it is not possible to use these interrupts simultaneously.
 
 # How to use interrupts
 
-- Configure the IER register within CANInit()   
+- Configure the IER register within CANInit().   
 	The types of interrupts that can be used are described in the "CAN interrupt enable register" section of the reference manual.   
 	This sample uses the following interrupts.   
 	```
@@ -87,21 +87,21 @@ Therefore, it is not possible to use these interrupts simultaneously.
 	CAN1->IER |= CAN_IER_FMPIE1;          // Set to FIFO1 message pending interrupt enable
 	```
 
-- Set interrupt priority within Setup()   
+- Set interrupt priority within Setup().   
 	```
 	NVIC_SetPriority(CAN1_TX_IRQn, 1);
 	NVIC_SetPriority(CAN1_RX0_IRQn, 1);
 	NVIC_SetPriority(CAN1_RX1_IRQn, 1);
 	```
 
-- Enable interrupts within Setup()   
+- Enable interrupts within Setup().   
 	```
 	NVIC_EnableIRQ(CAN1_TX_IRQn);
 	NVIC_EnableIRQ(CAN1_RX0_IRQn);
 	NVIC_EnableIRQ(CAN1_RX1_IRQn);
 	```
 
-- Set up a transmit interrupt handler   
+- Set up a transmit interrupt handler.   
 	Determine the type of interrupt and clear the interrupt that occurred.   
 	```
 	extern "C" void CAN1_TX_IRQHandler (void)
@@ -129,7 +129,7 @@ Therefore, it is not possible to use these interrupts simultaneously.
 	}
 	```
 
-- Set up a receive interrupt handler for FIFO0   
+- Set up a receive interrupt handler for FIFO0.   
 	Determine the type of interrupt and clear the interrupt that occurred.   
 	```
 	extern "C" void CAN1_RX0_IRQHandler(void)
@@ -147,7 +147,7 @@ Therefore, it is not possible to use these interrupts simultaneously.
 	}
 	```
 
-- Set up a receive interrupt handler for FIFO1   
+- Set up a receive interrupt handler for FIFO1.   
 	Determine the type of interrupt and clear the interrupt that occurred.   
 	```
 	extern "C" void CAN1_RX1_IRQHandler(void)
