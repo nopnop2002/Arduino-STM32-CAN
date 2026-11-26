@@ -365,7 +365,6 @@ Connect the ST-LINK adapter and the STM32 development board as follows.
 # Advanced use of transmit(TX) mailboxes   
 Skip if you don't need advanced usage.   
 Advanced usage has different purposes depending on the requirements of the application.   
-So I can't give you a concrete code example.   
 
 STM32 has three transmit(TX) mailboxes.   
 Three TX mailboxes are provided to the software for setting up outgoing messages.   
@@ -375,17 +374,18 @@ There are two ways to know if the send was successful without blocking.
 Read the reference manual carefully and modify the source code as needed.   
 
 - Uses a transmission completion interrupt   
- You need to set the CAN interrupt enable register (CAN_IER) appropriately.   
+	You need to set the CAN interrupt enable register (CAN_IER) appropriately.   
+	[Here](https://github.com/nopnop2002/Arduino-STM32-CAN/tree/master/stm32f103_interrupt) is a simple example of an interrupt.   
 
 - Check TX mailbox space before sending   
- When there are requests for multiple TX mailboxes, the transmission scheduler decides which mailbox has to be transmitted first.   
- You can specify which mailbox has priority using the CAN Master Control Register (CAN_MCR).   
- You can tell if a mailbox is free using the CAN Transmit Status Register (CAN_TSR).   
- When all three TX mailboxes are pending, no new messages can be sent until the transmit is canceled or completed.   
- When all three TX mailboxes are pending, you can choose to cancel the pending transmission, wait until the transmission is complete, or give up on the new transmission.   
- This choice depends on your application requirements.   
- When all three TX mailboxes are pending for a long time, it could be a transmission error.   
- CAN Error Status Register (CAN_ESR) should be checked.   
+	When there are requests for multiple TX mailboxes, the transmission scheduler decides which mailbox has to be transmitted first.   
+	You can specify which mailbox has priority using the CAN Master Control Register (CAN_MCR).   
+	You can tell if a mailbox is free using the CAN Transmit Status Register (CAN_TSR).   
+	When all three TX mailboxes are pending, no new messages can be sent until the transmit is canceled or completed.   
+	When all three TX mailboxes are pending, you can choose to cancel the pending transmission, wait until the transmission is complete, or give up on the new transmission.   
+	This choice depends on your application requirements.   
+	When all three TX mailboxes are pending for a long time, it could be a transmission error.   
+	CAN Error Status Register (CAN_ESR) should be checked.   
 
 
 # Reference
