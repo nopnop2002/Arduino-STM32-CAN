@@ -143,3 +143,8 @@ Therefore, it is not possible to use these interrupts simultaneously.
 	}
 	```
 
+# How to use multiple transmit (TX) mailboxes
+STM32 has three transmit(TX) mailboxes.   
+In this sample, the same message is stored simultaneously in three outgoing mailboxes.   
+Completion of transmission from each mailbox is determined using a transmission-complete interrupt.   
+<img width="651" height="486" alt="transmission-complete-interrupt" src="https://github.com/user-attachments/assets/82d0fb8c-3c5e-4cc7-b389-b126071514f0" />
