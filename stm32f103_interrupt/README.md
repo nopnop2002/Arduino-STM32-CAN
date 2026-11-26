@@ -52,10 +52,10 @@ CAN1_SCE_IRQn               = 22,     /*!< CAN1 SCE Interrupt                   
 In the STM32F1 series, these interrupts are shared at the hardware level.   
 Therefore, it is not possible to use these interrupts simultaneously.   
 ```
-#define USB_HP_CAN1_TX_IRQHandler  USB_HP_IRQHandler
-#define CAN1_TX_IRQHandler         USB_HP_IRQHandler
-#define CAN1_RX0_IRQHandler        USB_LP_IRQHandler
-#define USB_LP_CAN1_RX0_IRQHandler USB_LP_IRQHandler
+#define USB_HP_IRQn             USB_HP_CAN1_TX_IRQn
+#define CAN1_TX_IRQn            USB_HP_CAN1_TX_IRQn
+#define CAN1_RX0_IRQn           USB_LP_CAN1_RX0_IRQn
+#define USB_LP_IRQn             USB_LP_CAN1_RX0_IRQn
 
 ```
 
