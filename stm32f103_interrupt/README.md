@@ -80,66 +80,66 @@ Therefore, it is not possible to use these interrupts simultaneously.
 	```
 
 - Set up a transmit interrupt handler   
-Determine the type of interrupt and clear the interrupt that occurred.   
-```
-extern "C" void CAN1_TX_IRQHandler (void)
-{
-  // Check the transmission completion flag for mailbox 0.
-  if (CAN1->TSR & CAN_TSR_RQCP0) {
-    // Clear the transmission completion flag for mailbox 0.
-    // If this is not done, the interrupt flag will not be cleared, resulting in an infinite loop.
-    CAN1->TSR |= CAN_TSR_RQCP0;
-  }
+	Determine the type of interrupt and clear the interrupt that occurred.   
+	```
+	extern "C" void CAN1_TX_IRQHandler (void)
+	{
+	  // Check the transmission completion flag for mailbox 0.
+	  if (CAN1->TSR & CAN_TSR_RQCP0) {
+	    // Clear the transmission completion flag for mailbox 0.
+	    // If this is not done, the interrupt flag will not be cleared, resulting in an infinite loop.
+	    CAN1->TSR |= CAN_TSR_RQCP0;
+	  }
 
-  // Check the transmission completion flag for mailbox 1.
-  if (CAN1->TSR & CAN_TSR_RQCP1) {
-    // Clear the transmission completion flag for mailbox 1.
-    // If this is not done, the interrupt flag will not be cleared, resulting in an infinite loop.
-    CAN1->TSR |= CAN_TSR_RQCP1;
-  }
+	  // Check the transmission completion flag for mailbox 1.
+	  if (CAN1->TSR & CAN_TSR_RQCP1) {
+	    // Clear the transmission completion flag for mailbox 1.
+	    // If this is not done, the interrupt flag will not be cleared, resulting in an infinite loop.
+	    CAN1->TSR |= CAN_TSR_RQCP1;
+	  }
 
-  // Check the transmission completion flag for mailbox 2.
-  if (CAN1->TSR & CAN_TSR_RQCP2) {
-    // Clear the transmission completion flag for mailbox 2.
-    // If this is not done, the interrupt flag will not be cleared, resulting in an infinite loop.
-    CAN1->TSR |= CAN_TSR_RQCP2;
-  }
-}
-```
+	  // Check the transmission completion flag for mailbox 2.
+	  if (CAN1->TSR & CAN_TSR_RQCP2) {
+	    // Clear the transmission completion flag for mailbox 2.
+	    // If this is not done, the interrupt flag will not be cleared, resulting in an infinite loop.
+	    CAN1->TSR |= CAN_TSR_RQCP2;
+	  }
+	}
+	```
 
 - Set up a receive interrupt handler for FIFO0   
-Determine the type of interrupt and clear the interrupt that occurred.   
-```
-extern "C" void CAN1_RX0_IRQHandler(void)
-{
-  // Check if there are any unread messages in FIFO0.
-  // These bits indicate how many messages are pending in the receive FIFO0.
-  // The FIFO can store up to three messages.
-  if ((CAN1->RF0R & CAN_RF0R_FMP0) != 0U) {
-    // Release the output mailbox of the FIFO.
-    // If at least two messages are pending in the FIFO, 
-    // the software has to release the output mailbox to access the next message.
-    // If this is not done, the interrupt flag will not be cleared, resulting in an infinite loop.
-    CAN1->RF0R |= CAN_RF0R_RFOM0;
-  }
-}
-```
+	Determine the type of interrupt and clear the interrupt that occurred.   
+	```
+	extern "C" void CAN1_RX0_IRQHandler(void)
+	{
+	  // Check if there are any unread messages in FIFO0.
+	  // These bits indicate how many messages are pending in the receive FIFO0.
+	  // The FIFO can store up to three messages.
+	  if ((CAN1->RF0R & CAN_RF0R_FMP0) != 0U) {
+	    // Release the output mailbox of the FIFO.
+	    // If at least two messages are pending in the FIFO, 
+	    // the software has to release the output mailbox to access the next message.
+	    // If this is not done, the interrupt flag will not be cleared, resulting in an infinite loop.
+	    CAN1->RF0R |= CAN_RF0R_RFOM0;
+	  }
+	}
+	```
 
 - Set up a receive interrupt handler for FIFO1   
-Determine the type of interrupt and clear the interrupt that occurred.   
-```
-extern "C" void CAN1_RX1_IRQHandler(void)
-{
-  // Check if there are any unread messages in FIFO1.
-  // These bits indicate how many messages are pending in the receive FIFO1.
-  // The FIFO can store up to three messages.
-  if ((CAN1->RF1R & CAN_RF1R_FMP1) != 0U) {
-    // Release the output mailbox of the FIFO.
-    // If at least two messages are pending in the FIFO, 
-    // the software has to release the output mailbox to access the next message.
-    // If this is not done, the interrupt flag will not be cleared, resulting in an infinite loop.
-    CAN1->RF1R |= CAN_RF1R_RFOM1;
-  }
-}
+	Determine the type of interrupt and clear the interrupt that occurred.   
+	```
+	extern "C" void CAN1_RX1_IRQHandler(void)
+	{
+	  // Check if there are any unread messages in FIFO1.
+	  // These bits indicate how many messages are pending in the receive FIFO1.
+	  // The FIFO can store up to three messages.
+	  if ((CAN1->RF1R & CAN_RF1R_FMP1) != 0U) {
+	    // Release the output mailbox of the FIFO.
+	    // If at least two messages are pending in the FIFO, 
+	    // the software has to release the output mailbox to access the next message.
+	    // If this is not done, the interrupt flag will not be cleared, resulting in an infinite loop.
+	    CAN1->RF1R |= CAN_RF1R_RFOM1;
+	  }
+	}
 ```
 
