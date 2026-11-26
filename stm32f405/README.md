@@ -4,7 +4,7 @@ I used this board.
 This board is called a pyboard.   
 <img width="1125" height="583" alt="Image" src="https://github.com/user-attachments/assets/9be4714d-e3c7-4aaf-b6b2-e3e7bfb98614" />   
 GPIO is irregular, but you can use it in the Arduino environment.   
-![F405](https://user-images.githubusercontent.com/6020549/170388891-1d26c489-5fa2-4bf5-81c3-ff4a442368b8.JPG)
+<img width="864" height="576" alt="stm32f405_DevelopmentBoard" src="https://github.com/user-attachments/assets/0285194f-89e0-4033-9eca-6d2bd657c891" />
 
 # Remap CAN port
 This board does not have PA11/PA12 pin headers.   
