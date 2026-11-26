@@ -2,10 +2,16 @@
 BxCAN can use these interrupts.   
 - Transmission interrupt   
 	This occurs upon completion of a transmission or in the event of a transmission error.   
+	This interrupt uses CAN1_TX_IRQHandler/CAN2_TX_IRQHandler.   
 - FIFO0 receive interrupt   
-	This occurs upon completion of reception into FIFO0 or in the event of a reception error .   
+	This occurs upon completion of reception into FIFO0.   
+	This interrupt uses CAN1_RX0_IRQHandler/CAN2_RX0_IRQHandler.   
 - FIFO1 receive interrupt   
-	This occurs upon completion of reception into FIFO1 or in the event of a reception error .   
+	This occurs upon completion of reception into FIFO1.   
+	This interrupt uses CAN1_RX1_IRQHandler/CAN2_RX1_IRQHandler.   
+- Status Change and Error Interrupt   
+	This occurs when an error arises, when the bus state changes, or when the sleep state is modified.   
+	This interrupt uses CAN1_SCE_IRQHandler/CAN2_SCE_IRQHandler.   
 
 # Interrupt handlers
 Interrupt handlers are defined with the following names.   
