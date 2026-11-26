@@ -141,5 +141,5 @@ Therefore, it is not possible to use these interrupts simultaneously.
 	    CAN1->RF1R |= CAN_RF1R_RFOM1;
 	  }
 	}
-```
+	```
 
